@@ -1,0 +1,17 @@
+.expandableTableContainer {
+    margin: 1rem 0;
+    .btn-filter {
+        position: absolute;
+        right: 1rem;
+        top: 0rem;
+        z-index: 999;
+    }
+    .filter.text-filter.form-control {
+        display: none;
+    }
+    .react-bs-table-search-form {
+        position: absolute;
+        left: -1rem;
+        top: -1rem;
+    }
+}

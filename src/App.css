@@ -1,0 +1,341 @@
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.navbar-light .navbar-brand {
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+  min-height: calc(100vh - 100px);
+  background-color: #edecec;
+}
+
+/* Set gray background color and 100% height */
+.leftmenu-container {
+  background-color: #333333;
+  width: 15%;
+}
+
+.leftmenu li {
+  border-bottom: 1px ridge rgba(255, 255, 255, 0.04);
+}
+.leftmenu li.active,
+.leftmenu li:hover {
+  background: #1b93e1;
+}
+.leftmenu li a {
+  font-style: normal;
+  font-weight: 400;
+  position: relative;
+  display: block;
+  padding: 13px 20px;
+  color: #fff;
+  white-space: nowrap;
+  z-index: 2;
+  font-size: 0.9em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+}
+
+.main-container {
+  /* width: 84%; */
+  padding: 1em;
+}
+
+.list-container {
+  padding: 1em;
+  border: 1px solid #e7ebee;
+  margin-bottom: 2em;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.price-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.price-container-item {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.price-container-item:first-child {
+  margin-left: 0;
+}
+
+.price-container-item:hover {
+  cursor: pointer;
+  border: 1px solid darkgray;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .leftmenu-container {
+    height: auto;
+    width: 100%;
+  }
+  .main-container {
+    width: 100%;
+  }
+  .row.content {
+    height: auto;
+  }
+}
+
+/* Widget Info styles */
+.widget-info {
+  padding: 1em;
+  text-align: center;
+  color: #fff;
+  border-radius: 10px;
+}
+.widget-info .widget-info-count > h1 {
+  font-weight: bold;
+}
+.widget-info.red {
+  background: #ff4a43;
+}
+.widget-info.green {
+  background: #a2d200;
+}
+.widget-info.purple {
+  background: #8e44ad;
+}
+.widget-info.pink {
+  background: #ff00c3;
+}
+.widget-info.blue {
+  background: #7cb5ec;
+}
+.widget-info.lightgreen {
+  background: #90ed7d;
+}
+.widget-info.orange {
+  background: #eb5f1e;
+}
+.widget-info h3,
+.widget-info h4,
+.widget-info h5 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+@media screen and (max-width: 767px) {
+  .widget-info {
+    padding: 0.5em;
+  }
+}
+/* Widget Info styles */
+
+.formBtns {
+  margin: 0 0.5em;
+}
+.formBtns:last-child {
+  margin-right: 0;
+}
+.form-row {
+  margin: 1rem 0;
+}
+
+/* Card box styles */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  margin: 1em 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card.info .card-header {
+  background-color: #007bff;
+  color: #fff;
+}
+.card-header:first-child {
+  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+}
+.card-header-text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+.card-title {
+  margin-bottom: 0.75rem;
+}
+.card-text:last-child {
+  margin-bottom: 0;
+}
+.card-list {
+  width: 100%;
+}
+/*.card-list-item {
+  padding: 0.5rem 0;
+}*/
+.card-list-item > div {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+/* Card box styles */
+
+.loader-container {
+  min-height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-row {
+  margin: 0.75rem 0;
+}
+
+.brand-icon-container {
+  display:flex;
+  justify-content: center;
+}
+
+.brand-icon-container > div {
+  margin: 1rem;
+}
+
+.brand-icon-container > ul > li {
+  list-style: none;
+  padding: 1rem;
+}
+
+.vertical-horizontal-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leftmenu .accordion .card {
+  padding: 0!important;
+  margin: 0!important;
+  background-color: #333333;
+}
+
+.leftmenu .accordion .card .card-header {
+  color: #fff;
+  background-color: #333333;
+}
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+}
+
+.categories-container .category {
+  background-color: #f1f1f1;
+  min-width: 150px;
+  margin: 0.5rem;
+  text-align: center;
+  line-height: 75px;
+  color: #fff;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#CategoryAccordion .card {
+  margin: 0!important;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  cursor: pointer;
+}
+
+.react-datepicker__input-container input[type='text'] {
+  width: 100%;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  color: #495057;
+  height: calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+}
+
+.text-overflow-ellipses {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 8rem;
+}
+
+.certification-container {
+  margin: 1rem 0;
+  border: 1px solid;
+  padding: 1rem;
+}
+
+.accordion>.card:first-of-type {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.login-ctr {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.login-ctr .login-ctr-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-ctr .login-ctr-item .card,
+.certification-ctr, .training-ctr {
+  border: 1px solid #007bff;
+}
+.login-ctr .card-header,
+.certification-ctr .card-header,
+.training-ctr .card-header {
+  background: #007bff;
+  color: #fff;
+  font-weight: bold;
+  line-height: 2;
+  padding: 0.5rem;
+}
+
+/* not found styles */
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+/* not found styles */
+
+.header a.dropdown-toggle.nav-link {
+  color: #fff !important;
+  font-weight: bold;
+}
