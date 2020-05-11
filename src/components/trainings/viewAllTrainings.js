@@ -38,11 +38,19 @@ class ViewAllTrainings extends React.Component {
                     <title>Trainings</title>
                 </Helmet>
                 <div className="list-container">
-                <Row>
-                    <Col md={12} xs={12} sm={12}>
-                        <CustomDataTable data={trainings} itemType="trainings" />
-                    </Col>
-                </Row></div>
+                    <Row>
+                        <Col md={12} xs={12} sm={12}>
+                            <Button variant="primary" onClick={() => this.handleShowModal('addTraining', true)}>Add New</Button>
+                            <CustomDataTable data={trainings} itemType="trainings" />
+                        </Col>
+                    </Row>
+                </div>
+                <ModalPopup
+                    show={modal.addTraining}
+                    title={'Add New'}
+                    body={<TrainingFormPage />}
+                    handleHideModal={this.handleHideModal}
+                />
             </React.Fragment>
         );
     }

@@ -26,9 +26,9 @@ export const addForm = (form) => {
 
 export const fetchAllForms = (user) => {
     return (dispatch) => {
-        //let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=forms';
-        let userCondition = (user !== undefined) ? '&userType=' + user.type+ '&userId=' + user.id : '';
-        let url = appConstants.GET_ALL_ITEMS_URL + '?type=forms' + userCondition;
+        // let userCondition = (user !== undefined) ? '&userType=' + user.type+ '&userId=' + user.id : '';
+        // let url = appConstants.GET_ALL_ITEMS_URL + '?type=forms' + userCondition;
+        let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=forms';
         return axios.get(url)
             .then(response => {
                 dispatch(fetchForms(response.data));

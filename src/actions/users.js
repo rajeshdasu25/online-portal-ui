@@ -27,7 +27,7 @@ export const addUser = (user) => {
 export const fetchAllUsers = (user) => {
     return (dispatch) => {
         let userCondition = (user !== undefined) ? '&userId=' + user.id : '';
-        let url = appConstants.GET_ALL_ITEMS_URL + '?type=users' + userCondition;
+        let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=users' + userCondition;
         return axios.get(url)
             .then(response => {
                 dispatch(fetchUsers(response.data));

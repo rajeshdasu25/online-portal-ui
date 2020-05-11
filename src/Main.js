@@ -8,6 +8,7 @@ import LeftNav from './components/common/LeftNav';
 import Dashboard from './components/dashboard';
 import PageNotFound from './components/common/NotFound';
 import ReportsPage from './components/reports';
+import SkillsPage from './components/skills';
 import ResponseFormPage from './components/responses/responseFormPage';
 import ViewAllCertificates from './components/certificates/viewAllCertificates';
 import ViewIndCertificate from './components/certificates/viewIndCertificate';
@@ -56,6 +57,7 @@ function Main() {
             <Route path='/reports' component={ReportsPage} />
             <Route path='/responses' component={ViewAllResponses} />
             <Route path='/response/:id' component={ViewIndResponse} />
+            <Route path='/skills' component={SkillsPage} />
             <Route path='/trainings' component={ViewAllTrainings} />
             <Route path='/training/:id' component={ViewIndTraining} />
             <Route path='/users' component={ViewAllUsers} />

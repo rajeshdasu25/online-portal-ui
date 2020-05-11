@@ -1,0 +1,62 @@
+[
+    {
+        "Id": "1",
+        "SsoId": "1",
+        "UserTypeId": "1",
+        "FirstName": "Admin",
+        "LastName": "1",
+        "Username": "admin",
+        "Pword": "admin",
+        "EmailAddr": "admin@admin.com",
+        "Phoneno": "0123456789",
+        "TimeRegistered": "2020-04-13 11:14:00",
+        "TimeLastAccess": null,
+        "ActiveStatus": "1",
+        "UserType": "Admin"
+    },
+    {
+        "Id": "2",
+        "SsoId": "2",
+        "UserTypeId": "2",
+        "FirstName": "Manager",
+        "LastName": "1",
+        "Username": "manager",
+        "Pword": "manager",
+        "EmailAddr": "manager@manager.com",
+        "Phoneno": "9876543210",
+        "TimeRegistered": "2020-04-13 11:14:00",
+        "TimeLastAccess": null,
+        "ActiveStatus": "1",
+        "UserType": "Manager"
+    },
+    {
+        "Id": "4",
+        "SsoId": "4",
+        "UserTypeId": "2",
+        "FirstName": "Manager",
+        "LastName": "2",
+        "Username": "manager2",
+        "Pword": "manager2",
+        "EmailAddr": "manager2@manager2.com",
+        "Phoneno": "1245789630",
+        "TimeRegistered": "2020-04-13 11:14:00",
+        "TimeLastAccess": null,
+        "ActiveStatus": "1",
+        "UserType": "Manager"
+    },
+    {
+        "Id": "3",
+        "SsoId": "3",
+        "UserTypeId": "3",
+        "FirstName": "Rajesh",
+        "LastName": "Kumar",
+        "Username": "rajesh",
+        "Pword": "rajesh",
+        "EmailAddr": "rajesh@rajesh.com",
+        "Phoneno": "9876501234",
+        "TimeRegistered": "2020-04-13 11:14:00",
+        "TimeLastAccess": null,
+        "ActiveStatus": "1",
+        "UserType": "NonManager"
+    }
+]

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import './CustomDataTableStyles.scss';
-import { Badge, Col, Dropdown, DropdownButton, Image, Row } from 'react-bootstrap';
+import { Button, Badge, Col, Dropdown, DropdownButton, Image, Row } from 'react-bootstrap';
 
 const isExpandableRow = (row) => {
     if (row.hasOwnProperty('expand')) return true;
@@ -27,23 +27,28 @@ export default class ExpandRow extends React.Component {
     return (row === 1) ? 'Active' : 'Inactive';
   }
   
-  expandComponent(row) { 
+  expandComponent(row) { console.log('row: ', row);
     return (
       <>
         <Row>
           <Col md={3} xs={3}>&nbsp;</Col>
-          <Col md={1} xs={6} sm={12}>Number</Col>
-          <Col md={3} xs={6} sm={12}> : {row.Number}</Col>
+          <Col md={1} xs={6} sm={12}>First Name</Col>
+          <Col md={3} xs={6} sm={12}> : {row.FirstName}</Col>
         </Row>
         <Row>
           <Col md={3} xs={3}>&nbsp;</Col>
-          <Col md={1} xs={6} sm={12}>Balance</Col>
-          <Col md={3} xs={6} sm={12}> : {row.Balance}</Col>
+          <Col md={1} xs={6} sm={12}>Last Name</Col>
+          <Col md={3} xs={6} sm={12}> : {row.LastName}</Col>
         </Row>
         <Row>
           <Col md={3} xs={3}>&nbsp;</Col>
-          <Col md={1} xs={6} sm={12}>Image</Col>
-          <Col md={3} xs={6} sm={12}> : {row.Image ? row.Image : <Image src="holder.js/171x180" roundedCircle />}</Col>
+          <Col md={1} xs={6} sm={12}>Email</Col>
+          <Col md={3} xs={6} sm={12}> : {row.EmailAddr}</Col>
+        </Row>
+        <Row>
+          <Col md={3} xs={3}>&nbsp;</Col>
+          <Col md={1} xs={6} sm={12}>Contact</Col>
+          <Col md={3} xs={6} sm={12}> : {row.Phoneno}</Col>
         </Row>
       </>
     );
@@ -71,6 +76,7 @@ export default class ExpandRow extends React.Component {
       switch (itemType) {
         case 'certificates': csvFileName = 'Certificates.csv'; break;
         case 'forms': csvFileName = 'Forms.csv'; break;
+        case 'reports': csvFileName = 'Reports.csv'; break;
         case 'responses': csvFileName = 'Responses.csv'; break;
         case 'trainings': csvFileName = 'Trainings.csv'; break;
         case 'users': csvFileName = 'Employes.csv'; break;
@@ -90,6 +96,7 @@ export default class ExpandRow extends React.Component {
           // { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false },
         ];
         break;
+      case 'reports':
       case 'forms':
         headers = [
           { 'title': 'Id', 'dataField': 'id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
@@ -101,7 +108,7 @@ export default class ExpandRow extends React.Component {
           { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat':this.statusFormatter },
         ];
         break;
-      case 'responses':
+        case 'responses':
         headers = [
           { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
           { 'title': 'Form Name', 'dataField': 'FormName', 'ref': 'formCol', 'hidden': false, 'isKey': false  },
@@ -134,7 +141,7 @@ export default class ExpandRow extends React.Component {
   }
 
   render() {
-    const { accountTypes, forms, itemType } = this.props;
+    const { forms, itemType } = this.props;
     const options = {
       page: 1,  // which page you want to show as default
       sizePerPageList: [ 
@@ -146,7 +153,7 @@ export default class ExpandRow extends React.Component {
         { text: '100', value: 100 },
         { text: 'All', value: this.props.data.length }
       ],
-      sizePerPage: 5,  // which size per page you want to locate as default
+      sizePerPage: 10,  // which size per page you want to locate as default
       pageStartIndex: 1, // where to start counting the pages
       paginationSize: 3,  // the pagination bar size.
       prePage: 'Prev', // Previous page button text
@@ -162,16 +169,6 @@ export default class ExpandRow extends React.Component {
     
     return (
       <div className="expandableTableContainer">
-        {accountTypes && <DropdownButton id="dropdown-item-button" className="btn-filter" title="Filter" alignRight>
-          {accountTypes.map((type, index) => {
-              return (
-                  <Dropdown.Item as="button" key={index} value={type.Name} 
-                      onClick={this.handleTypeFilter.bind(this)}>
-                      {type.Name}
-                  </Dropdown.Item>
-              );
-          })}
-        </DropdownButton>}
         {itemType && itemType === 'responses' && <DropdownButton id="dropdown-item-button" className="btn-filter" title="Filter" alignRight>
           {forms.map((type, index) => {
               return (
@@ -182,12 +179,13 @@ export default class ExpandRow extends React.Component {
               );
           })}
         </DropdownButton>}
-        <BootstrapTable data={ this.props.data }
+        {itemType && itemType !== 'reports' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addTraining', true)}>Add New</Button>}
+        {this.props.data && (this.props.data.length > 0) && <BootstrapTable data={ this.props.data }
           search={ true }
           pagination={ true } 
           exportCSV={ true }
           csvFileName = { this.getCsvFileName(itemType) }
-          // insertRow= { true }
+          // insertRow= { (itemType === 'trainings' || itemType === 'certificates') ? true : false }
           options={ options }
           expandableRow={ isExpandableRow }
           expandComponent={ this.expandComponent }
@@ -222,7 +220,7 @@ export default class ExpandRow extends React.Component {
                   dataSort>{header.title}</TableHeaderColumn>
               )})
           }
-        </BootstrapTable>
+        </BootstrapTable>}
       </div>
     );
   }

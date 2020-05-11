@@ -6,6 +6,7 @@ import certificates from './allCertificatesReducer';
 import indForm from './indFormReducer';
 import forms from './allFormsReducer';
 import response from './indResponseReducer';
+import filterResponse from './filterResponsesReducer';
 import responses from './allResponsesReducer';
 import training from './indTrainingReducer';
 import trainings from './allTrainingsReducer';
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     certificates: certificates,
     indForm: indForm,
     forms: forms,
+    filterResponse: filterResponse,
     response: response,
     responses: responses,
     training: training,

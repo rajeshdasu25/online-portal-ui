@@ -1,71 +1,112 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Accordion, Button, Card, Col, Row } from 'react-bootstrap';
+import { Accordion, Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
 // import AddNewItem from './addNewItem';
 // import AutoSuggestion from '../common/AutoSuggestion';
 import AutoComplete from '../common/AutoComplete';
 // import AutoSearch from '../common/AutoSearch';
+import SkillForm from '../skills/skillForm';
 
-const renderCertifications = ({ fields, certificates }) => (
-    <div className="form-group">
-        <Row>
-            <Col md={12} sm={12} xs={12}>
-                <Button type="button" variant="primary" onClick={() => fields.push({})}>Add Certification</Button>
-            </Col>
-        </Row>
-        <Row>
-        {fields.map((member, index) =>
-            <Col md={4} sm={4} xs={12} key={index}>
-                <Card bg="light" className="certification-ctr">
-                    <Card.Header>
-                        <Row>
-                            <Col md={10} sm={10} xs={12}>
-                                <span style={{'fontWeight': 'bold', 'color': '#fff'}}>Certification #{index + 1}</span>
-                            </Col>
-                            <Col md={2} sm={2} xs={12} className="text-right">
-                                <Button type="button" variant="danger" size="sm" onClick={() => fields.remove(index)}>X</Button>
-                            </Col>
-                        </Row>
-                    </Card.Header>
-                    <Card.Body>
-                        <div className="form-group">
-                            <Row>
-                                <Col md={4} sm={4} xs={12}>
-                                    <label htmlFor="CertificationName" className="col-form-label">Name</label>
-                                </Col>
-                                <Col md={8} sm={8} xs={12}>
-                                    {/* <Field name={`${member}.CertificationName`} component="input" type="text" placeholder="Name" className="form-control" /> */}
-                                    {/* <Autosuggest suggestions={suggestions} />
+const ProficiencyOptions = [
+    { text: 'Novice', value: '0' },
+    { text: 'Beginner', value: '1' },
+    { text: 'Competant', value: '2' },
+    { text: 'Proficient', value: '3' },
+    { text: 'Expert', value: '4' }
+];
+
+const renderMoreFields = () => {
+    return (
+        <p>More Items</p>
+    )
+};
+
+const renderCertifications = ({ fields, certificates }) => {
+    return (
+        <div className="form-group">
+            <Row>
+                <Col md={12} sm={12} xs={12}>
+                    <Button type="button" variant="primary" onClick={() => fields.push({})}>Add Certification</Button>
+                </Col>
+            </Row>
+            <Row>
+                {fields.map((member, index) =>
+                    <Col md={4} sm={4} xs={12} key={index}>
+                        <Card bg="light" className="certification-ctr">
+                            <Card.Header>
+                                <Row>
+                                    <Col md={10} sm={10} xs={12}>
+                                        <span style={{ 'fontWeight': 'bold', 'color': '#fff' }}>Certification #{index + 1}</span>
+                                    </Col>
+                                    <Col md={2} sm={2} xs={12} className="text-right">
+                                        <Button type="button" variant="danger" size="sm" onClick={() => fields.remove(index)}>X</Button>
+                                    </Col>
+                                </Row>
+                            </Card.Header>
+                            <Card.Body>
+                                <div className="form-group">
+                                    <Row>
+                                        <Col md={4} sm={4} xs={12}>
+                                            <label htmlFor="CertificationName" className="col-form-label">Name</label>
+                                        </Col>
+                                        <Col md={8} sm={8} xs={12}>
+                                            {/* <Field name={`${member}.CertificationName`} component="input" type="text" placeholder="Name" className="form-control" /> */}
+                                            {/* <Autosuggest suggestions={suggestions} />
                                         suggestions={suggestions}
                                         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                                         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                                         getSuggestionValue={getSuggestionValue}
                                         renderSuggestion={renderSuggestion}
                                         inputProps={inputProps} /> */}
-                                    {/* <AutoSuggestion data={certificates} /> */}
-                                    <AutoComplete FieldName={`${member}.CertificationName`} data={certificates} />
-                                    {/* <AutoSearch data={certificates} /> */}
-                                </Col>
-                            </Row>
-                        </div>
-                        <div className="form-group">
-                            <Row>
-                                <Col md={4} sm={4} xs={12}>
-                                    <label htmlFor="CertificationAuthority" className="col-form-label">Authority</label>
-                                </Col>
-                                <Col md={8} sm={8} xs={12}>
-                                    <Field name={`${member}.CertificationAuthority`} component="input" type="text" placeholder="" className="form-control" />
-                                </Col>
-                            </Row>
-                        </div>
-                    </Card.Body>
-                </Card>
-            </Col>
-        )}
-        </Row>
-    </div>
-);
+                                            {/* <AutoSuggestion data={certificates} /> */}
+                                            <AutoComplete FieldName={`${member}.CertificationName`} data={certificates} />
+                                            {/* <AutoSearch data={certificates} /> */}
+                                        </Col>
+                                    </Row>
+                                </div>
+                                <div className="form-group">
+                                    <Row>
+                                        <Col md={4} sm={4} xs={12}>
+                                            <label htmlFor="CertificationAuthority" className="col-form-label">Authority</label>
+                                        </Col>
+                                        <Col md={8} sm={8} xs={12}>
+                                            <Field name={`${member}.CertificationAuthority`} component="input" type="text" placeholder="" className="form-control" />
+                                        </Col>
+                                    </Row>
+                                </div>
+                                <Button size="sm" onClick={() => { }} >...</Button>
+                                {/* {renderMoreFields()} */}
+                                {/* {renderMoreItems && <> */}
+                                <div className="form-group">
+                                    <Row>
+                                        <Col md={4} sm={4} xs={12}>
+                                            <label htmlFor="CertificationExpiry" className="col-form-label">Expiry</label>
+                                        </Col>
+                                        <Col md={8} sm={8} xs={12}>
+                                            <Field name={`${member}.CertificationExpiry`} component="input" type="text" placeholder="" className="form-control" />
+                                        </Col>
+                                    </Row>
+                                </div>
+                                <div className="form-group">
+                                    <Row>
+                                        <Col md={4} sm={4} xs={12}>
+                                            <label htmlFor="CertificationSoftcopy" className="col-form-label">Softcopy</label>
+                                        </Col>
+                                        <Col md={8} sm={8} xs={12}>
+                                            <Field name={`${member}.CertificationSoftcopy`} component="input" type="text" placeholder="" className="form-control" />
+                                        </Col>
+                                    </Row>
+                                </div>
+                                {/* </>} */}
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                )}
+            </Row>
+        </div>
+    )
+};
 
 const renderTrainings = ({ fields }) => (
     <div className="form-group">
@@ -75,51 +116,114 @@ const renderTrainings = ({ fields }) => (
             </Col>
         </Row>
         <Row>
-        {fields.map((member, index) =>
-            <Col md={4} sm={4} xs={12} key={index}>
-                <Card bg="light" className="training-ctr">
-                    <Card.Header>
-                        <Row>
-                            <Col md={10} sm={10} xs={12}>
-                                <span style={{'fontWeight': 'bold', 'color': '#fff'}}>Training #{index + 1}</span>
-                            </Col>
-                            <Col md={2} sm={2} xs={12} className="text-right">
-                                <Button type="button" variant="danger" size="sm" onClick={() => fields.remove(index)}>X</Button>
-                            </Col>
-                        </Row>
-                    </Card.Header>
-                    <Card.Body>
-                        <div className="form-group">
+            {fields.map((member, index) =>
+                <Col md={4} sm={4} xs={12} key={index}>
+                    <Card bg="light" className="training-ctr">
+                        <Card.Header>
                             <Row>
-                                <Col md={4} sm={4} xs={12}>
-                                    <label htmlFor="TrainingName" className="col-form-label">Name</label>
+                                <Col md={10} sm={10} xs={12}>
+                                    <span style={{ 'fontWeight': 'bold', 'color': '#fff' }}>Training #{index + 1}</span>
                                 </Col>
-                                <Col md={8} sm={8} xs={12}>
-                                    {/* <Field name={`${member}.TrainingName`} component="input" type="text" placeholder="Name" className="form-control" /> */}
-                                    <AutoComplete FieldName={`${member}.TrainingName`} />
+                                <Col md={2} sm={2} xs={12} className="text-right">
+                                    <Button type="button" variant="danger" size="sm" onClick={() => fields.remove(index)}>X</Button>
                                 </Col>
                             </Row>
-                        </div>
-                        <div className="form-group">
-                            <Row>
-                                <Col md={4} sm={4} xs={12}>
-                                    <label htmlFor="TrainingStream" className="col-form-label">Stream</label>
-                                </Col>
-                                <Col md={8} sm={8} xs={12}>
-                                    <Field name={`${member}.TrainingStream`} component="input" type="text" placeholder="" className="form-control" /> 
-                                </Col>
-                            </Row>
-                        </div>
-                    </Card.Body>
-                </Card>
-            </Col>
-        )}
+                        </Card.Header>
+                        <Card.Body>
+                            <div className="form-group">
+                                <Row>
+                                    <Col md={4} sm={4} xs={12}>
+                                        <label htmlFor="TrainingName" className="col-form-label">Name</label>
+                                    </Col>
+                                    <Col md={8} sm={8} xs={12}>
+                                        {/* <Field name={`${member}.TrainingName`} component="input" type="text" placeholder="Name" className="form-control" /> */}
+                                        <AutoComplete FieldName={`${member}.TrainingName`} />
+                                    </Col>
+                                </Row>
+                            </div>
+                            <div className="form-group">
+                                <Row>
+                                    <Col md={4} sm={4} xs={12}>
+                                        <label htmlFor="TrainingStream" className="col-form-label">Stream</label>
+                                    </Col>
+                                    <Col md={8} sm={8} xs={12}>
+                                        <Field name={`${member}.TrainingStream`} component="input" type="text" placeholder="" className="form-control" />
+                                    </Col>
+                                </Row>
+                            </div>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            )}
         </Row>
     </div>
 );
 
+const renderMultipleRadios = ({ onChange }) => (
+    ProficiencyOptions.map((radio, index) => {
+        return (
+            <Col md={2} sm={2} xs={2} key={index}>
+                <Field
+                    name={`radio-${index}`}
+                    component="input"
+                    type="radio"
+                    onChange={() => {
+                        onChange(radio.value)
+                    }}
+                    // checked={index === radio.value}
+                />
+            </Col>
+        )
+    }
+    )
+);
+
 let ResponseForm = props => {
-    const { handleSubmit, reset, certificates, pristine, submitting } = props;
+    const { handleSubmit, reset, certificates, pristine, submitting,
+            RoleTypeValue } = props;
+
+    const submit = formValues => { console.log(formValues);
+    }
+
+    const RoleTypeOptions = [
+        { text: 'Frontend Developer', value: 'ui' },
+        { text: 'JAVA Developer', value: 'java' },
+        { text: 'DevOPS Engineer', value: 'devops' }
+    ];
+
+    const ProficiencyOptions = [
+        { text: 'Novice', value: '0' },
+        { text: 'Beginner', value: '1' },
+        { text: 'Competant', value: '2' },
+        { text: 'Proficient', value: '3' },
+        { text: 'Expert', value: '4' }
+    ];
+
+    const FrontendOptions = [
+        { text: 'HTML 5', value: 'html5' },
+        { text: 'CSS 3', value: 'css3' },
+        { text: 'Javascript', value: 'javascript' },
+        { text: 'jQuery', value: 'jquery' },
+        { text: 'Angular', value: 'angular' },
+        { text: 'React', value: 'react' }
+    ];
+
+    const JavaOptions = [
+        { text: 'JAVA', value: 'java' },
+        { text: 'Spring', value: 'spring' },
+        { text: 'Hybernet', value: 'hybernet' },
+        { text: 'SQL', value: 'sql' },
+        { text: 'MySQL', value: 'mysql' },
+        { text: 'PostgreSQL', value: 'postgresql' }
+    ];
+
+    const DevOpsOptions = [
+        { text: 'CI & CD', value: 'cicd' },
+        { text: 'AWS', value: 'aws' },
+        { text: 'jenkins', value: 'jenkins' },
+        { text: 'newrelic', value: 'newrelic' }
+    ];
+
     return (
         <Row>
             <Col md={12} sm={12} xs={12}>
@@ -225,6 +329,99 @@ let ResponseForm = props => {
                                             </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
+                                    <Card>
+                                        <Accordion.Toggle as={Card.Header} eventKey="2">Skill</Accordion.Toggle>
+                                        <Accordion.Collapse eventKey="2">
+                                            <Card.Body>
+                                                <Container>
+                                                    <div className="form-group">
+                                                        <Row>
+                                                            <Col md={3} sm={3} xs={3}>
+                                                                <Field name="RoleType" component="select" className="form-control" >
+                                                                    <option value=''>Role</option>
+                                                                    {RoleTypeOptions.map(item => (
+                                                                        <option key={item.value} value={item.value}>
+                                                                            {item.text}
+                                                                        </option>
+                                                                    ))}
+                                                                </Field>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>
+                                                    {RoleTypeValue && <div className="form-group">
+                                                        <Row>
+                                                            <Col md={3} sm={3} xs={3}>
+                                                                &nbsp;
+                                                            </Col>
+                                                            <Col md={9} sm={9} xs={9}>
+                                                                <Row className="text-center">
+                                                                    {ProficiencyOptions.map((item, index) => (
+                                                                        <Col md={2} sm={2} xs={2} key={index}>
+                                                                            <span style={{ 'fontWeight': 'bold' }}>{item.text}</span>
+                                                                        </Col>
+                                                                    ))}
+                                                                </Row>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>}
+                                                    {RoleTypeValue && RoleTypeValue==='ui' && FrontendOptions.map((item, index) => (
+                                                        <div className="form-group" key={index}>
+                                                            <Row>
+                                                                <Col md={3} sm={3} xs={3}>
+                                                                    {item.text}
+                                                                </Col>
+                                                                <Col md={9} sm={9} xs={9}>
+                                                                    <Row className="text-center">
+                                                                        <FieldArray
+                                                                            name="radiosExample" component={renderMultipleRadios}
+                                                                            props={{
+                                                                                onChange: props.onChange
+                                                                            }} />
+                                                                    </Row>
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    ))}
+                                                    {RoleTypeValue && RoleTypeValue==='java' && JavaOptions.map((item, index) => (
+                                                        <div className="form-group" key={index}>
+                                                            <Row>
+                                                                <Col md={3} sm={3} xs={3}>
+                                                                    {item.text}
+                                                                </Col>
+                                                                <Col md={9} sm={9} xs={9}>
+                                                                    <Row className="text-center">
+                                                                        <FieldArray
+                                                                            name="radiosExample" component={renderMultipleRadios}
+                                                                            props={{
+                                                                                onChange: props.onChange
+                                                                            }} />
+                                                                    </Row>
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    ))}
+                                                    {RoleTypeValue && RoleTypeValue==='devops' && DevOpsOptions.map((item, index) => (
+                                                        <div className="form-group" key={index}>
+                                                            <Row>
+                                                                <Col md={3} sm={3} xs={3}>
+                                                                    {item.text}
+                                                                </Col>
+                                                                <Col md={9} sm={9} xs={9}>
+                                                                    <Row className="text-center">
+                                                                        <FieldArray
+                                                                            name="radiosExample" component={renderMultipleRadios}
+                                                                            props={{
+                                                                                onChange: props.onChange
+                                                                            }} />
+                                                                    </Row>
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    ))}
+                                                </Container>
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
                                 </Accordion>
                             </div>
                             <div className="form-group">
@@ -251,8 +448,9 @@ const selector = formValueSelector('responseForm');
 ResponseForm = connect(
     state => {
         const SSO = selector(state, 'SSO');
+        const RoleTypeValue = selector(state, 'RoleType');
         return {
-            SSO,
+            SSO, RoleTypeValue
         }
     }
 )(ResponseForm);

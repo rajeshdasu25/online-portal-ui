@@ -13,13 +13,10 @@ import { getModalStatus, showModal, hideModal } from '../../actions/modal';
 
 class ViewAllForms extends React.Component {
     componentDidMount() {
-        const loginUserType = localStorage.hasOwnProperty('loginUserType') && JSON.parse(localStorage.getItem('loginUserType'));
-        const loginUserId = localStorage.hasOwnProperty('loginUserId') && JSON.parse(localStorage.getItem('loginUserId'));
-        const loginUserSso = localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'));
         const loginUser = {
-            'type': loginUserType,
-            'id': loginUserId,
-            'sso': loginUserSso
+            'type': localStorage.hasOwnProperty('loginUserType') && JSON.parse(localStorage.getItem('loginUserType')),
+            'id': localStorage.hasOwnProperty('loginUserId') && JSON.parse(localStorage.getItem('loginUserId')),
+            'sso': localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'))
         };
         this.props.fetchAllForms(loginUser);
         this.props.getModalStatus();

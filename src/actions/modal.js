@@ -5,6 +5,7 @@ export const getStatus = (status) => {
         type: GET_MODAL_STATUS,
         modal: {
             addCertificate: status,
+            addTraining: status,
         }
     }
 };
@@ -14,6 +15,7 @@ export const setStatus = (type, status) => {
         type: SET_MODAL_STATUS,
         modal: {
             addCertificate: status,
+            addTraining: status,
             type: status
         }
     }

@@ -1,7 +1,10 @@
+import { createBrowserHistory } from 'history';
 import { FETCH_IND_TRAINING, FETCH_ALL_TRAININGS, ADD_NEW_TRAINING } from './types';
 import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
+
+export const browserHistory = createBrowserHistory();
 
 export const fetchTrainings = (trainings) => {
     return {
@@ -26,7 +29,7 @@ export const addTraining = (training) => {
 
 export const fetchAllTrainings = () => {
     return (dispatch) => {
-        let url = appConstants.GET_ALL_ITEMS_URL + '?type=trainings';
+        let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=trainings';
         return axios.get(url)
             .then(response => {
                 dispatch(fetchTrainings(response.data));
@@ -52,7 +55,7 @@ export const fetchATraining = (certId) => {
 
 export const addNewTraining = (formData) => {
     return (dispatch) => {
-        let url = appConstants.ADD_NEW_CERTIFICATE_URL;
+        let url = appConstants.ADD_NEW_ITEM_URL + '?type=trainings';
         let headers = {
             'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
         };
@@ -61,6 +64,10 @@ export const addNewTraining = (formData) => {
                 if (response.status === 200) {
                     dispatch(setStatus(false));
                 }
+            })
+            .then(() => {
+                browserHistory.push('/');
+                browserHistory.push('/trainings');
             })
             .catch(error => {
                 throw (error);

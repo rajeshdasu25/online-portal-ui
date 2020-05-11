@@ -9,7 +9,7 @@ const packageJson = require('../package.json');
 const app = express();
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 app.listen(port);
 
 console.log('App is listening on port ' + port);
@@ -53,12 +53,25 @@ app.get('/ping', function (req, res) {
 // An api endpoint that returns a short list of items
 app.get('/fetchAllItems', (req, res) => {
     let itemType = req.query.type;
-    let jsonUrl = './data/'+itemType+'.json';
+    let jsonUrl = './data/' + itemType + '.json';
 
     fs.readFile(jsonUrl, (err, data) => {
         if (err) throw err;
         let items = JSON.parse(data);
         res.json(items);
+    });
+});
+
+app.get('/fetchAnItem', (req, res) => {
+    let itemType = req.query.type;
+    let itemId = req.query.id;
+    let jsonUrl = './data/' + itemType + '.json';
+
+    fs.readFile(jsonUrl, (err, data) => {
+        if (err) throw err;
+        let items = JSON.parse(data);
+        let resultItem = items.find(item => item.id == itemId);
+        res.json(resultItem);
     });
 });
 

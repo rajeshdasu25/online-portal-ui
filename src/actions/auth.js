@@ -96,6 +96,12 @@ export const checkUserLogin = (formData) => {
                         localStorage.setItem('loginUserId', JSON.stringify(response.data.userId));
                         localStorage.setItem('loginSsoId', JSON.stringify(response.data.ssoId));
                         localStorage.setItem('loginUserType', JSON.stringify(response.data.userTypeId));
+                        let loginUser = {
+                            'type': response.data.userTypeId,
+                            'id': response.data.userId,
+                            'sso': response.data.ssoId
+                        };
+                        localStorage.setItem('loginUser', loginUser);
                         // dispatch(userLogin(response.data.userId));
                         dispatch(userLogin(response.data.ssoId));
                     }

@@ -1,9 +1,12 @@
 .expandableTableContainer {
     margin: 1rem 0;
+    .btn-addnew {
+        position: absolute;
+        left: 1rem;
+    }
     .btn-filter {
         position: absolute;
         right: 1rem;
-        top: 0rem;
         z-index: 999;
     }
     .filter.text-filter.form-control {
@@ -11,7 +14,13 @@
     }
     .react-bs-table-search-form {
         position: absolute;
-        left: -1rem;
-        top: -1rem;
+        // left: -1rem;
+        // top: -1rem;
+        left: 0rem !important;
+        top: 0rem !important;
+        bottom: 0rem !important;
+    }
+    .react-bs-table-tool-bar {
+        margin: 0 6rem 1rem 6rem;
     }
 }
