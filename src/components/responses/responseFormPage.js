@@ -6,8 +6,8 @@ import { fetchLoginUser } from '../../actions/auth';
 import ResponseForm from './responseForm';
 
 class ResponseFormPage extends React.Component {
-    submit = formValues => { 
-        this.props.addNewResponse(formValues);
+    submit = formValues => { console.log('formValues: ', formValues)
+        //this.props.addNewResponse(formValues);
     }
 
     componentDidMount() {

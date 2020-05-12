@@ -4,9 +4,9 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Button, Col, Row } from 'react-bootstrap';
 
 let FilterForm = props => {
-    const { 
-        certificates, forms, responses, trainings, users, 
-        FilterTypeValue, handleSubmit, pristine, submitting 
+    const {
+        certificates, forms, responses, trainings, users,
+        FilterTypeValue, handleSubmit, pristine, submitting
     } = props;
 
     const FilterTypeOptions = [

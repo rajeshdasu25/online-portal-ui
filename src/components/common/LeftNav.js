@@ -19,7 +19,7 @@ function LeftNav() {
       : 
       <ul style={{ listStyleType: "none", padding: 0 }}>
         <li className={currentLocation === '/new-response' ? 'active' : ''}><Link to="/new-response">New Entry</Link></li>
-        <li className={currentLocation === '/skills' ? 'active' : ''}><Link to="/skills">Skill Metrics</Link></li>
+        {/* <li className={currentLocation === '/skills' ? 'active' : ''}><Link to="/skills">Skill Metrics</Link></li> */}
         <li className={currentLocation === '/reports' ? 'active' : ''}><Link to="/reports">My Reports</Link></li>
       </ul>}
     </div>

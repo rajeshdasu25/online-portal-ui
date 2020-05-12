@@ -9,11 +9,11 @@ import AutoComplete from '../common/AutoComplete';
 import SkillForm from '../skills/skillForm';
 
 const ProficiencyOptions = [
-    { text: 'Novice', value: '0' },
-    { text: 'Beginner', value: '1' },
-    { text: 'Competant', value: '2' },
-    { text: 'Proficient', value: '3' },
-    { text: 'Expert', value: '4' }
+    { text: 'Novice', value: '0', checked: true },
+    { text: 'Beginner', value: '1', checked: false },
+    { text: 'Competant', value: '2', checked: false },
+    { text: 'Proficient', value: '3', checked: false },
+    { text: 'Expert', value: '4', checked: false }
 ];
 
 const renderMoreFields = () => {
@@ -170,7 +170,7 @@ const renderMultipleRadios = ({ onChange }) => (
                     onChange={() => {
                         onChange(radio.value)
                     }}
-                    // checked={index === radio.value}
+                // checked={index === radio.value}
                 />
             </Col>
         )
@@ -180,9 +180,10 @@ const renderMultipleRadios = ({ onChange }) => (
 
 let ResponseForm = props => {
     const { handleSubmit, reset, certificates, pristine, submitting,
-            RoleTypeValue } = props;
+        RoleTypeValue } = props;
 
-    const submit = formValues => { console.log(formValues);
+    const submit = formValues => {
+        console.log(formValues);
     }
 
     const RoleTypeOptions = [
@@ -192,11 +193,11 @@ let ResponseForm = props => {
     ];
 
     const ProficiencyOptions = [
-        { text: 'Novice', value: '0' },
-        { text: 'Beginner', value: '1' },
-        { text: 'Competant', value: '2' },
-        { text: 'Proficient', value: '3' },
-        { text: 'Expert', value: '4' }
+        { text: 'Novice', value: '0', checked: true },
+        { text: 'Beginner', value: '1', checked: false },
+        { text: 'Competant', value: '2', checked: false },
+        { text: 'Proficient', value: '3', checked: false },
+        { text: 'Expert', value: '4', checked: false }
     ];
 
     const FrontendOptions = [
@@ -312,7 +313,7 @@ let ResponseForm = props => {
                                 </Row>
                             </div>
                             <div className="form-group">
-                                <Accordion defaultActiveKey="0">
+                                <Accordion /*defaultActiveKey="0"*/>
                                     <Card>
                                         <Accordion.Toggle as={Card.Header} eventKey="0">Certifications</Accordion.Toggle>
                                         <Accordion.Collapse eventKey="0">
@@ -330,7 +331,7 @@ let ResponseForm = props => {
                                         </Accordion.Collapse>
                                     </Card>
                                     <Card>
-                                        <Accordion.Toggle as={Card.Header} eventKey="2">Skill</Accordion.Toggle>
+                                        <Accordion.Toggle as={Card.Header} eventKey="2">Skills</Accordion.Toggle>
                                         <Accordion.Collapse eventKey="2">
                                             <Card.Body>
                                                 <Container>
@@ -357,18 +358,18 @@ let ResponseForm = props => {
                                                                 <Row className="text-center">
                                                                     {ProficiencyOptions.map((item, index) => (
                                                                         <Col md={2} sm={2} xs={2} key={index}>
-                                                                            <span style={{ 'fontWeight': 'bold' }}>{item.text}</span>
+                                                                            <strong>{item.text}</strong>
                                                                         </Col>
                                                                     ))}
                                                                 </Row>
                                                             </Col>
                                                         </Row>
                                                     </div>}
-                                                    {RoleTypeValue && RoleTypeValue==='ui' && FrontendOptions.map((item, index) => (
+                                                    {/* {RoleTypeValue && RoleTypeValue === 'ui' && FrontendOptions.map((item, index) => (
                                                         <div className="form-group" key={index}>
                                                             <Row>
-                                                                <Col md={3} sm={3} xs={3}>
-                                                                    {item.text}
+                                                                <Col md={3} sm={3} xs={3} className="text-right">
+                                                                    <strong>{item.text}</strong>
                                                                 </Col>
                                                                 <Col md={9} sm={9} xs={9}>
                                                                     <Row className="text-center">
@@ -382,11 +383,11 @@ let ResponseForm = props => {
                                                             </Row>
                                                         </div>
                                                     ))}
-                                                    {RoleTypeValue && RoleTypeValue==='java' && JavaOptions.map((item, index) => (
+                                                    {RoleTypeValue && RoleTypeValue === 'java' && JavaOptions.map((item, index) => (
                                                         <div className="form-group" key={index}>
                                                             <Row>
-                                                                <Col md={3} sm={3} xs={3}>
-                                                                    {item.text}
+                                                                <Col md={3} sm={3} xs={3} className="text-right">
+                                                                    <strong>{item.text}</strong>
                                                                 </Col>
                                                                 <Col md={9} sm={9} xs={9}>
                                                                     <Row className="text-center">
@@ -400,11 +401,11 @@ let ResponseForm = props => {
                                                             </Row>
                                                         </div>
                                                     ))}
-                                                    {RoleTypeValue && RoleTypeValue==='devops' && DevOpsOptions.map((item, index) => (
+                                                    {RoleTypeValue && RoleTypeValue === 'devops' && DevOpsOptions.map((item, index) => (
                                                         <div className="form-group" key={index}>
                                                             <Row>
-                                                                <Col md={3} sm={3} xs={3}>
-                                                                    {item.text}
+                                                                <Col md={3} sm={3} xs={3} className="text-right">
+                                                                    <strong>{item.text}</strong>
                                                                 </Col>
                                                                 <Col md={9} sm={9} xs={9}>
                                                                     <Row className="text-center">
@@ -413,6 +414,34 @@ let ResponseForm = props => {
                                                                             props={{
                                                                                 onChange: props.onChange
                                                                             }} />
+                                                                    </Row>
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    ))} */}
+                                                    {RoleTypeValue && RoleTypeValue === 'ui' && FrontendOptions.map((RoleOptionItem, RoleOptionIndex) => (
+                                                        <div className="form-group" key={RoleOptionIndex}>
+                                                            <Row>
+                                                                <Col md={3} sm={3} xs={3} className="text-right">
+                                                                    <strong>{RoleOptionItem.text}</strong>
+                                                                </Col>
+                                                                <Col md={9} sm={9} xs={9}>
+                                                                    <Row className="text-center">
+                                                                        {ProficiencyOptions.map((ProficiencyOptionItem, ProficiencyOptionIndex) => { console.log('item: ', ProficiencyOptionItem); return(
+                                                                            <Col md={2} sm={2} xs={2} key={ProficiencyOptionIndex}>
+                                                                                <Field
+                                                                                    name={`${RoleOptionItem.value}_${ProficiencyOptionItem.value}`}
+                                                                                    component={"input"}
+                                                                                    type={"radio"}
+                                                                                    onChange={() => {
+                                                                                        alert(ProficiencyOptionItem.value);
+                                                                                        //this.onChange(ProficiencyOptionItem.value)
+                                                                                    }}
+                                                                                    checked={ProficiencyOptionItem.checked}
+                                                                                    // checked={ProficiencyOptionIndex === radio.value}
+                                                                                />
+                                                                            </Col>
+                                                                        )})}
                                                                     </Row>
                                                                 </Col>
                                                             </Row>
