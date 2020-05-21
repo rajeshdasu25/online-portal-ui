@@ -14,6 +14,7 @@ import user from './indUserReducer';
 import users from './allUsersReducer';
 import loginUser from './loginUserReducer';
 import loginUserId from './loginUserIdReducer';
+import loginError from './loginErrorReducer';
 
 const rootReducer = combineReducers({
     certificate: certificate,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
     modal: modal,
     loginUser: loginUser,
     loginUserId: loginUserId,
+    loginError: loginError,
     form: formReducer
 });
 

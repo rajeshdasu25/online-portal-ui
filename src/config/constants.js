@@ -4,6 +4,7 @@ export const PHP_HOST = "http://localhost/online-portal/api/";
 export const FETCH_AN_ITEM_URL = NODE_HOST + "fetchAnItem";
 export const FETCH_ALL_ITEMS_URL = NODE_HOST + "fetchAllItems";
 export const ADD_AN_ITEM_URL = NODE_HOST + "addAnItem";
+export const USER_LOGIN_URL = NODE_HOST + "login";
 
 export const FETCH_ALL_CERTIFICATES_URL = "https://onlineportalservices.appspot.com/api/certificationlookup";
 export const FETCH_A_CERTIFICATE_URL = "https://onlineportalservices.appspot.com/api/certificationlookup";

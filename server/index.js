@@ -5,9 +5,11 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const ip = require('ip').address();
 const packageJson = require('../package.json');
+const _ = require('lodash');
 
 const app = express();
 app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 5001;
 app.listen(port);
@@ -69,9 +71,40 @@ app.get('/fetchAnItem', (req, res) => {
 
     fs.readFile(jsonUrl, (err, data) => {
         if (err) throw err;
-        let items = JSON.parse(data);
-        let resultItem = items.find(item => item.id == itemId);
+        let items = JSON.parse(data);console.log('items: ', items);
+        let resultItem = items.find(item => item.Id == itemId);
         res.json(resultItem);
+    });
+});
+
+app.post('/login', (req, res) => {
+    let Username = req.body.Username;
+    let Password = req.body.Password;
+    let jsonUrl = './data/users.json';
+
+    fs.readFile(jsonUrl, (err, data) => {
+        if (err) throw err;
+        let resultObj = {};
+        let users = JSON.parse(data);
+        let user = users.find(item => item.Username == Username);
+        if(!_.isEmpty(user)) { 
+            if(user.Pword === Password) {
+                if(user.ActiveStatus == '1') {
+                    resultObj.userValidity = "VALID_USER";
+                    resultObj.userId = user.Id;
+                    resultObj.ssoId = user.SsoId;
+                    resultObj.userTypeId = user.UserTypeId;
+                } else {
+                    resultObj.userValidity = "ACCESS_DENIED";
+                }
+            } else {
+                resultObj.userValidity = "WRONG_PWD";
+            }
+        } else {
+            resultObj.userValidity = "NOT_EXIST";
+        }
+
+        res.json(resultObj);
     });
 });
 

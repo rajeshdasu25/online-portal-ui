@@ -235,16 +235,16 @@ let ResponseForm = props => {
                             <div className="form-group">
                                 <Row>
                                     <Col md={3} sm={3} xs={12} className="text-right">
-                                        <label htmlFor="SSO" className="col-form-label">SSO ID</label>
+                                        <label htmlFor="SsoId" className="col-form-label">SSO ID</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="SSO" component="input" type="text" placeholder="SSO ID" className="form-control" />
+                                        <Field name="SsoId" component="input" type="text" placeholder="SSO ID" className="form-control" />
                                     </Col>
                                     <Col md={2} sm={2} xs={12} className="text-right">
-                                        <label htmlFor="KIN" className="col-form-label">KIN ID</label>
+                                        <label htmlFor="KinId" className="col-form-label">KIN ID</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="KIN" component="input" type="text" placeholder="KIN ID" className="form-control" />
+                                        <Field name="KinId" component="input" type="text" placeholder="KIN ID" className="form-control" />
                                     </Col>
                                 </Row>
                             </div>
@@ -427,15 +427,15 @@ let ResponseForm = props => {
                                                                 </Col>
                                                                 <Col md={9} sm={9} xs={9}>
                                                                     <Row className="text-center">
-                                                                        {ProficiencyOptions.map((ProficiencyOptionItem, ProficiencyOptionIndex) => { console.log('item: ', ProficiencyOptionItem); return(
+                                                                        {ProficiencyOptions.map((ProficiencyOptionItem, ProficiencyOptionIndex) => { /*console.log('item: ', ProficiencyOptionItem);*/ return(
                                                                             <Col md={2} sm={2} xs={2} key={ProficiencyOptionIndex}>
                                                                                 <Field
                                                                                     name={`${RoleOptionItem.value}_${ProficiencyOptionItem.value}`}
                                                                                     component={"input"}
                                                                                     type={"radio"}
                                                                                     onChange={() => {
-                                                                                        alert(ProficiencyOptionItem.value);
-                                                                                        //this.onChange(ProficiencyOptionItem.value)
+                                                                                        // alert(ProficiencyOptionItem.value);
+                                                                                        this.onChange(ProficiencyOptionItem.value)
                                                                                     }}
                                                                                     checked={ProficiencyOptionItem.checked}
                                                                                     // checked={ProficiencyOptionIndex === radio.value}

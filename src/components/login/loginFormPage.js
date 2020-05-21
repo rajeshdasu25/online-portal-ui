@@ -21,7 +21,7 @@ class LoginFormPage extends React.Component {
 
     render() {
         if (this.state.redirectToDashboard === true) {
-            return <Redirect to="/" />;
+            return localStorage.loginUserType === '1' ? <Redirect to="/" /> : <Redirect to="/new-response" />;
         }
         return <LoginForm onSubmit={this.submit} {...this.props} />
     }
@@ -29,7 +29,9 @@ class LoginFormPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        loginUserId: state.loginUserId
+        loginUserId: state.loginUserId,
+        error: state.error,
+        loginError: state.loginError
     };
 };
 

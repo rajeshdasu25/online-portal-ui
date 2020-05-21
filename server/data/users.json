@@ -12,7 +12,8 @@
         "TimeRegistered": "2020-04-13 11:14:00",
         "TimeLastAccess": null,
         "ActiveStatus": "1",
-        "UserType": "Admin"
+        "UserType": "Admin",
+        "UserRole": "Admin"
     },
     {
         "Id": "2",
@@ -27,7 +28,8 @@
         "TimeRegistered": "2020-04-13 11:14:00",
         "TimeLastAccess": null,
         "ActiveStatus": "1",
-        "UserType": "Manager"
+        "UserType": "Manager",
+        "UserRole": "Manager"
     },
     {
         "Id": "4",
@@ -42,7 +44,8 @@
         "TimeRegistered": "2020-04-13 11:14:00",
         "TimeLastAccess": null,
         "ActiveStatus": "1",
-        "UserType": "Manager"
+        "UserType": "Manager",
+        "UserRole": "Manager"
     },
     {
         "Id": "3",
@@ -57,6 +60,7 @@
         "TimeRegistered": "2020-04-13 11:14:00",
         "TimeLastAccess": null,
         "ActiveStatus": "1",
-        "UserType": "NonManager"
+        "UserType": "NonManager",
+        "UserRole": "UiDeveloper"
     }
 ]

@@ -4,7 +4,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 
 let LoginForm = props => {
-    const { handleSubmit, reset, pristine, submitting } = props;
+    const { handleSubmit, reset, pristine, submitting, loginError } = props;
     return (
         <Row className="login-ctr">
             <Col md={12} sm={12} xs={12} className="login-ctr-item">
@@ -12,6 +12,7 @@ let LoginForm = props => {
                     <Card.Header>Login</Card.Header>
                     <Card.Body>
                         <form onSubmit={handleSubmit}>
+                            {loginError.error && <p className="text-center text-danger">{loginError.message}</p>}
                             <div className="form-group">
                                 <Row>
                                     <Col md={3} sm={3} xs={3} className="text-right">
@@ -44,7 +45,7 @@ let LoginForm = props => {
                     </Card.Body>
                 </Card>
             </Col>
-        </Row >
+        </Row>
     )
 }
 

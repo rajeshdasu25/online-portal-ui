@@ -1,4 +1,4 @@
-import { CHECK_USER_LOGIN, FETCH_LOGIN_USER } from './types';
+import { AUTH_ERROR, CHECK_USER_LOGIN, FETCH_LOGIN_USER } from './types';
 // import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
@@ -35,6 +35,13 @@ export const fetchLogUser = (loginUser) => {
     return {
         type: FETCH_LOGIN_USER,
         loginUser
+    }
+};
+
+export const authError = (loginErrorMessage) => {
+    return {
+        type: AUTH_ERROR,
+        loginErrorMessage
     }
 };
 
@@ -84,12 +91,16 @@ export const fetchLogUser = (loginUser) => {
 
 export const checkUserLogin = (formData) => {
     return (dispatch) => {
-        let url = appConstants.CHECK_USER_LOGIN_URL;
         //let url = 'https://onlineportalservices.appspot.com/api/login';
+        let url = appConstants.USER_LOGIN_URL;// + '?Username=' + formData.Username + '&Password=' + formData.Password;
         let headers = {
-            'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         };
-        return axios.post(url, formData, { headers : headers })
+        return axios.post(
+            url,
+            formData,
+            { body: JSON.stringify(formData) },
+            { headers: headers })
             .then(response => {
                 if (response.status === 200) {
                     if (response.data.userValidity === "VALID_USER") {
@@ -104,6 +115,12 @@ export const checkUserLogin = (formData) => {
                         localStorage.setItem('loginUser', loginUser);
                         // dispatch(userLogin(response.data.userId));
                         dispatch(userLogin(response.data.ssoId));
+                    } else if (response.data.userValidity === "WRONG_PWD") {
+                        dispatch(authError('Incorrect Password.!'));
+                    } else if (response.data.userValidity === "NOT_EXIST") {
+                        dispatch(authError('User does not exist.!'));
+                    } else if (response.data.userValidity === "ACCESS_DENIED") {
+                        dispatch(authError('User not active.!'));
                     }
                 }
             })
@@ -115,7 +132,7 @@ export const checkUserLogin = (formData) => {
 
 export const fetchLoginUser = (userId) => {
     return (dispatch) => {
-        const url = appConstants.GET_AN_ITEM_URL + '?type=users&id=' + userId;
+        const url = appConstants.FETCH_AN_ITEM_URL + '?type=users&id=' + userId;
         return axios.get(url)
             .then(response => {
                 dispatch(fetchLogUser(response.data));

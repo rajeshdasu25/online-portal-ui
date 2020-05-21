@@ -40,7 +40,7 @@ export const fetchAllUsers = (user) => {
 
 export const fetchAUser = (userId) => {
     return (dispatch) => {
-        const url = appConstants.GET_AN_ITEM_URL + '?type=users&id=' + userId;
+        const url = appConstants.FETCH_AN_ITEM_URL + '?type=users&id=' + userId;
         return axios.get(url)
             .then(response => {
                 dispatch(fetchUser(response.data));
