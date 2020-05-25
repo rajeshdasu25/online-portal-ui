@@ -3,6 +3,7 @@
         "Id": "1",
         "SsoId": "1",
         "UserTypeId": "1",
+        "RoleId": "1",
         "FirstName": "Admin",
         "LastName": "1",
         "Username": "admin",
@@ -10,15 +11,15 @@
         "EmailAddr": "admin@admin.com",
         "Phoneno": "0123456789",
         "TimeRegistered": "2020-04-13 11:14:00",
-        "TimeLastAccess": null,
         "ActiveStatus": "1",
         "UserType": "Admin",
-        "UserRole": "Admin"
+        "RoleName": "Frontend Developer"
     },
     {
         "Id": "2",
         "SsoId": "2",
         "UserTypeId": "2",
+        "RoleId": "1",
         "FirstName": "Manager",
         "LastName": "1",
         "Username": "manager",
@@ -26,15 +27,15 @@
         "EmailAddr": "manager@manager.com",
         "Phoneno": "9876543210",
         "TimeRegistered": "2020-04-13 11:14:00",
-        "TimeLastAccess": null,
         "ActiveStatus": "1",
         "UserType": "Manager",
-        "UserRole": "Manager"
+        "RoleName": "Frontend Developer"
     },
     {
         "Id": "4",
         "SsoId": "4",
         "UserTypeId": "2",
+        "RoleId": "1",
         "FirstName": "Manager",
         "LastName": "2",
         "Username": "manager2",
@@ -42,15 +43,15 @@
         "EmailAddr": "manager2@manager2.com",
         "Phoneno": "1245789630",
         "TimeRegistered": "2020-04-13 11:14:00",
-        "TimeLastAccess": null,
         "ActiveStatus": "1",
         "UserType": "Manager",
-        "UserRole": "Manager"
+        "RoleName": "Frontend Developer"
     },
     {
         "Id": "3",
         "SsoId": "3",
         "UserTypeId": "3",
+        "RoleId": "1",
         "FirstName": "Rajesh",
         "LastName": "Kumar",
         "Username": "rajesh",
@@ -58,9 +59,8 @@
         "EmailAddr": "rajesh@rajesh.com",
         "Phoneno": "9876501234",
         "TimeRegistered": "2020-04-13 11:14:00",
-        "TimeLastAccess": null,
         "ActiveStatus": "1",
         "UserType": "NonManager",
-        "UserRole": "UiDeveloper"
+        "RoleName": "Frontend Developer"
     }
 ]

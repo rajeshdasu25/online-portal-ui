@@ -8,7 +8,6 @@ import LeftNav from './components/common/LeftNav';
 import Dashboard from './components/dashboard';
 import PageNotFound from './components/common/NotFound';
 import ReportsPage from './components/reports';
-import SkillsPage from './components/skills';
 import ResponseFormPage from './components/responses/responseFormPage';
 import ViewAllCertificates from './components/certificates/viewAllCertificates';
 import ViewIndCertificate from './components/certificates/viewIndCertificate';
@@ -16,6 +15,10 @@ import ViewAllForms from './components/forms/viewAllForms';
 import ViewIndForm from './components/forms/viewIndForm';
 import ViewAllResponses from './components/responses/viewAllResponses';
 import ViewIndResponse from './components/responses/viewIndResponse';
+import ViewAllRoles from './components/roles/viewAllRoles';
+import ViewIndRole from './components/roles/viewIndRole';
+import ViewAllSkills from './components/skills/viewAllSkills';
+import ViewIndSkill from './components/skills/viewIndSkill';
 import ViewAllTrainings from './components/trainings/viewAllTrainings';
 import ViewIndTraining from './components/trainings/viewIndTraining';
 import ViewAllUsers from './components/users/viewAllUsers';
@@ -57,7 +60,11 @@ function Main() {
             <Route path='/reports' component={ReportsPage} />
             <Route path='/responses' component={ViewAllResponses} />
             <Route path='/response/:id' component={ViewIndResponse} />
-            <Route path='/skills' component={SkillsPage} />
+            <Route path='/roles' component={ViewAllRoles} />
+            <Route path='/role/:id' component={ViewIndRole} />
+            <Route path='/skills' component={ViewAllSkills} />
+            <Route path='/skill/:id' component={ViewIndSkill} />
+            {/* <Route path='/skills' component={SkillsPage} /> */}
             <Route path='/trainings' component={ViewAllTrainings} />
             <Route path='/training/:id' component={ViewIndTraining} />
             <Route path='/users' component={ViewAllUsers} />

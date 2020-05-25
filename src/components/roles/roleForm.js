@@ -3,31 +3,10 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Button, Col, Row } from 'react-bootstrap';
 
-let SkillForm = props => {
-    const { handleSubmit, reset, roles, pristine, submitting } = props;
+let RoleForm = props => {
+    const { handleSubmit, reset, pristine, submitting } = props;
     return (
         <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <Row>
-                    <Col md={3} sm={3} xs={3} className="text-right">
-                        <label htmlFor="type" className="col-form-label">Role</label>
-                    </Col>
-                    <Col md={8} sm={8} xs={8}>
-                        <Field name="RoleId" component="select" className="form-control" >
-                            <option value=''>Select</option>
-                            {roles.map((role) => {
-                                return (
-                                    <option
-                                        key={role.Id}
-                                        value={role.Id}>
-                                        {role.DisplayName}
-                                    </option>
-                                );
-                            })}
-                        </Field>
-                    </Col>
-                </Row>
-            </div>
             <div className="form-group">
                 <Row>
                     <Col md={3} sm={3} xs={3} className="text-right">
@@ -44,7 +23,7 @@ let SkillForm = props => {
                         <label htmlFor="DisplayName" className="col-form-label">DisplayName</label>
                     </Col>
                     <Col md={8} sm={8} xs={8}>
-                        <Field name="DisplayName" component="input" type="text" placeholder="Display Name" className="form-control" />
+                        <Field name="DisplayName" component="input" type="text" placeholder="DisplayName" className="form-control" />
                     </Col>
                 </Row>
             </div>
@@ -60,20 +39,18 @@ let SkillForm = props => {
     )
 }
 
-SkillForm = reduxForm({
-    form: 'skillForm'
-})(SkillForm)
+RoleForm = reduxForm({
+    form: 'roleForm'
+})(RoleForm)
 
-const selector = formValueSelector('skillForm');
-SkillForm = connect(state => {
-    const RoleId = selector(state, 'RoleId');
+const selector = formValueSelector('roleForm');
+RoleForm = connect(state => {
     const Name = selector(state, 'Name');
     const DisplayName = selector(state, 'DisplayName');
     return {
-        RoleId,
         Name,
         DisplayName
     }
-})(SkillForm)
+})(RoleForm)
 
-export default SkillForm;
+export default RoleForm;

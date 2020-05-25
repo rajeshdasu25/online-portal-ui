@@ -1,35 +1,38 @@
-import { FETCH_IND_USER, FETCH_ALL_USERS, ADD_NEW_USER } from './types';
+import { createBrowserHistory } from 'history';
+import { FETCH_IND_ROLE, FETCH_ALL_ROLES, ADD_NEW_ROLE } from './types';
 import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
 
-export const fetchUsers = (users) => {
+export const browserHistory = createBrowserHistory();
+
+export const fetchRoles = (roles) => {
     return {
-        type: FETCH_ALL_USERS,
-        users
+        type: FETCH_ALL_ROLES,
+        roles
     }
 };
 
-export const fetchUser = (user) => {
+export const fetchRole = (indRole) => {
     return {
-        type: FETCH_IND_USER,
-        user
+        type: FETCH_IND_ROLE,
+        indRole
     }
 };
 
-export const addUser = (user) => {
+export const addRole = (role) => {
     return {
-        type: ADD_NEW_USER,
-        user
+        type: ADD_NEW_ROLE,
+        role
     }
 };
 
-export const fetchAllUsers = (user) => {
+export const fetchAllRoles = (user) => {
     return (dispatch) => {
-        let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=users';
+        let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=roles';
         return axios.get(url)
             .then(response => {
-                dispatch(fetchUsers(response.data));
+                dispatch(fetchRoles(response.data));
             })
             .catch(error => {
                 throw (error);
@@ -37,12 +40,12 @@ export const fetchAllUsers = (user) => {
     };
 };
 
-export const fetchAUser = (userId) => {
+export const fetchARole = (roleId) => {
     return (dispatch) => {
-        const url = appConstants.FETCH_AN_ITEM_URL + '?type=users&id=' + userId;
+        const url = appConstants.FETCH_AN_ITEM_URL + '?id=' + roleId;
         return axios.get(url)
             .then(response => {
-                dispatch(fetchUser(response.data));
+                dispatch(fetchRole(response.data));
             })
             .catch(error => {
                 throw (error);
@@ -50,9 +53,9 @@ export const fetchAUser = (userId) => {
     };
 };
 
-export const addNewUser = (formData) => {
+export const addNewRole = (formData) => {
     return (dispatch) => {
-        let url = appConstants.ADD_NEW_CERTIFICATE_URL;
+        let url = appConstants.ADD_NEW_ITEM_URL + '?type=roles';
         let headers = {
             'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
         };
@@ -61,6 +64,10 @@ export const addNewUser = (formData) => {
                 if (response.status === 200) {
                     dispatch(setStatus(false));
                 }
+            })
+            .then(() => {
+                browserHistory.push('/');
+                browserHistory.push('/roles');
             })
             .catch(error => {
                 throw (error);

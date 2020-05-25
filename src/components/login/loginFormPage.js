@@ -21,7 +21,12 @@ class LoginFormPage extends React.Component {
 
     render() {
         if (this.state.redirectToDashboard === true) {
-            return localStorage.loginUserType === '1' ? <Redirect to="/" /> : <Redirect to="/new-response" />;
+            // return localStorage.loginUserType === '1' ? <Redirect to="/" /> : <Redirect to="/new-response" />;
+            if (localStorage.loginUserType === '1') {
+                return <Redirect to="/" />;
+            } else {
+                return <Redirect to="/new-response" />;
+            }
         }
         return <LoginForm onSubmit={this.submit} {...this.props} />
     }

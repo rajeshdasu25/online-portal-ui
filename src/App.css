@@ -130,6 +130,12 @@ footer {
 .widget-info.orange {
   background: #eb5f1e;
 }
+.widget-info.brown {
+  background: brown;
+}
+.widget-info.yellow {
+  background: yellowgreen;
+}
 .widget-info h3,
 .widget-info h4,
 .widget-info h5 {

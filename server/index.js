@@ -71,7 +71,7 @@ app.get('/fetchAnItem', (req, res) => {
 
     fs.readFile(jsonUrl, (err, data) => {
         if (err) throw err;
-        let items = JSON.parse(data);console.log('items: ', items);
+        let items = JSON.parse(data);
         let resultItem = items.find(item => item.Id == itemId);
         res.json(resultItem);
     });

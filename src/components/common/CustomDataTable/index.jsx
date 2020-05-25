@@ -78,6 +78,8 @@ export default class ExpandRow extends React.Component {
         case 'forms': csvFileName = 'Forms.csv'; break;
         case 'reports': csvFileName = 'Reports.csv'; break;
         case 'responses': csvFileName = 'Responses.csv'; break;
+        case 'roles': csvFileName = 'Roles.csv'; break;
+        case 'skills': csvFileName = 'Skills.csv'; break;
         case 'trainings': csvFileName = 'Trainings.csv'; break;
         case 'users': csvFileName = 'Employes.csv'; break;
         default: csvFileName = 'spreadsheet.csv'; break;
@@ -108,15 +110,29 @@ export default class ExpandRow extends React.Component {
           { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat':this.statusFormatter },
         ];
         break;
-        case 'responses':
+      case 'responses':
         headers = [
           { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
-          { 'title': 'Form Name', 'dataField': 'FormName', 'ref': 'formCol', 'hidden': false, 'isKey': false  },
-          { 'title': 'Creator', 'dataField': 'Creator', 'ref': 'creatorCol', 'hidden': false, 'isKey': false  },
-          { 'title': 'Description', 'dataField': 'Description', 'ref': 'descCol', 'hidden': false, 'isKey': false  },
-          { 'title': 'Date', 'dataField': 'FormattedDate', 'ref': 'dateCol', 'hidden': false, 'isKey': false  },
+          { 'title': 'Form Name', 'dataField': 'FormName', 'ref': 'formCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Creator', 'dataField': 'Creator', 'ref': 'creatorCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Description', 'dataField': 'Description', 'ref': 'descCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Date', 'dataField': 'FormattedDate', 'ref': 'dateCol', 'hidden': false, 'isKey': false },
         ];
         break;
+      case 'roles':
+          headers = [
+            { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
+            { 'title': 'Name', 'dataField': 'Name', 'ref': 'nameCol', 'hidden': false, 'isKey': false },
+            { 'title': 'Display Name', 'dataField': 'DisplayName', 'ref': 'displayNameCol', 'hidden': false, 'isKey': false },
+          ];
+          break;
+      case 'skills':
+          headers = [
+            { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
+            { 'title': 'Name', 'dataField': 'DisplayName', 'ref': 'displayNameCol', 'hidden': false, 'isKey': false },
+            { 'title': 'Role', 'dataField': 'RoleName', 'ref': 'roleNameCol', 'hidden': false, 'isKey': false },
+          ];
+          break;
       case 'trainings':
         headers = [
           { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true, 'csvHeader': 'Id' },
@@ -130,6 +146,7 @@ export default class ExpandRow extends React.Component {
           { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true, 'csvHeader': 'Id' },
           { 'title': 'SSO ID', 'dataField': 'SsoId', 'ref': 'ssoCol', 'hidden': false, 'isKey': false },
           { 'title': 'Type', 'dataField': 'UserType', 'ref': 'userTypeCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Role', 'dataField': 'RoleName', 'ref': 'roleCol', 'hidden': false, 'isKey': false },
           { 'title': 'First Name', 'dataField': 'FirstName', 'ref': 'firstNameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Last Name', 'dataField': 'LastName', 'ref': 'lastNameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Email', 'dataField': 'EmailAddr', 'ref': 'emailCol', 'hidden': false, 'isKey': false },
@@ -179,7 +196,11 @@ export default class ExpandRow extends React.Component {
               );
           })}
         </DropdownButton>}
-        {itemType && itemType !== 'reports' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addTraining', true)}>Add New</Button>}
+        {itemType && itemType !== 'reports' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addCertificate', true)}>Add New</Button>}
+        {itemType && itemType === 'certificates' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addCertificate', true)}>Add New</Button>}
+        {itemType && itemType === 'roles' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addRole', true)}>Add New</Button>}
+        {itemType && itemType === 'skills' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addSkill', true)}>Add New</Button>}
+        {itemType && itemType === 'trainings' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addTraining', true)}>Add New</Button>}
         {this.props.data && (this.props.data.length > 0) && <BootstrapTable data={ this.props.data }
           search={ true }
           pagination={ true } 

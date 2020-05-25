@@ -6,6 +6,8 @@ export const getStatus = (status) => {
         modal: {
             addCertificate: status,
             addTraining: status,
+            addRole: status,
+            addSkill: status,
         }
     }
 };
@@ -16,6 +18,8 @@ export const setStatus = (type, status) => {
         modal: {
             addCertificate: status,
             addTraining: status,
+            addRole: status,
+            addSkill: status,
             type: status
         }
     }
@@ -33,7 +37,7 @@ export const displayModal = (val) => {
     };
 };
 
-export const showModal = (type, status) => { 
+export const showModal = (type, status) => {
     return (dispatch) => {
         dispatch(setStatus(type, status));
     };

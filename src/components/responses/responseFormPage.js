@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { addNewResponse } from '../../actions/responses';
-import { fetchAllCertificates } from '../../actions/certificates';
 import { fetchLoginUser } from '../../actions/auth';
+import { fetchAllCertificates } from '../../actions/certificates';
+import { addNewResponse } from '../../actions/responses';
 import ResponseForm from './responseForm';
 
 class ResponseFormPage extends React.Component {

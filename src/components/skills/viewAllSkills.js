@@ -7,16 +7,16 @@ import { Link } from 'react-router-dom';
 
 import ModalPopup from '../common/ModalPopup';
 import CustomDataTable from '../common/CustomDataTable';
-import TrainingFormPage from './trainingFormPage';
-import { fetchAllTrainings } from '../../actions/trainings';
+import SkillPage from './skillFormPage';
+import { fetchAllSkills } from '../../actions/skills';
 import { getModalStatus, showModal, hideModal } from '../../actions/modal';
 
-class ViewAllTrainings extends React.Component {
+class ViewAllSkills extends React.Component {
     componentDidMount() {
-        this.props.fetchAllTrainings();
+        this.props.fetchAllSkills();
         this.props.getModalStatus();
     }
-    handleShowModal = (type, status) => { console.log('type: ',type, '; status: ', status);
+    handleShowModal = (type, status) => {
         this.props.showModal(type, status);
     }
     handleHideModal = () => {
@@ -28,26 +28,26 @@ class ViewAllTrainings extends React.Component {
     handleEditItem = () => {
         this.props.showModal(true);
     }
-    render() { 
-        const { trainings, modal } = this.props;
+    render() {
+        const { skills, modal } = this.props;
 
         return (
             <React.Fragment>
                 <Helmet>
-                    <title>Trainings</title>
+                    <title>Skills</title>
                 </Helmet>
                 <div className="list-container">
                     <Row>
                         <Col md={12} xs={12} sm={12}>
-                            <Button variant="primary" onClick={() => this.handleShowModal('addTraining', true)}>Add New</Button>
-                            <CustomDataTable data={trainings} itemType="trainings" />
+                            <Button variant="primary" onClick={() => this.handleShowModal('addSkill', true)}>Add New</Button>
+                            <CustomDataTable data={skills} itemType="skills" />
                         </Col>
                     </Row>
                 </div>
                 <ModalPopup
-                    show={modal.addTraining}
+                    show={modal.addSkill}
                     title={'Add New'}
-                    body={<TrainingFormPage />}
+                    body={<SkillPage />}
                     handleHideModal={this.handleHideModal}
                 />
             </React.Fragment>
@@ -57,14 +57,14 @@ class ViewAllTrainings extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        trainings: state.trainings,
+        skills: state.skills,
         modal: state.modal
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({
-        fetchAllTrainings: fetchAllTrainings,
+        fetchAllSkills: fetchAllSkills,
         getModalStatus: getModalStatus,
         showModal: showModal,
         hideModal: hideModal
@@ -74,4 +74,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ViewAllTrainings);
+)(ViewAllSkills);

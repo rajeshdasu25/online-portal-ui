@@ -8,6 +8,10 @@ import forms from './allFormsReducer';
 import response from './indResponseReducer';
 import filterResponse from './filterResponsesReducer';
 import responses from './allResponsesReducer';
+import role from './indRoleReducer';
+import roles from './allRolesReducer';
+import skill from './indSkillReducer';
+import skills from './allSkillsReducer';
 import training from './indTrainingReducer';
 import trainings from './allTrainingsReducer';
 import user from './indUserReducer';
@@ -24,6 +28,10 @@ const rootReducer = combineReducers({
     filterResponse: filterResponse,
     response: response,
     responses: responses,
+    role: role,
+    roles: roles,
+    skill: skill,
+    skills: skills,
     training: training,
     trainings: trainings,
     users: users,

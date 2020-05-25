@@ -6,7 +6,6 @@ import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
 // import AutoSuggestion from '../common/AutoSuggestion';
 import AutoComplete from '../common/AutoComplete';
 // import AutoSearch from '../common/AutoSearch';
-import SkillForm from '../skills/skillForm';
 
 const ProficiencyOptions = [
     { text: 'Novice', value: '0', checked: true },
@@ -179,8 +178,8 @@ const renderMultipleRadios = ({ onChange }) => (
 );
 
 let ResponseForm = props => {
-    const { handleSubmit, reset, certificates, pristine, submitting,
-        RoleTypeValue } = props;
+    const { handleSubmit, reset, pristine, submitting,
+            certificates, RoleTypeValue, loginUser } = props;
 
     const submit = formValues => {
         console.log(formValues);

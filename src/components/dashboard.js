@@ -10,6 +10,8 @@ import WidgetInfo from './common/WidgetInfo.js';
 import { fetchAllCertificates } from '../actions/certificates';
 import { fetchAllForms } from '../actions/forms';
 import { fetchAllResponses } from '../actions/responses';
+import { fetchAllRoles } from '../actions/roles';
+// import { fetchAllSkills } from '../actions/skills';
 import { fetchAllTrainings } from '../actions/trainings';
 import { fetchAllUsers } from '../actions/users';
 
@@ -20,6 +22,8 @@ class Dashboard extends React.Component {
             this.props.fetchAllCertificates(),
             this.props.fetchAllForms(loginUser),
             this.props.fetchAllResponses(loginUser),
+            this.props.fetchAllRoles(),
+            // this.props.fetchAllSkills(),
             this.props.fetchAllTrainings(),
             this.props.fetchAllUsers()
         ]);
@@ -33,6 +37,8 @@ class Dashboard extends React.Component {
             'sso': localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'))
         };
         this.props.fetchAllCertificates();
+        this.props.fetchAllRoles();
+        // this.props.fetchAllSkills();
         this.props.fetchAllTrainings();
         this.props.fetchAllUsers();
         if (loginUser.type === '1') {
@@ -46,8 +52,17 @@ class Dashboard extends React.Component {
 
     render() {
         const {
-            certificates, forms, responses, trainings, users
+            certificates, forms, responses, roles, /*skills,*/ trainings, users
         } = this.props;
+
+        const masterItems = [
+            { url: 'forms', text: 'Forms', theme: 'green' },
+            { url: 'responses', text: 'Responses', theme: 'orange' },
+            { url: 'certifications', text: 'Certifications', theme: 'purple' },
+            { url: 'trainings', text: 'Trainings', theme: 'blue' },
+            { url: 'trainings', text: 'Users', theme: 'yellow' },
+            { url: 'roles', text: 'Roles', theme: 'brown' },
+        ];
 
         return (
             <React.Fragment>
@@ -55,31 +70,15 @@ class Dashboard extends React.Component {
                     <title>Dashboard</title>
                 </Helmet>
                 <Row>
-                    <Col md={2} xs={4} sm={6}>
-                        <Link to="/forms">
-                            <WidgetInfo theme='green' text='Forms' count={forms && forms.length} />
-                        </Link>
-                    </Col>
-                    <Col md={2} xs={4} sm={6}>
-                        <Link to="/responses">
-                            <WidgetInfo theme='orange' text='Responses' count={responses.length} />
-                        </Link>
-                    </Col>
-                    <Col md={2} xs={4} sm={6}>
-                        <Link to="/certifications">
-                            <WidgetInfo theme='purple' text='Certifications' count={certificates.length} />
-                        </Link>
-                    </Col>
-                    <Col md={2} xs={4} sm={6}>
-                        <Link to="/trainings">
-                            <WidgetInfo theme='blue' text='Trainings' count={trainings.length} />
-                        </Link>
-                    </Col>
-                    <Col md={2} xs={4} sm={6}>
-                        <Link to="/trainings">
-                            <WidgetInfo theme='blue' text='Users' count={users.length} />
-                        </Link>
-                    </Col>
+                    {masterItems.map((item, index) => {
+                        return (
+                            <Col md={2} xs={4} sm={6} key={index}>
+                                <Link to={'/' + item.url}>
+                                    <WidgetInfo theme={item.theme} text={item.text} count={item.url.length} />
+                                </Link>
+                            </Col>
+                        );
+                    })}
                 </Row>
             </React.Fragment>
         );
@@ -91,6 +90,8 @@ const mapStateToProps = state => {
         certificates: state.certificates,
         forms: state.forms,
         responses: state.responses,
+        roles: state.roles,
+        // skills: state.skills,
         trainings: state.trainings,
         users: state.users
     };
@@ -101,6 +102,8 @@ const mapDispatchToProps = dispatch => {
         fetchAllCertificates: () => dispatch(fetchAllCertificates()),
         fetchAllForms: (params) => dispatch(fetchAllForms(params)),
         fetchAllResponses: (params) => dispatch(fetchAllResponses(params)),
+        fetchAllRoles: () => dispatch(fetchAllRoles()),
+        // fetchAllSkills: () => dispatch(fetchAllSkills()),
         fetchAllTrainings: () => dispatch(fetchAllTrainings()),
         fetchAllUsers: () => dispatch(fetchAllUsers())
     };
