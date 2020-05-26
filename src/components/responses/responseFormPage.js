@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchLoginUser } from '../../actions/auth';
 import { fetchAllCertificates } from '../../actions/certificates';
 import { addNewResponse } from '../../actions/responses';
+import { fetchAllSkills } from '../../actions/skills';
 import ResponseForm from './responseForm';
 
 class ResponseFormPage extends React.Component {
@@ -14,6 +15,7 @@ class ResponseFormPage extends React.Component {
         const loginUserId = localStorage.hasOwnProperty('loginUserId') && JSON.parse(localStorage.getItem('loginUserId'));
         this.props.fetchLoginUser(loginUserId);
         this.props.fetchAllCertificates();
+        this.props.fetchAllSkills(loginUserId);
     }
 
     render() {
@@ -25,7 +27,8 @@ const mapStateToProps = state => {
     return {
         certificates: state.certificates,
         loginUser: state.loginUser,
-        loginUserId: state.loginUserId
+        loginUserId: state.loginUserId,
+        skills: state.skills
     };
 };
 
@@ -33,7 +36,8 @@ const mapDispatchToProps = dispatch => {
     return {
         addNewResponse: (params) => dispatch(addNewResponse(params)),
         fetchLoginUser: (params) => dispatch(fetchLoginUser(params)),
-        fetchAllCertificates: () => dispatch(fetchAllCertificates())
+        fetchAllCertificates: () => dispatch(fetchAllCertificates()),
+        fetchAllSkills: (params) => dispatch(fetchAllSkills(params))
     };
 };
 

@@ -1,0 +1,14 @@
+[
+    {
+        "Id": 1,
+        "Name": "oracle",
+        "Authority": "Oracle Developer",
+        "ActiveStatus": 1
+    },
+    {
+        "Id": 2,
+        "Name": "asd",
+        "Authority": "asd",
+        "ActiveStatus": "1"
+    }
+]

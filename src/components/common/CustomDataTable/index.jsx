@@ -90,12 +90,20 @@ export default class ExpandRow extends React.Component {
   renderTableHeaders = (itemType) => {
     let headers;
     switch (itemType) {
+      // case 'certificates':
+      //   headers = [
+      //     { 'title': 'Id', 'dataField': '_id', 'ref': 'idCol', 'hidden': true, 'isKey': true, 'csvHeader': 'Id' },
+      //     { 'title': 'Name', 'dataField': 'certification_Name', 'ref': 'nameCol', 'hidden': false, 'isKey': false },
+      //     { 'title': 'Authority', 'dataField': 'certification_Authority', 'ref': 'authCol', 'hidden': false, 'isKey': false },
+      //     // { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false },
+      //   ];
+      //   break;
       case 'certificates':
         headers = [
-          { 'title': 'Id', 'dataField': '_id', 'ref': 'idCol', 'hidden': true, 'isKey': true, 'csvHeader': 'Id' },
-          { 'title': 'Name', 'dataField': 'certification_Name', 'ref': 'nameCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Authority', 'dataField': 'certification_Authority', 'ref': 'authCol', 'hidden': false, 'isKey': false },
-          // { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true, 'csvHeader': 'Id' },
+          { 'title': 'Name', 'dataField': 'Name', 'ref': 'nameCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Authority', 'dataField': 'Authority', 'ref': 'authCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false },
         ];
         break;
       case 'reports':
@@ -196,11 +204,11 @@ export default class ExpandRow extends React.Component {
               );
           })}
         </DropdownButton>}
-        {itemType && itemType !== 'reports' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addCertificate', true)}>Add New</Button>}
+        {/* {itemType && itemType !== 'reports' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addCertificate', true)}>Add New</Button>}
         {itemType && itemType === 'certificates' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addCertificate', true)}>Add New</Button>}
         {itemType && itemType === 'roles' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addRole', true)}>Add New</Button>}
         {itemType && itemType === 'skills' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addSkill', true)}>Add New</Button>}
-        {itemType && itemType === 'trainings' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addTraining', true)}>Add New</Button>}
+        {itemType && itemType === 'trainings' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addTraining', true)}>Add New</Button>} */}
         {this.props.data && (this.props.data.length > 0) && <BootstrapTable data={ this.props.data }
           search={ true }
           pagination={ true } 

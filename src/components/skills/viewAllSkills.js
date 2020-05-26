@@ -39,12 +39,13 @@ class ViewAllSkills extends React.Component {
                 <div className="list-container">
                     <Row>
                         <Col md={12} xs={12} sm={12}>
-                            <Button variant="primary" onClick={() => this.handleShowModal('addSkill', true)}>Add New</Button>
+                            <Button className="position-absolute" size="sm" variant="primary" onClick={() => this.handleShowModal('addSkill', true)}>Add New</Button>
                             <CustomDataTable data={skills} itemType="skills" />
                         </Col>
                     </Row>
                 </div>
                 <ModalPopup
+                    size={'lg'}
                     show={modal.addSkill}
                     title={'Add New'}
                     body={<SkillPage />}

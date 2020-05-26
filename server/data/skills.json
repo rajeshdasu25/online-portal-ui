@@ -126,5 +126,12 @@
         "DisplayName": "SQL",
         "ActiveStatus": "1",
         "RoleName": "Database Administrator"
+    },
+    {
+        "Id": 17,
+        "RoleId": "7",
+        "Name": "oracle",
+        "DisplayName": "Oracle",
+        "ActiveStatus": "1"
     }
 ]

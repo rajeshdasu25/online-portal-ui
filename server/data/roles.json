@@ -34,5 +34,11 @@
         "Name": "ui",
         "DisplayName": "Frontend Developer",
         "ActiveStatus": "1"
+    },
+    {
+        "Id": 7,
+        "Name": "oracle",
+        "DisplayName": "Oracle Developer",
+        "ActiveStatus": 1
     }
 ]

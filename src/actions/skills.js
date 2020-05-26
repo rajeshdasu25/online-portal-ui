@@ -24,9 +24,10 @@ export const addSkill = (skill) => {
     }
 };
 
-export const fetchAllSkills = (user) => {
+export const fetchAllSkills = (roleId) => {
     return (dispatch) => {
-        let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=skills';
+        let roleCondition = (roleId !== undefined) ? '&roleId=' + roleId : '';
+        let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=skills' + roleCondition;
         return axios.get(url)
             .then(response => {
                 dispatch(fetchSkills(response.data));
@@ -50,13 +51,16 @@ export const fetchASkill = (skillId) => {
     };
 };
 
-export const addNewSkill = (skillData) => {
+export const addNewSkill = (formData) => {
     return (dispatch) => {
-        let url = appConstants.ADD_NEW_ITEM_URL + '?type=skills';
+        let url = appConstants.ADD_AN_ITEM_URL + '?type=skills';
         let headers = {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         };
-        return axios.post(url, skillData, { headers: headers })
+        return axios.post(
+            url, formData,
+            { body: JSON.stringify(formData) },
+            { headers: headers })
             .then(response => {
                 if (response.status === 200) {
                     dispatch(setStatus(false));

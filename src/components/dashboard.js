@@ -11,7 +11,7 @@ import { fetchAllCertificates } from '../actions/certificates';
 import { fetchAllForms } from '../actions/forms';
 import { fetchAllResponses } from '../actions/responses';
 import { fetchAllRoles } from '../actions/roles';
-// import { fetchAllSkills } from '../actions/skills';
+import { fetchAllSkills } from '../actions/skills';
 import { fetchAllTrainings } from '../actions/trainings';
 import { fetchAllUsers } from '../actions/users';
 
@@ -23,7 +23,7 @@ class Dashboard extends React.Component {
             this.props.fetchAllForms(loginUser),
             this.props.fetchAllResponses(loginUser),
             this.props.fetchAllRoles(),
-            // this.props.fetchAllSkills(),
+            this.props.fetchAllSkills(),
             this.props.fetchAllTrainings(),
             this.props.fetchAllUsers()
         ]);
@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
         };
         this.props.fetchAllCertificates();
         this.props.fetchAllRoles();
-        // this.props.fetchAllSkills();
+        this.props.fetchAllSkills();
         this.props.fetchAllTrainings();
         this.props.fetchAllUsers();
         if (loginUser.type === '1') {
@@ -62,6 +62,7 @@ class Dashboard extends React.Component {
             { url: 'trainings', text: 'Trainings', theme: 'blue' },
             { url: 'trainings', text: 'Users', theme: 'yellow' },
             { url: 'roles', text: 'Roles', theme: 'brown' },
+            { url: 'skills', text: 'Skills', theme: 'brown' },
         ];
 
         return (
@@ -91,7 +92,7 @@ const mapStateToProps = state => {
         forms: state.forms,
         responses: state.responses,
         roles: state.roles,
-        // skills: state.skills,
+        skills: state.skills,
         trainings: state.trainings,
         users: state.users
     };
@@ -103,7 +104,7 @@ const mapDispatchToProps = dispatch => {
         fetchAllForms: (params) => dispatch(fetchAllForms(params)),
         fetchAllResponses: (params) => dispatch(fetchAllResponses(params)),
         fetchAllRoles: () => dispatch(fetchAllRoles()),
-        // fetchAllSkills: () => dispatch(fetchAllSkills()),
+        fetchAllSkills: () => dispatch(fetchAllSkills()),
         fetchAllTrainings: () => dispatch(fetchAllTrainings()),
         fetchAllUsers: () => dispatch(fetchAllUsers())
     };

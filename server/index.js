@@ -49,18 +49,26 @@ app.get('/ping', function (req, res) {
         "Application Version": packageJson.version,
         "Node Version": process.version
     };
-    res.status(200).send(JSON.stringify(responseData, null, 4));
+    res.send(JSON.stringify(responseData, null, 4));
 });
 
 // An api endpoint that returns a short list of items
 app.get('/fetchAllItems', (req, res) => {
     let itemType = req.query.type;
+    let roleId = req.query.roleId ? req.query.roleId : '';//console.log('itemType: ', itemType, '; roleId present: ', _.isEmpty(roleId));
     let jsonUrl = './data/' + itemType + '.json';
+    let result;
 
     fs.readFile(jsonUrl, (err, data) => {
         if (err) throw err;
         let items = JSON.parse(data);
-        res.json(items);
+        // res.json(items);
+        if ((itemType === 'skills') && (!_.isEmpty(roleId))) {
+            if (req.query.roleId != '') {
+                result = items.filter(item => item.RoleId == roleId);
+            }
+        } else { result = items; }
+        res.json(result);
     });
 });
 
@@ -77,6 +85,57 @@ app.get('/fetchAnItem', (req, res) => {
     });
 });
 
+app.post('/addAnItem', (req, res) => {
+    let itemType = req.query.type;
+    let jsonUrl = './data/' + itemType + '.json';
+    let formData = {};
+
+    fs.readFile(jsonUrl, (err, data) => {
+        if (err) throw err;
+        let items = JSON.parse(data);
+        switch (itemType) {
+            case 'certificates':
+                formData = {
+                    'Id': items.length + 1,
+                    'Name': req.body.Name,
+                    'Authority': req.body.Authority,
+                    'ActiveStatus': "1"
+                };
+                break;
+            case 'roles':
+                formData = {
+                    'Id': items.length + 1,
+                    'Name': req.body.Name,
+                    'DisplayName': req.body.DisplayName,
+                    'ActiveStatus': "1"
+                };
+                break;
+            case 'skills':
+                formData = {
+                    'Id': items.length + 1,
+                    'RoleId': req.body.RoleId,
+                    'Name': req.body.Name,
+                    'DisplayName': req.body.DisplayName,
+                    'ActiveStatus': "1"
+                };
+                break;
+            case 'trainings':
+                formData = {
+                    'Id': items.length + 1,
+                    'Name': req.body.Name,
+                    'Description': req.body.Description,
+                    'ActiveStatus': "1"
+                };
+                break;
+        }
+        items.push(formData);
+        fs.writeFile(jsonUrl, JSON.stringify(items, null, 4), function (err) {
+            if (err) throw err;
+            res.send(formData);
+        });
+    });
+});
+
 app.post('/login', (req, res) => {
     let Username = req.body.Username;
     let Password = req.body.Password;
@@ -87,9 +146,9 @@ app.post('/login', (req, res) => {
         let resultObj = {};
         let users = JSON.parse(data);
         let user = users.find(item => item.Username == Username);
-        if(!_.isEmpty(user)) { 
-            if(user.Pword === Password) {
-                if(user.ActiveStatus == '1') {
+        if (!_.isEmpty(user)) {
+            if (user.Pword === Password) {
+                if (user.ActiveStatus == '1') {
                     resultObj.userValidity = "VALID_USER";
                     resultObj.userId = user.Id;
                     resultObj.ssoId = user.SsoId;

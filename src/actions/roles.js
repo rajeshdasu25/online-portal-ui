@@ -27,7 +27,7 @@ export const addRole = (role) => {
     }
 };
 
-export const fetchAllRoles = (user) => {
+export const fetchAllRoles = () => {
     return (dispatch) => {
         let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=roles';
         return axios.get(url)
@@ -55,11 +55,14 @@ export const fetchARole = (roleId) => {
 
 export const addNewRole = (formData) => {
     return (dispatch) => {
-        let url = appConstants.ADD_NEW_ITEM_URL + '?type=roles';
+        let url = appConstants.ADD_AN_ITEM_URL + '?type=roles';
         let headers = {
-            'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         };
-        return axios.post(url, formData, { headers : headers })
+        return axios.post(
+            url, formData,
+            { body: JSON.stringify(formData) },
+            { headers: headers })
             .then(response => {
                 if (response.status === 200) {
                     dispatch(setStatus(false));

@@ -55,11 +55,14 @@ export const fetchATraining = (certId) => {
 
 export const addNewTraining = (formData) => {
     return (dispatch) => {
-        let url = appConstants.ADD_NEW_ITEM_URL + '?type=trainings';
+        let url = appConstants.ADD_AN_ITEM_URL + '?type=trainings';
         let headers = {
-            'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         };
-        return axios.post(url, formData, { headers : headers })
+        return axios.post(
+            url, formData,
+            { body: JSON.stringify(formData) },
+            { headers: headers })
             .then(response => {
                 if (response.status === 200) {
                     dispatch(setStatus(false));

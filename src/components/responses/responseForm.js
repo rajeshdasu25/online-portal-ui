@@ -15,12 +15,6 @@ const ProficiencyOptions = [
     { text: 'Expert', value: '4', checked: false }
 ];
 
-const renderMoreFields = () => {
-    return (
-        <p>More Items</p>
-    )
-};
-
 const renderCertifications = ({ fields, certificates }) => {
     return (
         <div className="form-group">
@@ -75,8 +69,6 @@ const renderCertifications = ({ fields, certificates }) => {
                                     </Row>
                                 </div>
                                 <Button size="sm" onClick={() => { }} >...</Button>
-                                {/* {renderMoreFields()} */}
-                                {/* {renderMoreItems && <> */}
                                 <div className="form-group">
                                     <Row>
                                         <Col md={4} sm={4} xs={12}>
@@ -97,7 +89,6 @@ const renderCertifications = ({ fields, certificates }) => {
                                         </Col>
                                     </Row>
                                 </div>
-                                {/* </>} */}
                             </Card.Body>
                         </Card>
                     </Col>
@@ -179,50 +170,11 @@ const renderMultipleRadios = ({ onChange }) => (
 
 let ResponseForm = props => {
     const { handleSubmit, reset, pristine, submitting,
-            certificates, RoleTypeValue, loginUser } = props;
+            certificates, skills, loginUser } = props;
 
     const submit = formValues => {
         console.log(formValues);
     }
-
-    const RoleTypeOptions = [
-        { text: 'Frontend Developer', value: 'ui' },
-        { text: 'JAVA Developer', value: 'java' },
-        { text: 'DevOPS Engineer', value: 'devops' }
-    ];
-
-    const ProficiencyOptions = [
-        { text: 'Novice', value: '0', checked: true },
-        { text: 'Beginner', value: '1', checked: false },
-        { text: 'Competant', value: '2', checked: false },
-        { text: 'Proficient', value: '3', checked: false },
-        { text: 'Expert', value: '4', checked: false }
-    ];
-
-    const FrontendOptions = [
-        { text: 'HTML 5', value: 'html5' },
-        { text: 'CSS 3', value: 'css3' },
-        { text: 'Javascript', value: 'javascript' },
-        { text: 'jQuery', value: 'jquery' },
-        { text: 'Angular', value: 'angular' },
-        { text: 'React', value: 'react' }
-    ];
-
-    const JavaOptions = [
-        { text: 'JAVA', value: 'java' },
-        { text: 'Spring', value: 'spring' },
-        { text: 'Hybernet', value: 'hybernet' },
-        { text: 'SQL', value: 'sql' },
-        { text: 'MySQL', value: 'mysql' },
-        { text: 'PostgreSQL', value: 'postgresql' }
-    ];
-
-    const DevOpsOptions = [
-        { text: 'CI & CD', value: 'cicd' },
-        { text: 'AWS', value: 'aws' },
-        { text: 'jenkins', value: 'jenkins' },
-        { text: 'newrelic', value: 'newrelic' }
-    ];
 
     return (
         <Row>
@@ -337,20 +289,6 @@ let ResponseForm = props => {
                                                     <div className="form-group">
                                                         <Row>
                                                             <Col md={3} sm={3} xs={3}>
-                                                                <Field name="RoleType" component="select" className="form-control" >
-                                                                    <option value=''>Role</option>
-                                                                    {RoleTypeOptions.map(item => (
-                                                                        <option key={item.value} value={item.value}>
-                                                                            {item.text}
-                                                                        </option>
-                                                                    ))}
-                                                                </Field>
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                    {RoleTypeValue && <div className="form-group">
-                                                        <Row>
-                                                            <Col md={3} sm={3} xs={3}>
                                                                 &nbsp;
                                                             </Col>
                                                             <Col md={9} sm={9} xs={9}>
@@ -363,73 +301,19 @@ let ResponseForm = props => {
                                                                 </Row>
                                                             </Col>
                                                         </Row>
-                                                    </div>}
-                                                    {/* {RoleTypeValue && RoleTypeValue === 'ui' && FrontendOptions.map((item, index) => (
-                                                        <div className="form-group" key={index}>
-                                                            <Row>
-                                                                <Col md={3} sm={3} xs={3} className="text-right">
-                                                                    <strong>{item.text}</strong>
-                                                                </Col>
-                                                                <Col md={9} sm={9} xs={9}>
-                                                                    <Row className="text-center">
-                                                                        <FieldArray
-                                                                            name="radiosExample" component={renderMultipleRadios}
-                                                                            props={{
-                                                                                onChange: props.onChange
-                                                                            }} />
-                                                                    </Row>
-                                                                </Col>
-                                                            </Row>
-                                                        </div>
-                                                    ))}
-                                                    {RoleTypeValue && RoleTypeValue === 'java' && JavaOptions.map((item, index) => (
-                                                        <div className="form-group" key={index}>
-                                                            <Row>
-                                                                <Col md={3} sm={3} xs={3} className="text-right">
-                                                                    <strong>{item.text}</strong>
-                                                                </Col>
-                                                                <Col md={9} sm={9} xs={9}>
-                                                                    <Row className="text-center">
-                                                                        <FieldArray
-                                                                            name="radiosExample" component={renderMultipleRadios}
-                                                                            props={{
-                                                                                onChange: props.onChange
-                                                                            }} />
-                                                                    </Row>
-                                                                </Col>
-                                                            </Row>
-                                                        </div>
-                                                    ))}
-                                                    {RoleTypeValue && RoleTypeValue === 'devops' && DevOpsOptions.map((item, index) => (
-                                                        <div className="form-group" key={index}>
-                                                            <Row>
-                                                                <Col md={3} sm={3} xs={3} className="text-right">
-                                                                    <strong>{item.text}</strong>
-                                                                </Col>
-                                                                <Col md={9} sm={9} xs={9}>
-                                                                    <Row className="text-center">
-                                                                        <FieldArray
-                                                                            name="radiosExample" component={renderMultipleRadios}
-                                                                            props={{
-                                                                                onChange: props.onChange
-                                                                            }} />
-                                                                    </Row>
-                                                                </Col>
-                                                            </Row>
-                                                        </div>
-                                                    ))} */}
-                                                    {RoleTypeValue && RoleTypeValue === 'ui' && FrontendOptions.map((RoleOptionItem, RoleOptionIndex) => (
+                                                    </div>                                                    
+                                                    {skills.map((RoleOptionItem, RoleOptionIndex) => (
                                                         <div className="form-group" key={RoleOptionIndex}>
                                                             <Row>
                                                                 <Col md={3} sm={3} xs={3} className="text-right">
-                                                                    <strong>{RoleOptionItem.text}</strong>
+                                                                    <strong>{RoleOptionItem.DisplayName}</strong>
                                                                 </Col>
                                                                 <Col md={9} sm={9} xs={9}>
                                                                     <Row className="text-center">
                                                                         {ProficiencyOptions.map((ProficiencyOptionItem, ProficiencyOptionIndex) => { /*console.log('item: ', ProficiencyOptionItem);*/ return(
                                                                             <Col md={2} sm={2} xs={2} key={ProficiencyOptionIndex}>
                                                                                 <Field
-                                                                                    name={`${RoleOptionItem.value}_${ProficiencyOptionItem.value}`}
+                                                                                    name={`${RoleOptionItem.Name}_${ProficiencyOptionItem.value}`}
                                                                                     component={"input"}
                                                                                     type={"radio"}
                                                                                     onChange={() => {
@@ -476,9 +360,8 @@ const selector = formValueSelector('responseForm');
 ResponseForm = connect(
     state => {
         const SSO = selector(state, 'SSO');
-        const RoleTypeValue = selector(state, 'RoleType');
         return {
-            SSO, RoleTypeValue
+            SSO
         }
     }
 )(ResponseForm);

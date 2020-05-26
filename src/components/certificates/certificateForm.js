@@ -3,31 +3,10 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Button, Col, Row } from 'react-bootstrap';
 
-let AccountForm = props => {
-    const { handleSubmit, reset, accountTypes, pristine, submitting } = props;
+let CertificateForm = props => {
+    const { handleSubmit, reset, pristine, submitting } = props;
     return (
         <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <Row>
-                    <Col md={3} sm={3} xs={3} className="text-right">
-                        <label htmlFor="type" className="col-form-label">Type</label>
-                    </Col>
-                    <Col md={8} sm={8} xs={8}>
-                        <Field name="AccountTypeId" component="select" className="form-control" >
-                            <option value=''>Select</option>
-                            {accountTypes.map((account) => {
-                                return (
-                                    <option
-                                        key={account.Id}
-                                        value={account.Id}>
-                                        {account.Name}
-                                    </option>
-                                );
-                            })}
-                        </Field>
-                    </Col>
-                </Row>
-            </div>
             <div className="form-group">
                 <Row>
                     <Col md={3} sm={3} xs={3} className="text-right">
@@ -41,20 +20,10 @@ let AccountForm = props => {
             <div className="form-group">
                 <Row>
                     <Col md={3} sm={3} xs={3} className="text-right">
-                        <label htmlFor="Number" className="col-form-label">Number</label>
+                        <label htmlFor="Authority" className="col-form-label">Authority</label>
                     </Col>
                     <Col md={8} sm={8} xs={8}>
-                        <Field name="Number" component="input" type="text" placeholder="Number" className="form-control" />
-                    </Col>
-                </Row>
-            </div>
-            <div className="form-group">
-                <Row>
-                    <Col md={3} sm={3} xs={3} className="text-right">
-                        <label htmlFor="Balance" className="col-form-label">Balance</label>
-                    </Col>
-                    <Col md={8} sm={8} xs={8}>
-                        <Field name="Balance" component="input" type="text" placeholder="Balance" className="form-control" />
+                        <Field name="Authority" component="input" type="text" placeholder="Authority" className="form-control" />
                     </Col>
                 </Row>
             </div>
@@ -70,22 +39,18 @@ let AccountForm = props => {
     )
 }
 
-AccountForm = reduxForm({
-    form: 'accountForm'
-})(AccountForm)
+CertificateForm = reduxForm({
+    form: 'certificateForm'
+})(CertificateForm)
 
-const selector = formValueSelector('accountForm');
-AccountForm = connect(state => {
-    const AccountTypeId = selector(state, 'AccountTypeId');
+const selector = formValueSelector('certificateForm');
+CertificateForm = connect(state => {
     const Name = selector(state, 'Name');
-    const Number = selector(state, 'Number');
-    const Balance = selector(state, 'Balance');
+    const Authority = selector(state, 'Authority');
     return {
-        AccountTypeId,
         Name,
-        Number,
-        Balance
+        Authority
     }
-})(AccountForm)
+})(CertificateForm)
 
-export default AccountForm;
+export default CertificateForm;

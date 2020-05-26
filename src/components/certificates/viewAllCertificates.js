@@ -2,7 +2,6 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import Loader from 'react-loader-spinner';
 import { Button, Badge, Col, Row, /*, Modal*/ } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -29,7 +28,7 @@ class ViewAllCertificates extends React.Component {
     handleEditItem = () => {
         this.props.showModal(true);
     }
-    render() { 
+    render() {
         const { certificates, modal } = this.props;
 
         return (
@@ -38,11 +37,20 @@ class ViewAllCertificates extends React.Component {
                     <title>Certificates</title>
                 </Helmet>
                 <div className="list-container">
-                <Row>
-                    <Col md={12} xs={12} sm={12}>
-                        <CustomDataTable data={certificates} itemType="certificates" />
-                    </Col>
-                </Row></div>
+                    <Row>
+                        <Col md={12} xs={12} sm={12}>
+                            <Button className="position-absolute" size="sm" variant="primary" onClick={() => this.handleShowModal('addCertificate', true)}>Add New</Button>
+                            <CustomDataTable data={certificates} itemType="certificates" />
+                        </Col>
+                    </Row>
+                </div>
+                <ModalPopup
+                    size={'lg'}
+                    show={modal.addRole}
+                    title={'Add New'}
+                    body={<CertificateFormPage />}
+                    handleHideModal={this.handleHideModal}
+                />
             </React.Fragment>
         );
     }

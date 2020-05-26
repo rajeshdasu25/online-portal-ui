@@ -46,5 +46,11 @@
         "Name": "Training - 8",
         "Description": "Training - 8 Description",
         "ActiveStatus": "1"
+    },
+    {
+        "Id": 9,
+        "Name": "Training - 9",
+        "Description": "Training - 9 Description",
+        "ActiveStatus": "1"
     }
 ]

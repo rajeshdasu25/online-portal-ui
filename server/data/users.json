@@ -3,7 +3,7 @@
         "Id": "1",
         "SsoId": "1",
         "UserTypeId": "1",
-        "RoleId": "1",
+        "RoleId": "6",
         "FirstName": "Admin",
         "LastName": "1",
         "Username": "admin",
@@ -13,13 +13,13 @@
         "TimeRegistered": "2020-04-13 11:14:00",
         "ActiveStatus": "1",
         "UserType": "Admin",
-        "RoleName": "Frontend Developer"
+        "RoleName": "Database Administrator"
     },
     {
         "Id": "2",
         "SsoId": "2",
         "UserTypeId": "2",
-        "RoleId": "1",
+        "RoleId": "2",
         "FirstName": "Manager",
         "LastName": "1",
         "Username": "manager",
@@ -29,13 +29,13 @@
         "TimeRegistered": "2020-04-13 11:14:00",
         "ActiveStatus": "1",
         "UserType": "Manager",
-        "RoleName": "Frontend Developer"
+        "RoleName": "JAVA Developer"
     },
     {
         "Id": "4",
         "SsoId": "4",
         "UserTypeId": "2",
-        "RoleId": "1",
+        "RoleId": "3",
         "FirstName": "Manager",
         "LastName": "2",
         "Username": "manager2",
@@ -45,7 +45,7 @@
         "TimeRegistered": "2020-04-13 11:14:00",
         "ActiveStatus": "1",
         "UserType": "Manager",
-        "RoleName": "Frontend Developer"
+        "RoleName": "DevOPS Engineer"
     },
     {
         "Id": "3",

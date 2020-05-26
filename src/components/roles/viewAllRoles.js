@@ -39,12 +39,13 @@ class ViewAllRoles extends React.Component {
                 <div className="list-container">
                     <Row>
                         <Col md={12} xs={12} sm={12}>
-                            <Button variant="primary" onClick={() => this.handleShowModal('addRole', true)}>Add New</Button>
+                            <Button className="position-absolute" size="sm" variant="primary" onClick={() => this.handleShowModal('addRole', true)}>Add New</Button>
                             <CustomDataTable data={roles} itemType="roles" />
                         </Col>
                     </Row>
                 </div>
                 <ModalPopup
+                    size={'lg'}
                     show={modal.addRole}
                     title={'Add New'}
                     body={<RoleFormPage />}
@@ -69,12 +70,6 @@ const mapDispatchToProps = dispatch => {
         showModal: showModal,
         hideModal: hideModal
     }, dispatch);
-    // return {
-    //     fetchAllRoles: () => dispatch(fetchAllRoles()),
-    //     getModalStatus: () => dispatch(getModalStatus()),
-    //     showModal: () => dispatch(showModal()),
-    //     hideModal: () => dispatch(hideModal())
-    // };
 };
 
 export default connect(
