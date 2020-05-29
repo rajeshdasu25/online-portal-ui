@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Link, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
@@ -14,8 +14,8 @@ class AppHeader extends React.Component {
     }
 
     componentDidMount() {
-        const loginUserSso = localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'));
-        this.props.fetchAUser(loginUserSso);
+        const loginUserId = localStorage.hasOwnProperty('loginUserId') && JSON.parse(localStorage.getItem('loginUserId'));
+        this.props.fetchAUser(loginUserId);
     }
 
     handleLogout() {
@@ -24,7 +24,7 @@ class AppHeader extends React.Component {
     }
 
     render() { 
-        const { user } = this.props;
+        const { user } = this.props;console.log('user: ', user);
         const { redirect } = this.state;
         if(redirect){
             return <Redirect push to="/login"/> 
@@ -39,7 +39,7 @@ class AppHeader extends React.Component {
                             <NavDropdown title={user.FirstName} id="basic-nav-dropdown" alignRight>
                                 <NavDropdown.Item><Link to="/profile">Profile</Link></NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={this.handleLogout}>Sign Out</NavDropdown.Item>
+                                <NavDropdown.Item onClick={this.handleLogout.bind(this)}>Sign Out</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>

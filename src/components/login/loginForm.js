@@ -12,14 +12,14 @@ let LoginForm = props => {
                     <Card.Header>Login</Card.Header>
                     <Card.Body>
                         <form onSubmit={handleSubmit}>
-                            {loginError.error && <p className="text-center text-danger">{loginError.message}</p>}
+                            {loginError.error && <p className="text-center text-danger font-weight-bold">{loginError.message}</p>}
                             <div className="form-group">
                                 <Row>
                                     <Col md={3} sm={3} xs={3} className="text-right">
-                                        <label htmlFor="Username" className="col-form-label">Username</label>
+                                        <label htmlFor="SsoId" className="col-form-label">SSO ID</label>
                                     </Col>
                                     <Col md={8} sm={8} xs={8}>
-                                        <Field name="Username" component="input" type="text" placeholder="Username / Email" className="form-control" />
+                                        <Field name="SsoId" component="input" type="text" placeholder="SSO ID" className="form-control" />
                                     </Col>
                                 </Row>
                             </div>
@@ -55,10 +55,10 @@ LoginForm = reduxForm({
 
 const selector = formValueSelector('loginForm');
 LoginForm = connect(state => {
-    const Username = selector(state, 'Username');
+    const SsoId = selector(state, 'SsoId');
     const Password = selector(state, 'Password');
     return {
-        Username,
+        SsoId,
         Password
     }
 })(LoginForm)

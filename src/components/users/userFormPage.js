@@ -1,11 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { addNewTraining } from '../../actions/trainings';
+import { fetchAllRoles } from '../../actions/roles';
+import { addNewUser } from '../../actions/users';
 import UserForm from './userForm';
 
-class TrainingFormPage extends React.Component {
-    submit = formValues => { 
-        this.props.addNewTraining(formValues);
+class UserFormPage extends React.Component {
+    submit = formValues => { console.log('formValues: ', formValues);
+        this.props.addNewUser(formValues);
+    }
+
+    componentDidMount() {
+        this.props.fetchAllRoles();
     }
 
     render() {
@@ -13,10 +18,17 @@ class TrainingFormPage extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        addNewTraining: (params) => dispatch(addNewTraining(params))
+        roles: state.roles
     };
 };
 
-export default connect(null, mapDispatchToProps)(TrainingFormPage);
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchAllRoles: () => dispatch(fetchAllRoles()),
+        addNewUser: (params) => dispatch(addNewUser(params))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserFormPage);

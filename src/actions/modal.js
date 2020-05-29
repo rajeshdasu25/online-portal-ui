@@ -8,6 +8,7 @@ export const getStatus = (status) => {
             addTraining: status,
             addRole: status,
             addSkill: status,
+            addUser: status,
         }
     }
 };
@@ -20,6 +21,7 @@ export const setStatus = (type, status) => {
             addTraining: status,
             addRole: status,
             addSkill: status,
+            addUser: status,
             type: status
         }
     }

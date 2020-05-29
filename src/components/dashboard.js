@@ -52,17 +52,17 @@ class Dashboard extends React.Component {
 
     render() {
         const {
-            certificates, forms, responses, roles, /*skills,*/ trainings, users
+            certificates, forms, responses, roles, skills, trainings, users
         } = this.props;
 
         const masterItems = [
-            { url: 'forms', text: 'Forms', theme: 'green' },
-            { url: 'responses', text: 'Responses', theme: 'orange' },
-            { url: 'certifications', text: 'Certifications', theme: 'purple' },
-            { url: 'trainings', text: 'Trainings', theme: 'blue' },
-            { url: 'trainings', text: 'Users', theme: 'yellow' },
-            { url: 'roles', text: 'Roles', theme: 'brown' },
-            { url: 'skills', text: 'Skills', theme: 'brown' },
+            { url: 'forms', text: 'Forms', theme: 'green', count: forms },
+            { url: 'responses', text: 'Responses', theme: 'orange', count: responses },
+            { url: 'certifications', text: 'Certifications', theme: 'purple', count: certificates },
+            { url: 'trainings', text: 'Trainings', theme: 'blue', count: trainings },
+            { url: 'users', text: 'Users', theme: 'yellow', count: users },
+            { url: 'roles', text: 'Roles', theme: 'brown', count: roles },
+            { url: 'skills', text: 'Skills', theme: 'brown', count: skills },
         ];
 
         return (
@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
                         return (
                             <Col md={2} xs={4} sm={6} key={index}>
                                 <Link to={'/' + item.url}>
-                                    <WidgetInfo theme={item.theme} text={item.text} count={item.url.length} />
+                                    <WidgetInfo theme={item.theme} text={item.text} count={item.count.length} />
                                 </Link>
                             </Col>
                         );

@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const ip = require('ip').address();
 const packageJson = require('../package.json');
 const _ = require('lodash');
+const moment = require('moment');
 
 const app = express();
 app.use(bodyParser.json());
@@ -127,6 +128,27 @@ app.post('/addAnItem', (req, res) => {
                     'ActiveStatus': "1"
                 };
                 break;
+            case 'users':
+                formData = {
+                    'Id': items.length + 1,
+                    'UserTypeId': req.body.UserTypeId,
+                    'RoleId': req.body.RoleId,
+                    'SsoId': req.body.SsoId,
+                    'KinId': req.body.KinId,
+                    'Pword': req.body.SsoId + '_' + moment(req.body.DateOfBirth).format('DDMMYYYY'),
+                    'FirstName': req.body.FirstName,
+                    'LastName': req.body.LastName,
+                    'CgEmail': req.body.CgEmail,
+                    'SyfEmail': req.body.SyfEmail,
+                    'DateOfBirth': req.body.DateOfBirth,
+                    'Designation': req.body.Designation,
+                    'Band': req.body.Band,
+                    'Grade': req.body.Grade,
+                    'SyfTower': req.body.SyfTower,
+                    'SyfApplication': req.body.SyfApplication,
+                    'ActiveStatus': "1"
+                };
+                break;
         }
         items.push(formData);
         fs.writeFile(jsonUrl, JSON.stringify(items, null, 4), function (err) {
@@ -137,7 +159,7 @@ app.post('/addAnItem', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    let Username = req.body.Username;
+    let SsoId = req.body.SsoId;
     let Password = req.body.Password;
     let jsonUrl = './data/users.json';
 
@@ -145,7 +167,7 @@ app.post('/login', (req, res) => {
         if (err) throw err;
         let resultObj = {};
         let users = JSON.parse(data);
-        let user = users.find(item => item.Username == Username);
+        let user = users.find(item => item.SsoId == SsoId);
         if (!_.isEmpty(user)) {
             if (user.Pword === Password) {
                 if (user.ActiveStatus == '1') {

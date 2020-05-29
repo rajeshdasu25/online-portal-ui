@@ -1,14 +1,74 @@
 [
     {
         "Id": 1,
-        "Name": "oracle",
-        "Authority": "Oracle Developer",
-        "ActiveStatus": 1
+        "Name": "Oracle Certified Associate Java Programmer (OCAJP)",
+        "Authority": "Oracle",
+        "ActiveStatus": "1"
     },
     {
         "Id": 2,
-        "Name": "asd",
-        "Authority": "asd",
+        "Name": "Oracle Certified Professional Java Programmer (OCPJP)",
+        "Authority": "Oracle",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 3,
+        "Name": "Spring Professional Certification",
+        "Authority": "Pivotal",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 4,
+        "Name": "Oracle Certified Expert - Web Component Developer(OCEWCD)",
+        "Authority": "Oracle",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 5,
+        "Name": "Apache Spark Developer Certification (HDPCD)",
+        "Authority": "Apache",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 6,
+        "Name": "Professional Scrum Master Certification(PSM I)",
+        "Authority": "Scrum.org",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 7,
+        "Name": "Professional Scrum Master Certification(PSM 2)",
+        "Authority": "Scrum.org",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 8,
+        "Name": "Project Management Professional Certification(PMP)",
+        "Authority": "PMI",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 9,
+        "Name": "Agile Certified Professsional(ACP)",
+        "Authority": "PMI",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 10,
+        "Name": "Certified Scrum Master(CSM)",
+        "Authority": "PMI",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 11,
+        "Name": "AWS Certified Solutions Architect - Associate",
+        "Authority": "Amazon",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 12,
+        "Name": "Oracle Certified Master Java Enterprise Architect(OCMJEA)",
+        "Authority": "Oracle",
         "ActiveStatus": "1"
     }
 ]

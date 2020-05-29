@@ -170,7 +170,7 @@ const renderMultipleRadios = ({ onChange }) => (
 
 let ResponseForm = props => {
     const { handleSubmit, reset, pristine, submitting,
-            certificates, skills, loginUser } = props;
+        certificates, skills, loginUser } = props;
 
     const submit = formValues => {
         console.log(formValues);
@@ -301,7 +301,7 @@ let ResponseForm = props => {
                                                                 </Row>
                                                             </Col>
                                                         </Row>
-                                                    </div>                                                    
+                                                    </div>
                                                     {skills.map((RoleOptionItem, RoleOptionIndex) => (
                                                         <div className="form-group" key={RoleOptionIndex}>
                                                             <Row>
@@ -310,7 +310,7 @@ let ResponseForm = props => {
                                                                 </Col>
                                                                 <Col md={9} sm={9} xs={9}>
                                                                     <Row className="text-center">
-                                                                        {ProficiencyOptions.map((ProficiencyOptionItem, ProficiencyOptionIndex) => { /*console.log('item: ', ProficiencyOptionItem);*/ return(
+                                                                        {ProficiencyOptions.map((ProficiencyOptionItem, ProficiencyOptionIndex) => { /*console.log('item: ', ProficiencyOptionItem);*/ return (
                                                                             <Col md={2} sm={2} xs={2} key={ProficiencyOptionIndex}>
                                                                                 <Field
                                                                                     name={`${RoleOptionItem.Name}_${ProficiencyOptionItem.value}`}
@@ -321,10 +321,11 @@ let ResponseForm = props => {
                                                                                         this.onChange(ProficiencyOptionItem.value)
                                                                                     }}
                                                                                     checked={ProficiencyOptionItem.checked}
-                                                                                    // checked={ProficiencyOptionIndex === radio.value}
+                                                                                // checked={ProficiencyOptionIndex === radio.value}
                                                                                 />
                                                                             </Col>
-                                                                        )})}
+                                                                        )
+                                                                        })}
                                                                     </Row>
                                                                 </Col>
                                                             </Row>
@@ -353,17 +354,21 @@ let ResponseForm = props => {
 }
 
 ResponseForm = reduxForm({
-    form: 'responseForm'
+    form: 'responseForm',
+    enableReinitialize: true,
+    initialValues: {
+        SsoId: "123"
+    }
 })(ResponseForm)
 
 const selector = formValueSelector('responseForm');
 ResponseForm = connect(
-    state => {
+    (state) => { console.log('state: ', state);
         const SSO = selector(state, 'SSO');
         return {
             SSO
         }
-    }
+    }, null
 )(ResponseForm);
 
 // ResponseForm = connect(

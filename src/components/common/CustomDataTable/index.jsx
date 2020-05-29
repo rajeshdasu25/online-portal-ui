@@ -153,11 +153,12 @@ export default class ExpandRow extends React.Component {
         headers = [
           { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true, 'csvHeader': 'Id' },
           { 'title': 'SSO ID', 'dataField': 'SsoId', 'ref': 'ssoCol', 'hidden': false, 'isKey': false },
+          { 'title': 'KIN ID', 'dataField': 'KinId', 'ref': 'ssoCol', 'hidden': false, 'isKey': false },
           { 'title': 'Type', 'dataField': 'UserType', 'ref': 'userTypeCol', 'hidden': false, 'isKey': false },
           { 'title': 'Role', 'dataField': 'RoleName', 'ref': 'roleCol', 'hidden': false, 'isKey': false },
           { 'title': 'First Name', 'dataField': 'FirstName', 'ref': 'firstNameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Last Name', 'dataField': 'LastName', 'ref': 'lastNameCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Email', 'dataField': 'EmailAddr', 'ref': 'emailCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Email', 'dataField': 'SyfEmail', 'ref': 'emailCol', 'hidden': false, 'isKey': false },
           { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat':this.statusFormatter },
         ];
         break;

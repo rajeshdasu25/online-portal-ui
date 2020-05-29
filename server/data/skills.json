@@ -133,5 +133,12 @@
         "Name": "oracle",
         "DisplayName": "Oracle",
         "ActiveStatus": "1"
+    },
+    {
+        "Id": 18,
+        "RoleId": "6",
+        "Name": "no-sql",
+        "DisplayName": "NoSQL",
+        "ActiveStatus": "1"
     }
 ]
