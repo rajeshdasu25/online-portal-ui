@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Accordion, Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
@@ -68,7 +68,7 @@ const renderCertifications = ({ fields, certificates }) => {
                                         </Col>
                                     </Row>
                                 </div>
-                                <Button size="sm" onClick={() => { }} >...</Button>
+                                {/* <Button size="sm" onClick={() => { }} >...</Button>
                                 <div className="form-group">
                                     <Row>
                                         <Col md={4} sm={4} xs={12}>
@@ -88,7 +88,7 @@ const renderCertifications = ({ fields, certificates }) => {
                                             <Field name={`${member}.CertificationSoftcopy`} component="input" type="text" placeholder="" className="form-control" />
                                         </Col>
                                     </Row>
-                                </div>
+                                </div> */}
                             </Card.Body>
                         </Card>
                     </Col>
@@ -189,13 +189,13 @@ let ResponseForm = props => {
                                         <label htmlFor="SsoId" className="col-form-label">SSO ID</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="SsoId" component="input" type="text" placeholder="SSO ID" className="form-control" />
+                                        <Field name="SsoId" component="input" type="text" placeholder="SSO ID" className="form-control" disabled={true} />
                                     </Col>
                                     <Col md={2} sm={2} xs={12} className="text-right">
                                         <label htmlFor="KinId" className="col-form-label">KIN ID</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="KinId" component="input" type="text" placeholder="KIN ID" className="form-control" />
+                                        <Field name="KinId" component="input" type="text" placeholder="KIN ID" className="form-control" disabled={true} />
                                     </Col>
                                 </Row>
                             </div>
@@ -205,13 +205,13 @@ let ResponseForm = props => {
                                         <label htmlFor="CgEmail" className="col-form-label">CG Email</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="CgEmail" component="input" type="text" placeholder="CG Email" className="form-control" />
+                                        <Field name="CgEmail" component="input" type="text" placeholder="CG Email" className="form-control" disabled={true} />
                                     </Col>
                                     <Col md={2} sm={2} xs={12} className="text-right">
                                         <label htmlFor="SyfEmail" className="col-form-label">SYF Email</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="SyfEmail" component="input" type="text" placeholder="SYF Email" className="form-control" />
+                                        <Field name="SyfEmail" component="input" type="text" placeholder="SYF Email" className="form-control" disabled={true} />
                                     </Col>
                                 </Row>
                             </div>
@@ -221,13 +221,13 @@ let ResponseForm = props => {
                                         <label htmlFor="FirstName" className="col-form-label">Full Name</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="FirstName" component="input" type="text" placeholder="Full Name" className="form-control" />
+                                        <Field name="FirstName" component="input" type="text" placeholder="Full Name" className="form-control" disabled={true} />
                                     </Col>
                                     <Col md={2} sm={2} xs={12} className="text-right">
                                         <label htmlFor="Designation" className="col-form-label">Designation</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="Designation" component="input" type="text" placeholder="Designation" className="form-control" />
+                                        <Field name="Designation" component="input" type="text" placeholder="Designation" className="form-control" disabled={true} />
                                     </Col>
                                 </Row>
                             </div>
@@ -237,13 +237,13 @@ let ResponseForm = props => {
                                         <label htmlFor="Band" className="col-form-label">Band</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="Band" component="input" type="text" placeholder="Band" className="form-control" />
+                                        <Field name="Band" component="input" type="text" placeholder="Band" className="form-control" disabled={true} />
                                     </Col>
                                     <Col md={2} sm={2} xs={12} className="text-right">
                                         <label htmlFor="Grade" className="col-form-label">Grade</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="Grade" component="input" type="text" placeholder="Grade" className="form-control" />
+                                        <Field name="Grade" component="input" type="text" placeholder="Grade" className="form-control" disabled={true} />
                                     </Col>
                                 </Row>
                             </div>
@@ -253,13 +253,13 @@ let ResponseForm = props => {
                                         <label htmlFor="SyfTower" className="col-form-label">SYF Tower</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="SyfTower" component="input" type="text" placeholder="SYF Tower" className="form-control" />
+                                        <Field name="SyfTower" component="input" type="text" placeholder="SYF Tower" className="form-control" disabled={true} />
                                     </Col>
                                     <Col md={2} sm={2} xs={12} className="text-right">
                                         <label htmlFor="SyfApplication" className="col-form-label">SYF Application</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="SyfApplication" component="input" type="text" placeholder="SYF Application" className="form-control" />
+                                        <Field name="SyfApplication" component="input" type="text" placeholder="SYF Application" className="form-control" disabled={true} />
                                     </Col>
                                 </Row>
                             </div>
@@ -361,20 +361,20 @@ ResponseForm = reduxForm({
     }
 })(ResponseForm)
 
-const selector = formValueSelector('responseForm');
-ResponseForm = connect(
-    (state) => { console.log('state: ', state);
-        const SSO = selector(state, 'SSO');
-        return {
-            SSO
-        }
-    }, null
-)(ResponseForm);
-
+// const selector = formValueSelector('responseForm');
 // ResponseForm = connect(
-//     state => ({
-//         initialValues: state.loginUser,
-//     }), null
+//     (state) => { console.log('state: ', state);
+//         const SSO = selector(state, 'SSO');
+//         return {
+//             SSO
+//         }
+//     }, null
 // )(ResponseForm);
+
+ResponseForm = connect(
+    state => ({
+        initialValues: state.loginUser,
+    }), null
+)(ResponseForm);
 
 export default ResponseForm;

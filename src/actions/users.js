@@ -37,9 +37,9 @@ export const fetchAllUsers = (user) => {
     };
 };
 
-export const fetchAUser = (userId) => { console.log('userId: ', userId);
+export const fetchAUser = (ssoId) => {
     return (dispatch) => {
-        const url = appConstants.FETCH_AN_ITEM_URL + '?type=users&id=' + userId;
+        const url = appConstants.FETCH_AN_ITEM_URL + '?type=users&ssoId=' + ssoId;
         return axios.get(url)
             .then(response => {
                 dispatch(fetchUser(response.data));

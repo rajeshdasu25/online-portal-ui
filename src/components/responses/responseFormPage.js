@@ -12,10 +12,11 @@ class ResponseFormPage extends React.Component {
     }
 
     componentDidMount() {
-        const loginUserId = localStorage.hasOwnProperty('loginUserId') && JSON.parse(localStorage.getItem('loginUserId'));
-        this.props.fetchLoginUser(loginUserId);
+        const loginSsoId = localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'));
+        const loginUserRoleId = localStorage.hasOwnProperty('loginUserRoleId') && JSON.parse(localStorage.getItem('loginUserRoleId'));
+        this.props.fetchLoginUser(loginSsoId);
         this.props.fetchAllCertificates();
-        this.props.fetchAllSkills(loginUserId);
+        this.props.fetchAllSkills(loginUserRoleId);
     }
 
     render() {

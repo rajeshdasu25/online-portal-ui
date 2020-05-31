@@ -6,7 +6,7 @@ import { fetchAUser } from '../../actions/users';
 
 class AppHeader extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             redirect: false
@@ -14,21 +14,23 @@ class AppHeader extends React.Component {
     }
 
     componentDidMount() {
-        const loginUserId = localStorage.hasOwnProperty('loginUserId') && JSON.parse(localStorage.getItem('loginUserId'));
-        this.props.fetchAUser(loginUserId);
+        const loginSsoId = localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'));
+        this.props.fetchAUser(loginSsoId);
     }
 
     handleLogout() {
         localStorage.clear();
-        this.setState({redirect: true});
+        this.setState({ redirect: true });
     }
 
-    render() { 
-        const { user } = this.props;console.log('user: ', user);
+    render() {
+        const { user } = this.props;
         const { redirect } = this.state;
-        if(redirect){
-            return <Redirect push to="/login"/> 
+
+        if (redirect) {
+            return <Redirect push to="/login" />
         }
+
         return (
             <header>
                 <Navbar bg="primary" expand="lg">

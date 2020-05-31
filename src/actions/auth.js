@@ -42,10 +42,12 @@ export const checkUserLogin = (formData) => {
                         localStorage.setItem('loginUserId', JSON.stringify(response.data.userId));
                         localStorage.setItem('loginSsoId', JSON.stringify(response.data.ssoId));
                         localStorage.setItem('loginUserType', JSON.stringify(response.data.userTypeId));
+                        localStorage.setItem('loginUserRoleId', JSON.stringify(response.data.userRoleId));
                         let loginUser = {
                             'type': response.data.userTypeId,
                             'id': response.data.userId,
-                            'sso': response.data.ssoId
+                            'sso': response.data.ssoId,
+                            'role': response.data.userRoleId
                         };
                         localStorage.setItem('loginUser', loginUser);
                         dispatch(userLogin(response.data.ssoId));
@@ -64,9 +66,9 @@ export const checkUserLogin = (formData) => {
     };
 };
 
-export const fetchLoginUser = (userId) => {
+export const fetchLoginUser = (ssoId) => {
     return (dispatch) => {
-        const url = appConstants.FETCH_AN_ITEM_URL + '?type=users&id=' + userId;
+        const url = appConstants.FETCH_AN_ITEM_URL + '?type=users&ssoId=' + ssoId;
         return axios.get(url)
             .then(response => {
                 dispatch(fetchLogUser(response.data));

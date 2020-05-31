@@ -56,7 +56,7 @@ app.get('/ping', function (req, res) {
 // An api endpoint that returns a short list of items
 app.get('/fetchAllItems', (req, res) => {
     let itemType = req.query.type;
-    let roleId = req.query.roleId ? req.query.roleId : '';//console.log('itemType: ', itemType, '; roleId present: ', _.isEmpty(roleId));
+    let roleId = req.query.roleId ? req.query.roleId : '';
     let jsonUrl = './data/' + itemType + '.json';
     let result;
 
@@ -64,10 +64,16 @@ app.get('/fetchAllItems', (req, res) => {
         if (err) throw err;
         let items = JSON.parse(data);
         // res.json(items);
-        if ((itemType === 'skills') && (!_.isEmpty(roleId))) {
-            if (req.query.roleId != '') {
-                result = items.filter(item => item.RoleId == roleId);
-            }
+        if (itemType === 'skills') {
+            fs.readFile('./data/roles.json', (err, data) => {
+                let roles = JSON.parse(data);
+                for (var i = 0; i < items.length; i++) {
+                    for (var j = 0; j < roles.length; j++) { //console.log(roles[j]);
+                        items[i].RoleName = roles[j].DisplayName;//'Rajesh';
+                    }
+                }
+            });
+            result = (!_.isEmpty(roleId)) ? items.filter(item => item.RoleId == roleId) : items;
         } else { result = items; }
         res.json(result);
     });
@@ -76,12 +82,18 @@ app.get('/fetchAllItems', (req, res) => {
 app.get('/fetchAnItem', (req, res) => {
     let itemType = req.query.type;
     let itemId = req.query.id;
+    let SsoId = req.query.ssoId ? req.query.ssoId : '';
     let jsonUrl = './data/' + itemType + '.json';
+    let resultItem;
 
     fs.readFile(jsonUrl, (err, data) => {
         if (err) throw err;
         let items = JSON.parse(data);
-        let resultItem = items.find(item => item.Id == itemId);
+        if (itemType === 'users') {
+            resultItem = items.find(item => item.SsoId == SsoId);
+        } else {
+            resultItem = items.find(item => item.Id == itemId);
+        }
         res.json(resultItem);
     });
 });
@@ -175,6 +187,7 @@ app.post('/login', (req, res) => {
                     resultObj.userId = user.Id;
                     resultObj.ssoId = user.SsoId;
                     resultObj.userTypeId = user.UserTypeId;
+                    resultObj.userRoleId = user.RoleId;
                 } else {
                     resultObj.userValidity = "ACCESS_DENIED";
                 }
