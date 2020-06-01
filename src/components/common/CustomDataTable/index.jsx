@@ -1,7 +1,7 @@
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import './CustomDataTableStyles.scss';
-import { Button, Badge, Col, Dropdown, DropdownButton, Image, Row } from 'react-bootstrap';
+import { Badge, Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 
 const isExpandableRow = (row) => {
     if (row.hasOwnProperty('expand')) return true;
@@ -15,9 +15,9 @@ const selectRow = {
 };
 
 export default class ExpandRow extends React.Component {
-  constructor(props) {
+  /*constructor(props) {
     super(props);
-  }
+  }*/
 
   statusFormatter = (row) => {
     return (row === 1) ? <Badge variant="success">Active</Badge> : <Badge variant="danger">Inactive</Badge>;

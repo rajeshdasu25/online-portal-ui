@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import { Badge, Button, Card, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import CustomDataTable from '../common/CustomDataTable';
 import { fetchAllCertificates } from '../../actions/certificates';
@@ -30,7 +30,7 @@ class ViewReports extends React.Component {
     }
 
     render() {
-        const { certificates, forms, filterResponse, responses, trainings, users } = this.props;
+        const { forms, filterResponse, /*certificates, responses, trainings, users*/ } = this.props;
 
         filterResponse.forEach(function (response) {
             response.expand = [];

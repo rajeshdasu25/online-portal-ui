@@ -2,8 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { Card, Col, Row, Table } from 'react-bootstrap';
-import Loader from 'react-loader-spinner';
+import { Col, Row } from 'react-bootstrap';
 
 import WidgetInfo from './common/WidgetInfo.js';
 

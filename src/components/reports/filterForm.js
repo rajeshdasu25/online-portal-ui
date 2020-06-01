@@ -5,8 +5,7 @@ import { Button, Col, Row } from 'react-bootstrap';
 
 let FilterForm = props => {
     const {
-        certificates, forms, responses, trainings, users,
-        FilterTypeValue, handleSubmit, pristine, submitting
+        /*FilterTypeValue, */handleSubmit, pristine, submitting
     } = props;
 
     const FilterTypeOptions = [
@@ -14,13 +13,6 @@ let FilterForm = props => {
         { text: 'Certification', value: 'Certification' },
         { text: 'Training', value: 'Training' },
         { text: 'User', value: 'User' }
-    ];
-    const UserOptions = [
-        { text: 'User - 1', value: '1' },
-        { text: 'User - 2', value: '2' },
-        { text: 'User - 3', value: '3' },
-        { text: 'User - 4', value: '4' },
-        { text: 'User - 5', value: '5' },
     ];
 
     return (

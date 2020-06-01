@@ -2,8 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import { Button, Badge, Col, Row, /*, Modal*/ } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Button, Col, Row, /*, Modal*/ } from 'react-bootstrap';
 
 import ModalPopup from '../common/ModalPopup';
 import CustomDataTable from '../common/CustomDataTable';

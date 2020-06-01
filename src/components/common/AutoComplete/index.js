@@ -1,12 +1,11 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import countries from './countries';
+// import { Field } from 'redux-form';
 import certificates from './certificates';
 import './style.css';
 
-export default class AutoCompletedText extends React.Component{
+export default class AutoCompletedText extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             suggestions: [],
@@ -17,7 +16,7 @@ export default class AutoCompletedText extends React.Component{
     onTextChange = (e) => {
         const value = e.target.value;
         let suggestions = [];
-        if(value.length > 0){
+        if (value.length > 0) {
             const regex = new RegExp(`^${value}`, 'i');
             suggestions = certificates.sort().filter(v => regex.test(v))
         }
@@ -36,8 +35,9 @@ export default class AutoCompletedText extends React.Component{
     }
 
     renderSuggestions = () => {
+        console.log('props: ', this.props);
         let { suggestions } = this.state;
-        if(suggestions.length === 0){
+        if (suggestions.length === 0) {
             return null;
         }
         return (
@@ -50,11 +50,11 @@ export default class AutoCompletedText extends React.Component{
             </ul>
         );
     }
-    
+
     render() {
-        const { text, suggestions } = this.state;
-        const { FieldName } = this.props;
-        return(
+        const { text/*, suggestions*/ } = this.state;
+        // const { FieldName } = this.props;
+        return (
             <div id="notebooks">
                 <input id="query" type="text" onChange={this.onTextChange} value={text} className="form-control" />
                 {/* <Field name={FieldName} component="input" type="text" onChange={this.onTextChange} value={text} placeholder="Name" className="form-control" /> */}

@@ -1,15 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { fetchAllCertificates } from '../../actions/certificates';
+import { addNewForm } from '../../actions/forms';
 import NewForm from './newForm';
 
 class FormSubmitPage extends React.Component {
     submit = formValues => { 
-        this.props.addNewCertificate(formValues);
-    }
-
-    componentDidMount() {
-        this.props.fetchAllCertificates();
+        this.props.addNewForm(formValues);
     }
 
     render() {
@@ -17,16 +13,10 @@ class FormSubmitPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        certificates: state.certificates
-    };
-};
-
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllCertificates: () => dispatch(fetchAllCertificates()),
+        addNewForm: (params) => dispatch(addNewForm(params)),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormSubmitPage);
+export default connect(null, mapDispatchToProps)(FormSubmitPage);

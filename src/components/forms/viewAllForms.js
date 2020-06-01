@@ -2,8 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import { Button, Badge, Col, Row, /*, Modal*/ } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Button, Col, Row } from 'react-bootstrap';
 
 import ModalPopup from '../common/ModalPopup';
 import CustomDataTable from '../common/CustomDataTable';
@@ -42,11 +41,20 @@ class ViewAllForms extends React.Component {
                     <title>Forms</title>
                 </Helmet>
                 <div className="list-container">
-                <Row>
-                    <Col md={12} xs={12} sm={12}>
-                        <CustomDataTable data={forms} itemType="forms" />
-                    </Col>
-                </Row></div>
+                    <Row>
+                        <Col md={12} xs={12} sm={12}>
+                            <Button className="position-absolute" size="sm" variant="primary" onClick={() => this.handleShowModal('addForm', true)}>Add New</Button>
+                            <CustomDataTable data={forms} itemType="forms" />
+                        </Col>
+                    </Row>
+                </div>
+                <ModalPopup
+                    size={'lg'}
+                    show={modal.addForm}
+                    title={'Add New'}
+                    body={<FormPage />}
+                    handleHideModal={this.handleHideModal}
+                />
             </React.Fragment>
         );
     }
@@ -60,18 +68,18 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    /*return bindActionCreators({
+    return bindActionCreators({
         fetchAllForms: fetchAllForms,
         getModalStatus: getModalStatus,
         showModal: showModal,
         hideModal: hideModal
-    }, dispatch);*/
-    return {
+    }, dispatch);
+    /*return {
         fetchAllForms: (params) => dispatch(fetchAllForms(params)),
         getModalStatus: () => dispatch(getModalStatus()),
         showModal: () => dispatch(showModal()),
         hideModal: () => dispatch(hideModal())
-    };
+    };*/
 };
 
 export default connect(

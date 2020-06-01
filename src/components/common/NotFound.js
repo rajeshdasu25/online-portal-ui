@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Image, Row, Table } from 'react-bootstrap';
+import { Card, Col, Image, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function NotFound() {

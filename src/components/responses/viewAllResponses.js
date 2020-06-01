@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import { Button, Badge, Col, Row, /*, Modal*/ } from 'react-bootstrap';
+import { Col, Row, /*, Modal*/ } from 'react-bootstrap';
 
 import CustomDataTable from '../common/CustomDataTable';
 import { fetchAllForms } from '../../actions/forms';
@@ -30,7 +30,7 @@ class ViewAllResponses extends React.Component {
         this.props.showModal(true);
     }
     render() { 
-        const { responses, forms, modal } = this.props;
+        const { responses, forms } = this.props;
 
         return (
             <React.Fragment>

@@ -115,6 +115,14 @@ app.post('/addAnItem', (req, res) => {
                     'ActiveStatus': "1"
                 };
                 break;
+            case 'forms':
+                formData = {
+                    'Id': items.length + 1,
+                    'Name': req.body.Name,
+                    'Description': req.body.Description,
+                    'ActiveStatus': "1"
+                };
+                break;
             case 'roles':
                 formData = {
                     'Id': items.length + 1,

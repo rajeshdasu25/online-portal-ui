@@ -5,6 +5,7 @@ export const getStatus = (status) => {
         type: GET_MODAL_STATUS,
         modal: {
             addCertificate: status,
+            addForm: status,
             addTraining: status,
             addRole: status,
             addSkill: status,
@@ -18,6 +19,7 @@ export const setStatus = (type, status) => {
         type: SET_MODAL_STATUS,
         modal: {
             addCertificate: status,
+            addForm: status,
             addTraining: status,
             addRole: status,
             addSkill: status,
