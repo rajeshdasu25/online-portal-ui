@@ -8,11 +8,11 @@ import AutoComplete from '../common/AutoComplete';
 // import AutoSearch from '../common/AutoSearch';
 
 const ProficiencyOptions = [
-    { text: 'Novice', value: '0', checked: true },
-    { text: 'Beginner', value: '1', checked: false },
-    { text: 'Competant', value: '2', checked: false },
-    { text: 'Proficient', value: '3', checked: false },
-    { text: 'Expert', value: '4', checked: false }
+    { text: 'Novice', value: '1', checked: true },
+    { text: 'Beginner', value: '2', checked: false },
+    { text: 'Competant', value: '3', checked: false },
+    { text: 'Proficient', value: '4', checked: false },
+    { text: 'Expert', value: '5', checked: false }
 ];
 
 const renderCertifications = ({ fields, certificates }) => {
@@ -173,7 +173,7 @@ let ResponseForm = props => {
         certificates, skills, loginUser } = props;
 
     const submit = formValues => {
-        console.log(formValues);
+        // console.log(formValues);
     }
 
     return (
@@ -295,7 +295,7 @@ let ResponseForm = props => {
                                                                 <Row className="text-center">
                                                                     {ProficiencyOptions.map((item, index) => (
                                                                         <Col md={2} sm={2} xs={2} key={index}>
-                                                                            <strong>{item.text}</strong>
+                                                                            <strong>{item.text} ({item.value})</strong>
                                                                         </Col>
                                                                     ))}
                                                                 </Row>
@@ -310,21 +310,24 @@ let ResponseForm = props => {
                                                                 </Col>
                                                                 <Col md={9} sm={9} xs={9}>
                                                                     <Row className="text-center">
-                                                                        {ProficiencyOptions.map((ProficiencyOptionItem, ProficiencyOptionIndex) => { /*console.log('item: ', ProficiencyOptionItem);*/ return (
-                                                                            <Col md={2} sm={2} xs={2} key={ProficiencyOptionIndex}>
-                                                                                <Field
-                                                                                    name={`${RoleOptionItem.Name}_${ProficiencyOptionItem.value}`}
-                                                                                    component={"input"}
-                                                                                    type={"radio"}
-                                                                                    onChange={() => {
-                                                                                        // alert(ProficiencyOptionItem.value);
-                                                                                        this.onChange(ProficiencyOptionItem.value)
-                                                                                    }}
-                                                                                    checked={ProficiencyOptionItem.checked}
-                                                                                // checked={ProficiencyOptionIndex === radio.value}
-                                                                                />
-                                                                            </Col>
-                                                                        )
+                                                                        {ProficiencyOptions.map((ProficiencyOptionItem, ProficiencyOptionIndex) => {
+                                                                            return (
+                                                                                <Col md={2} sm={2} xs={2} key={ProficiencyOptionIndex}>
+                                                                                    <Field
+                                                                                        name={`skill_${RoleOptionItem.Name}`}
+                                                                                        component={"input"}
+                                                                                        type={"radio"}
+                                                                                        // onChange={(e) => {
+                                                                                        //     // console.log(ProficiencyOptionItem.value);
+                                                                                        //     if (e.target.checked) {
+                                                                                        //         console.log(e.target.value);
+                                                                                        //     }
+                                                                                        // }}
+                                                                                        // checked={ProficiencyOptionIndex === radio.value}
+                                                                                        value={ProficiencyOptionItem.value}
+                                                                                    />
+                                                                                </Col>
+                                                                            )
                                                                         })}
                                                                     </Row>
                                                                 </Col>
@@ -355,10 +358,7 @@ let ResponseForm = props => {
 
 ResponseForm = reduxForm({
     form: 'responseForm',
-    enableReinitialize: true,
-    initialValues: {
-        SsoId: "123"
-    }
+    enableReinitialize: true
 })(ResponseForm)
 
 // const selector = formValueSelector('responseForm');

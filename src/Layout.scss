@@ -37,6 +37,9 @@ body {
     box-sizing: border-box;
     height: calc(100vh - var(--header-height));
   }
+  input:disabled {
+    cursor: not-allowed;
+  }
 }
 
 // Main area specific style:

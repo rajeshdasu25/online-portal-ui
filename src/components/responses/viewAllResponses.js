@@ -31,6 +31,16 @@ class ViewAllResponses extends React.Component {
     }
     render() { 
         const { responses, forms } = this.props;
+        
+        responses.forEach(function (response) {
+            response.expand = [];
+            let expandObj = {
+                "certifications": response.certifications,
+                "skills": response.skills,
+                "trainings": response.trainings
+            };
+            response.expand.push(expandObj);
+        });
 
         return (
             <React.Fragment>

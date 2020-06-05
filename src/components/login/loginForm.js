@@ -15,7 +15,7 @@ let LoginForm = props => {
                             {loginError.error && <p className="text-center text-danger font-weight-bold">{loginError.message}</p>}
                             <div className="form-group">
                                 <Row>
-                                    <Col md={3} sm={3} xs={3} className="text-right">
+                                    <Col md={4} sm={4} xs={4} className="text-right">
                                         <label htmlFor="SsoId" className="col-form-label">SSO ID</label>
                                     </Col>
                                     <Col md={8} sm={8} xs={8}>
@@ -25,7 +25,7 @@ let LoginForm = props => {
                             </div>
                             <div className="form-group">
                                 <Row>
-                                    <Col md={3} sm={3} xs={3} className="text-right">
+                                    <Col md={4} sm={4} xs={4} className="text-right">
                                         <label htmlFor="Password" className="col-form-label">Password</label>
                                     </Col>
                                     <Col md={8} sm={8} xs={8}>

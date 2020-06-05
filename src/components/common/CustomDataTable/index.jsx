@@ -1,17 +1,17 @@
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import './CustomDataTableStyles.scss';
-import { Badge, Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
+import { Accordion, Badge, Card, Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 
 const isExpandableRow = (row) => {
-    if (row.hasOwnProperty('expand')) return true;
-    else return false;
+  if (row.hasOwnProperty('expand')) return true;
+  else return false;
 };
 
 const selectRow = {
-    //mode: 'checkbox',
-    //clickToSelect: true,
-    clickToExpand: true
+  //mode: 'checkbox',
+  //clickToSelect: true,
+  clickToExpand: true
 };
 
 export default class ExpandRow extends React.Component {
@@ -26,29 +26,60 @@ export default class ExpandRow extends React.Component {
   csvStatusFormatter = (row) => {
     return (row === 1) ? 'Active' : 'Inactive';
   }
-  
-  expandComponent(row) { console.log('row: ', row);
+
+  expandComponent(row) {
     return (
       <>
         <Row>
-          <Col md={3} xs={3}>&nbsp;</Col>
-          <Col md={1} xs={6} sm={12}>First Name</Col>
-          <Col md={3} xs={6} sm={12}> : {row.FirstName}</Col>
-        </Row>
-        <Row>
-          <Col md={3} xs={3}>&nbsp;</Col>
-          <Col md={1} xs={6} sm={12}>Last Name</Col>
-          <Col md={3} xs={6} sm={12}> : {row.LastName}</Col>
-        </Row>
-        <Row>
-          <Col md={3} xs={3}>&nbsp;</Col>
-          <Col md={1} xs={6} sm={12}>Email</Col>
-          <Col md={3} xs={6} sm={12}> : {row.EmailAddr}</Col>
-        </Row>
-        <Row>
-          <Col md={3} xs={3}>&nbsp;</Col>
-          <Col md={1} xs={6} sm={12}>Contact</Col>
-          <Col md={3} xs={6} sm={12}> : {row.Phoneno}</Col>
+          <Col md={4} sm={12} xs={12}>
+            <Card bg="light" className="certification-ctr">
+              <Card.Header>
+                <Row>
+                  <Col md={10} sm={10} xs={12}>
+                    <span style={{ 'fontWeight': 'bold', 'color': '#fff' }}>Certifications</span>
+                  </Col>
+                </Row>
+              </Card.Header>
+              <Card.Body>
+                &nbsp;
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={4} sm={12} xs={12}>
+            <Card bg="light" className="certification-ctr">
+              <Card.Header>
+                <Row>
+                  <Col md={10} sm={10} xs={12}>
+                    <span style={{ 'fontWeight': 'bold', 'color': '#fff' }}>Trainings</span>
+                  </Col>
+                </Row>
+              </Card.Header>
+              <Card.Body>
+                &nbsp;
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={4} sm={12} xs={12}>
+            <Card bg="light" className="certification-ctr">
+              <Card.Header>
+                <Row>
+                  <Col md={10} sm={10} xs={12}>
+                    <span style={{ 'fontWeight': 'bold', 'color': '#fff' }}>Skills</span>
+                  </Col>
+                </Row>
+              </Card.Header>
+              <Card.Body>
+                {row.skills.map((skill, index) => {
+                  return (
+                    <Row key={index}>
+                      <Col md={6} sm={6} xs={6} className="text-right">{Object.keys(skill)[0]}&nbsp;:&nbsp;</Col>
+                      <Col md={6} sm={6} xs={6}>{Object.values(skill)[0]}</Col>
+                    </Row>
+                  );
+                })}
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
       </>
     );
@@ -56,14 +87,14 @@ export default class ExpandRow extends React.Component {
 
   renderShowsTotal = (total) => {
     return (
-      <span style={ { position: 'absolute', left: '5rem' } }>
-        Total: <strong>{ total }</strong>&nbsp;items
+      <span style={{ position: 'absolute', left: '5rem' }}>
+        Total: <strong>{total}</strong>&nbsp;items
       </span>
     );
   }
 
   handleTypeFilter = (itemType, event) => {
-    switch(itemType) {
+    switch (itemType) {
       case 'certificates': this.refs.authCol.applyFilter(event.target.value); break;
       case 'forms': this.refs.nameCol.applyFilter(event.target.value); break;
       case 'responses': this.refs.nameCol.applyFilter(event.target.value); break;
@@ -71,20 +102,20 @@ export default class ExpandRow extends React.Component {
     }
   }
 
-  getCsvFileName = (itemType) => { 
-      let csvFileName = 'spreadsheet.csv';
-      switch (itemType) {
-        case 'certificates': csvFileName = 'Certificates.csv'; break;
-        case 'forms': csvFileName = 'Forms.csv'; break;
-        case 'reports': csvFileName = 'Reports.csv'; break;
-        case 'responses': csvFileName = 'Responses.csv'; break;
-        case 'roles': csvFileName = 'Roles.csv'; break;
-        case 'skills': csvFileName = 'Skills.csv'; break;
-        case 'trainings': csvFileName = 'Trainings.csv'; break;
-        case 'users': csvFileName = 'Employes.csv'; break;
-        default: csvFileName = 'spreadsheet.csv'; break;
-      }
-      return csvFileName;
+  getCsvFileName = (itemType) => {
+    let csvFileName = 'spreadsheet.csv';
+    switch (itemType) {
+      case 'certificates': csvFileName = 'Certificates.csv'; break;
+      case 'forms': csvFileName = 'Forms.csv'; break;
+      case 'reports': csvFileName = 'Reports.csv'; break;
+      case 'responses': csvFileName = 'Responses.csv'; break;
+      case 'roles': csvFileName = 'Roles.csv'; break;
+      case 'skills': csvFileName = 'Skills.csv'; break;
+      case 'trainings': csvFileName = 'Trainings.csv'; break;
+      case 'users': csvFileName = 'Employes.csv'; break;
+      default: csvFileName = 'spreadsheet.csv'; break;
+    }
+    return csvFileName;
   }
 
   renderTableHeaders = (itemType) => {
@@ -115,38 +146,48 @@ export default class ExpandRow extends React.Component {
           { 'title': 'Creator', 'dataField': 'UserFullName', 'ref': 'usernameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Created', 'dataField': 'FormattedCreatedDate', 'ref': 'createdDateCol', 'hidden': false, 'isKey': false },
           { 'title': 'Closed', 'dataField': 'FormattedClosedDate', 'ref': 'closedDateCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat':this.statusFormatter },
+          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat': this.statusFormatter },
         ];
         break;
+      // case 'responses':
+      //   headers = [
+      //     { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
+      //     { 'title': 'Form Name', 'dataField': 'FormName', 'ref': 'formCol', 'hidden': false, 'isKey': false },
+      //     { 'title': 'Creator', 'dataField': 'Creator', 'ref': 'creatorCol', 'hidden': false, 'isKey': false },
+      //     { 'title': 'Description', 'dataField': 'Description', 'ref': 'descCol', 'hidden': false, 'isKey': false },
+      //     { 'title': 'Date', 'dataField': 'FormattedDate', 'ref': 'dateCol', 'hidden': false, 'isKey': false },
+      //   ];
+      //   break;
       case 'responses':
         headers = [
           { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
-          { 'title': 'Form Name', 'dataField': 'FormName', 'ref': 'formCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Creator', 'dataField': 'Creator', 'ref': 'creatorCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Description', 'dataField': 'Description', 'ref': 'descCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Date', 'dataField': 'FormattedDate', 'ref': 'dateCol', 'hidden': false, 'isKey': false },
+          { 'title': 'SSO ID', 'dataField': 'ssoId', 'ref': 'ssoIdCol', 'hidden': false, 'isKey': false },
+          // { 'title': 'Certifications', 'dataField': 'certifications', 'ref': 'certificationsCol', 'hidden': false, 'isKey': false },
+          // { 'title': 'Skills', 'dataField': 'skills', 'ref': 'skillsCol', 'hidden': false, 'isKey': false },
+          // { 'title': 'Trainings', 'dataField': 'trainings', 'ref': 'trainingsCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Date Time', 'dataField': 'dateTime', 'ref': 'dateTimeCol', 'hidden': false, 'isKey': false },
         ];
         break;
       case 'roles':
-          headers = [
-            { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
-            { 'title': 'Name', 'dataField': 'Name', 'ref': 'nameCol', 'hidden': false, 'isKey': false },
-            { 'title': 'Display Name', 'dataField': 'DisplayName', 'ref': 'displayNameCol', 'hidden': false, 'isKey': false },
-          ];
-          break;
+        headers = [
+          { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
+          { 'title': 'Name', 'dataField': 'Name', 'ref': 'nameCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Display Name', 'dataField': 'DisplayName', 'ref': 'displayNameCol', 'hidden': false, 'isKey': false },
+        ];
+        break;
       case 'skills':
-          headers = [
-            { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
-            { 'title': 'Name', 'dataField': 'DisplayName', 'ref': 'displayNameCol', 'hidden': false, 'isKey': false },
-            { 'title': 'Role', 'dataField': 'RoleName', 'ref': 'roleNameCol', 'hidden': false, 'isKey': false },
-          ];
-          break;
+        headers = [
+          { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
+          { 'title': 'Name', 'dataField': 'DisplayName', 'ref': 'displayNameCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Role', 'dataField': 'RoleName', 'ref': 'roleNameCol', 'hidden': false, 'isKey': false },
+        ];
+        break;
       case 'trainings':
         headers = [
           { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true, 'csvHeader': 'Id' },
           { 'title': 'Name', 'dataField': 'Name', 'ref': 'nameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Description', 'dataField': 'Description', 'ref': 'authCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat':this.statusFormatter },
+          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat': this.statusFormatter },
         ];
         break;
       case 'users':
@@ -159,7 +200,7 @@ export default class ExpandRow extends React.Component {
           { 'title': 'First Name', 'dataField': 'FirstName', 'ref': 'firstNameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Last Name', 'dataField': 'LastName', 'ref': 'lastNameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Email', 'dataField': 'SyfEmail', 'ref': 'emailCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat':this.statusFormatter },
+          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat': this.statusFormatter },
         ];
         break;
     }
@@ -170,7 +211,7 @@ export default class ExpandRow extends React.Component {
     const { forms, itemType } = this.props;
     const options = {
       page: 1,  // which page you want to show as default
-      sizePerPageList: [ 
+      sizePerPageList: [
         { text: '2', value: 2 },
         { text: '5', value: 5 },
         { text: '10', value: 10 },
@@ -192,17 +233,17 @@ export default class ExpandRow extends React.Component {
       // alwaysShowAllBtns: true // Always show next and previous button
       // withFirstAndLast: false > Hide the going to First and Last page button
     };
-    
+
     return (
       <div className="expandableTableContainer">
         {itemType && itemType === 'responses' && <DropdownButton id="dropdown-item-button" className="btn-filter" title="Filter" alignRight>
           {forms.map((type, index) => {
-              return (
-                  <Dropdown.Item as="button" key={index} value={type.Name} 
-                      onClick={this.handleTypeFilter.bind(this, itemType)}>
-                      {type.Name}
-                  </Dropdown.Item>
-              );
+            return (
+              <Dropdown.Item as="button" key={index} value={type.Name}
+                onClick={this.handleTypeFilter.bind(this, itemType)}>
+                {type.Name}
+              </Dropdown.Item>
+            );
           })}
         </DropdownButton>}
         {/* {itemType && itemType !== 'reports' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addCertificate', true)}>Add New</Button>}
@@ -210,16 +251,16 @@ export default class ExpandRow extends React.Component {
         {itemType && itemType === 'roles' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addRole', true)}>Add New</Button>}
         {itemType && itemType === 'skills' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addSkill', true)}>Add New</Button>}
         {itemType && itemType === 'trainings' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addTraining', true)}>Add New</Button>} */}
-        {this.props.data && (this.props.data.length > 0) && <BootstrapTable data={ this.props.data }
-          search={ true }
-          pagination={ true } 
-          exportCSV={ true }
-          csvFileName = { this.getCsvFileName(itemType) }
+        {this.props.data && (this.props.data.length > 0) && <BootstrapTable data={this.props.data}
+          search={true}
+          pagination={true}
+          exportCSV={true}
+          csvFileName={this.getCsvFileName(itemType)}
           // insertRow= { (itemType === 'trainings' || itemType === 'certificates') ? true : false }
-          options={ options }
-          expandableRow={ isExpandableRow }
-          expandComponent={ this.expandComponent }
-          expandColumnOptions={ { expandColumnVisible: true } }
+          options={options}
+          expandableRow={isExpandableRow}
+          expandComponent={this.expandComponent}
+          expandColumnOptions={{ expandColumnVisible: true }}
           selectRow={selectRow} >
           {/* <TableHeaderColumn dataField='_id' isKey={true} hidden={true}>Id</TableHeaderColumn>
           <TableHeaderColumn dataField='certification_Name' ref='nameCol' filter={{ type: 'TextFilter', delay: 1000 }} dataSort>Name</TableHeaderColumn>
@@ -237,18 +278,19 @@ export default class ExpandRow extends React.Component {
           {/* this.renderTableHeaders(itemType) */}
           {
             this.renderTableHeaders(itemType).map(
-              function(header, index){
-              return (
-                <TableHeaderColumn key={index} 
-                  ref={header.ref} 
-                  dataField={header.dataField} 
-                  isKey={header.isKey} 
-                  hidden={header.hidden} 
-                  filter={{ type: 'TextFilter', delay: 1000 }} 
-                  csvHeader={header.title} 
-                  // dataFormat={header.statusFormatter}
-                  dataSort>{header.title}</TableHeaderColumn>
-              )})
+              function (header, index) {
+                return (
+                  <TableHeaderColumn key={index}
+                    ref={header.ref}
+                    dataField={header.dataField}
+                    isKey={header.isKey}
+                    hidden={header.hidden}
+                    filter={{ type: 'TextFilter', delay: 1000 }}
+                    csvHeader={header.title}
+                    // dataFormat={header.statusFormatter}
+                    dataSort>{header.title}</TableHeaderColumn>
+                )
+              })
           }
         </BootstrapTable>}
       </div>

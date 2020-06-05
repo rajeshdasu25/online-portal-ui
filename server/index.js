@@ -131,6 +131,17 @@ app.post('/addAnItem', (req, res) => {
                     'ActiveStatus': "1"
                 };
                 break;
+            case 'responses':
+                formData = {
+                    'Id': items.length + 1,
+                    'ssoId': req.body.userSsoId,
+                    'certifications': req.body.userCertifications,
+                    'skills': req.body.userSkills,
+                    'trainings': req.body.userTrainings,
+                    'dateTime': req.body.dateTime,
+                    'ActiveStatus': "1"
+                };
+                break;
             case 'skills':
                 formData = {
                     'Id': items.length + 1,

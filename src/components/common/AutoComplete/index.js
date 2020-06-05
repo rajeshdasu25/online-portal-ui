@@ -1,9 +1,12 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 // import { Field } from 'redux-form';
+import { fetchAllCertificates } from '../../../actions/certificates';
 import certificates from './certificates';
 import './style.css';
 
-export default class AutoCompletedText extends React.Component {
+class AutoCompletedText extends React.Component {
 
     constructor(props) {
         super(props)
@@ -11,6 +14,9 @@ export default class AutoCompletedText extends React.Component {
             suggestions: [],
             text: ''
         }
+    }
+    componentDidMount() {
+        this.props.fetchAllCertificates();
     }
 
     onTextChange = (e) => {
@@ -35,7 +41,7 @@ export default class AutoCompletedText extends React.Component {
     }
 
     renderSuggestions = () => {
-        console.log('props: ', this.props);
+        const { certificates } = this.props;console.log('cert: ', certificates);
         let { suggestions } = this.state;
         if (suggestions.length === 0) {
             return null;
@@ -64,3 +70,21 @@ export default class AutoCompletedText extends React.Component {
     }
 
 }
+
+const mapStateToProps = state => {
+    return {
+        certificates: state.certificates,
+        modal: state.modal
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({
+        fetchAllCertificates: fetchAllCertificates
+    }, dispatch);
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AutoCompletedText);
