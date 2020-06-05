@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import { Field } from 'redux-form';
+import { Field } from 'redux-form';
 import { fetchAllCertificates } from '../../../actions/certificates';
 import certificates from './certificates';
 import './style.css';
@@ -19,12 +19,13 @@ class AutoCompletedText extends React.Component {
         this.props.fetchAllCertificates();
     }
 
-    onTextChange = (e) => {
+    onTextChange = (e) => { //console.log('e: ', e);debugger;
+        // const { certificates } = this.props; console.log('cert: ', certificates);
         const value = e.target.value;
         let suggestions = [];
         if (value.length > 0) {
             const regex = new RegExp(`^${value}`, 'i');
-            suggestions = certificates.sort().filter(v => regex.test(v))
+            suggestions = certificates.sort().filter(certificate => regex.test(certificate))
         }
 
         this.setState(() => ({
@@ -33,7 +34,7 @@ class AutoCompletedText extends React.Component {
         }))
     }
 
-    selectedText(value) {
+    selectedText(value) { //debugger;
         this.setState(() => ({
             text: value,
             suggestions: [],
@@ -41,7 +42,6 @@ class AutoCompletedText extends React.Component {
     }
 
     renderSuggestions = () => {
-        const { certificates } = this.props;console.log('cert: ', certificates);
         let { suggestions } = this.state;
         if (suggestions.length === 0) {
             return null;
@@ -49,21 +49,23 @@ class AutoCompletedText extends React.Component {
         return (
             <ul >
                 {
-                    suggestions.map((item, index) => (
-                        <li key={index} onClick={() => this.selectedText(item)}>{item}</li>
-                    ))
+                    suggestions.map((item, index) => { //console.log(item, index);
+                        return (
+                            <li key={index} onClick={() => this.selectedText(item)}>{item}</li>
+                        )
+                    })
                 }
             </ul>
         );
     }
 
     render() {
-        const { text/*, suggestions*/ } = this.state;
-        // const { FieldName } = this.props;
+        const { text, suggestions } = this.state;
+        const { FieldId, FieldName } = this.props;
         return (
-            <div id="notebooks">
-                <input id="query" type="text" onChange={this.onTextChange} value={text} className="form-control" />
-                {/* <Field name={FieldName} component="input" type="text" onChange={this.onTextChange} value={text} placeholder="Name" className="form-control" /> */}
+            <div id={FieldId}>
+                {/* <input id={FieldName} name={FieldName} type="text" onChange={this.onTextChange} value={text} className="form-control" /> */}
+                <Field id={FieldName} name={FieldName} component="input" type="text" onChange={this.onTextChange} value={text} className="form-control" />
                 {this.renderSuggestions()}
             </div>
         );

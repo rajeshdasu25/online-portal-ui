@@ -1,7 +1,10 @@
+import { createBrowserHistory } from 'history';
 import { FETCH_IND_RESPONSE, FETCH_FILTER_RESPONSE, FETCH_ALL_RESPONSES, ADD_NEW_RESPONSE } from './types';
 import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
+
+export const browserHistory = createBrowserHistory();
 
 export const fetchResponses = (responses) => {
     return {
@@ -92,6 +95,10 @@ export const addNewResponse = (formData) => {
                     dispatch(setStatus(false));
                 }
             })
+            // .then(() => {
+            //     browserHistory.push('/');
+            //     browserHistory.push('/responses');
+            // })
             .catch(error => {
                 throw (error);
             });

@@ -90,7 +90,7 @@ let UserForm = props => {
             <div className="form-group">
                 <Row>
                     <Col md={3} sm={3} xs={12} className="text-right">
-                        <label htmlFor="DateOfBirth" className="col-form-label">DateOfBirth</label>
+                        <label htmlFor="DateOfBirth" className="col-form-label">Date Of Birth</label>
                     </Col>
                     <Col md={3} sm={3} xs={12}>
                         <Field name="DateOfBirth" component="input" type="text" placeholder="MM/DD/YYYY" className="form-control" />

@@ -1,81 +1,41 @@
 [
     {
         "Id": 1,
-        "ssoId": "502455770",
-        "certifications": [
-            {}
-        ],
-        "skills": [
-            {
-                "hybernet": "4"
-            },
-            {
-                "java": "4"
-            },
-            {
-                "spring": "4"
-            }
-        ],
-        "trainings": [
-            {}
-        ],
-        "dateTime": "03-06-2020 19:40:34",
-        "ActiveStatus": "1"
-    },
-    {
-        "Id": 2,
         "ssoId": "503006500",
         "certifications": [
-            {},
-            {}
+            {
+                "CertificationName": "a"
+            },
+            {
+                "CertificationName": "s"
+            }
         ],
         "skills": [
             {
-                "angular": "4"
+                "Angular": "1"
             },
             {
-                "css3": "4"
+                "CSS 3": "2"
             },
             {
-                "html5": "4"
+                "HTML 5": "3"
             },
             {
-                "javascript": "4"
+                "Javascript": "4"
             },
             {
-                "jquery": "4"
+                "jQuery": "5"
             },
             {
-                "react": "4"
+                "React": "4"
             }
         ],
         "trainings": [
-            {},
-            {}
-        ],
-        "dateTime": "03-06-2020 19:42:47",
-        "ActiveStatus": "1"
-    },
-    {
-        "Id": 3,
-        "ssoId": "500000001",
-        "certifications": [],
-        "skills": [
             {
-                "mysql": "5"
-            },
-            {
-                "postgresql": "5"
-            },
-            {
-                "sql": "5"
-            },
-            {
-                "no-sql": "5"
+                "TrainingName": "o"
             }
         ],
-        "trainings": [],
-        "dateTime": "04-06-2020 09:15:23",
+        "dateTime": "05-06-2020 18:26:47",
         "ActiveStatus": "1"
     }
 ]

@@ -53,7 +53,7 @@ const renderCertifications = ({ fields, certificates }) => {
                                         renderSuggestion={renderSuggestion}
                                         inputProps={inputProps} /> */}
                                             {/* <AutoSuggestion data={certificates} /> */}
-                                            <AutoComplete FieldName={`${member}.CertificationName`} data={certificates} />
+                                            <AutoComplete FieldId={'certifications'} FieldName={`${member}.CertificationName`} data={certificates} />
                                             {/* <AutoSearch data={certificates} /> */}
                                         </Col>
                                     </Row>
@@ -127,7 +127,7 @@ const renderTrainings = ({ fields }) => (
                                     </Col>
                                     <Col md={8} sm={8} xs={12}>
                                         {/* <Field name={`${member}.TrainingName`} component="input" type="text" placeholder="Name" className="form-control" /> */}
-                                        <AutoComplete FieldName={`${member}.TrainingName`} />
+                                        <AutoComplete FieldId={'trainings'} FieldName={`${member}.TrainingName`} />
                                     </Col>
                                 </Row>
                             </div>
@@ -202,6 +202,22 @@ let ResponseForm = props => {
                             <div className="form-group">
                                 <Row>
                                     <Col md={3} sm={3} xs={12} className="text-right">
+                                        <label htmlFor="FirstName" className="col-form-label">First Name</label>
+                                    </Col>
+                                    <Col md={3} sm={3} xs={12}>
+                                        <Field name="FirstName" component="input" type="text" placeholder="First Name" className="form-control" disabled={true} />
+                                    </Col>
+                                    <Col md={2} sm={2} xs={12} className="text-right">
+                                        <label htmlFor="LastName" className="col-form-label">Last Name</label>
+                                    </Col>
+                                    <Col md={3} sm={3} xs={12}>
+                                        <Field name="LastName" component="input" type="text" placeholder="Last Name" className="form-control" disabled={true} />
+                                    </Col>
+                                </Row>
+                            </div>
+                            <div className="form-group">
+                                <Row>
+                                    <Col md={3} sm={3} xs={12} className="text-right">
                                         <label htmlFor="CgEmail" className="col-form-label">CG Email</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
@@ -218,10 +234,10 @@ let ResponseForm = props => {
                             <div className="form-group">
                                 <Row>
                                     <Col md={3} sm={3} xs={12} className="text-right">
-                                        <label htmlFor="FirstName" className="col-form-label">Full Name</label>
+                                        <label htmlFor="DateOfBirth" className="col-form-label">Date Of Birth</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="FirstName" component="input" type="text" placeholder="Full Name" className="form-control" disabled={true} />
+                                        <Field name="DateOfBirth" component="input" type="text" placeholder="MM/DD/YYYY" className="form-control" disabled={true} />
                                     </Col>
                                     <Col md={2} sm={2} xs={12} className="text-right">
                                         <label htmlFor="Designation" className="col-form-label">Designation</label>
@@ -314,7 +330,7 @@ let ResponseForm = props => {
                                                                             return (
                                                                                 <Col md={2} sm={2} xs={2} key={ProficiencyOptionIndex}>
                                                                                     <Field
-                                                                                        name={`skill_${RoleOptionItem.Name}`}
+                                                                                        name={`skill_${RoleOptionItem.DisplayName}`}
                                                                                         component={"input"}
                                                                                         type={"radio"}
                                                                                         // onChange={(e) => {

@@ -57,7 +57,8 @@
     max-height: 450px;
 } */
 
-#notebooks ul {
+#certifications ul,
+#trainings ul {
     margin: 0 auto;
     padding: 0;
     max-height: 390px;
@@ -68,7 +69,8 @@
     border-right: none;
 }
 
-#notebooks ul li {
+#certifications ul li,
+#trainings ul li {
     list-style: none;
     background-color: rgba(0, 0, 0, 0.05);
     background-image:
@@ -87,7 +89,8 @@
     border-radius: 3px;
 }
 
-#notebooks span {
+#certifications span,
+#trainings span {
     display: block;
     position: absolute;
     background: #FFD32E;

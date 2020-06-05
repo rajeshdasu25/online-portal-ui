@@ -8,6 +8,10 @@ const isExpandableRow = (row) => {
   else return false;
 };
 
+const statusFormatter = (row) => { console.log('row: ', row);
+    return (row === 1) ? <Badge variant="success">Active</Badge> : <Badge variant="danger">Inactive</Badge>;
+  }
+
 const selectRow = {
   //mode: 'checkbox',
   //clickToSelect: true,
@@ -19,7 +23,7 @@ export default class ExpandRow extends React.Component {
     super(props);
   }*/
 
-  statusFormatter = (row) => {
+  statusFormatter = (row) => { console.log('row: ', row);
     return (row === 1) ? <Badge variant="success">Active</Badge> : <Badge variant="danger">Inactive</Badge>;
   }
 
@@ -27,7 +31,7 @@ export default class ExpandRow extends React.Component {
     return (row === 1) ? 'Active' : 'Inactive';
   }
 
-  expandComponent(row) {
+  expandComponent(row) { //console.log('row: ', row);
     return (
       <>
         <Row>
@@ -41,7 +45,13 @@ export default class ExpandRow extends React.Component {
                 </Row>
               </Card.Header>
               <Card.Body>
-                &nbsp;
+                {row.certifications.map((certification, index) => {
+                  return (
+                    <Row key={index}>
+                      <Col md={6} sm={6} xs={6}>{certification.CertificationName}</Col>
+                    </Row>
+                  );
+                })}
               </Card.Body>
             </Card>
           </Col>
@@ -55,7 +65,13 @@ export default class ExpandRow extends React.Component {
                 </Row>
               </Card.Header>
               <Card.Body>
-                &nbsp;
+                {row.trainings.map((training, index) => {
+                  return (
+                    <Row key={index}>
+                      <Col md={6} sm={6} xs={6}>{training.TrainingName}</Col>
+                    </Row>
+                  );
+                })}
               </Card.Body>
             </Card>
           </Col>
@@ -72,7 +88,7 @@ export default class ExpandRow extends React.Component {
                 {row.skills.map((skill, index) => {
                   return (
                     <Row key={index}>
-                      <Col md={6} sm={6} xs={6} className="text-right">{Object.keys(skill)[0]}&nbsp;:&nbsp;</Col>
+                      <Col md={6} sm={6} xs={6} className="text-right font-weight-bold">{Object.keys(skill)[0]}&nbsp;:&nbsp;</Col>
                       <Col md={6} sm={6} xs={6}>{Object.values(skill)[0]}</Col>
                     </Row>
                   );
@@ -200,7 +216,7 @@ export default class ExpandRow extends React.Component {
           { 'title': 'First Name', 'dataField': 'FirstName', 'ref': 'firstNameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Last Name', 'dataField': 'LastName', 'ref': 'lastNameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Email', 'dataField': 'SyfEmail', 'ref': 'emailCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat': this.statusFormatter },
+          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat': {statusFormatter} },
         ];
         break;
     }
