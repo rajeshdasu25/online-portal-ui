@@ -1,44 +1,42 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { Field } from 'redux-form';
-import { fetchAllCertificates } from '../../../actions/certificates';
-import certificates from './certificates';
 import './style.css';
 
-class AutoCompletedText extends React.Component {
+export default class AutoCompletedText extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
             suggestions: [],
-            text: ''
+            Field1Text: '',
+            Field2Text: ''
         }
-    }
-    componentDidMount() {
-        this.props.fetchAllCertificates();
     }
 
-    onTextChange = (e) => { //console.log('e: ', e);debugger;
-        // const { certificates } = this.props; console.log('cert: ', certificates);
-        const value = e.target.value;
+    onTextChange = (e) => {
+        const { data } = this.props;
+        const Field1Value = e.target.value;
         let suggestions = [];
-        if (value.length > 0) {
-            const regex = new RegExp(`^${value}`, 'i');
-            suggestions = certificates.sort().filter(certificate => regex.test(certificate))
+
+        if (Field1Value.length > 0) {
+            const regex = new RegExp(`^${Field1Value}`, 'i');
+            suggestions = data.sort().filter(certificate => regex.test(certificate.Name));
         }
+        console.log('suggestions: ', suggestions);
 
         this.setState(() => ({
             suggestions,
-            text: value
-        }))
+            //Field1Text: Field1Value,
+            //Field2Text: Field1Value
+        })); console.log('onTextChange state: ', this.state);
     }
 
-    selectedText(value) { //debugger;
-        this.setState(() => ({
-            text: value,
-            suggestions: [],
-        }))
+    selectedText(value) {
+        this.setState({
+            Field1Text: value,
+            suggestions: []
+        });
+        console.log('selectedText state: ', this.state);
     }
 
     renderSuggestions = () => {
@@ -48,45 +46,35 @@ class AutoCompletedText extends React.Component {
         }
         return (
             <ul >
-                {
-                    suggestions.map((item, index) => { //console.log(item, index);
-                        return (
-                            <li key={index} onClick={() => this.selectedText(item)}>{item}</li>
-                        )
-                    })
-                }
+                {suggestions.map((item, index) => {
+                    return (
+                        <li key={index} onClick={() => this.selectedText(item.Name)}>{item.Name}</li>
+                    )
+                })}
             </ul>
         );
     }
 
+    TextInput = ({ input: reduxFormProps, ...inputProps }) => (
+        <input
+            type="text"
+            {...reduxFormProps}
+            {...inputProps}
+        />
+    );
+
     render() {
-        const { text, suggestions } = this.state;
-        const { FieldId, FieldName } = this.props;
+        const { Field1Text, Field2Text } = this.state; console.log('render state: ', this.state);
+        const { FieldId, Field1Name/*, Field2Name*/ } = this.props;
         return (
             <div id={FieldId}>
                 {/* <input id={FieldName} name={FieldName} type="text" onChange={this.onTextChange} value={text} className="form-control" /> */}
-                <Field id={FieldName} name={FieldName} component="input" type="text" onChange={this.onTextChange} value={text} className="form-control" />
+                {/* <Field id={FieldName} name={FieldName} component="input" type="text" onChange={this.onTextChange} value={text} className="form-control" /> */}
+                <Field id={Field1Name} name={Field1Name} component={this.TextInput} type="text" onChange={this.onTextChange} value={Field1Text} className="form-control" />
+                {/* <Field id={Field2Name} name={Field2Name} component={this.TextInput} type="text" value={Field2Text} className="form-control" /> */}
                 {this.renderSuggestions()}
             </div>
         );
     }
 
 }
-
-const mapStateToProps = state => {
-    return {
-        certificates: state.certificates,
-        modal: state.modal
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators({
-        fetchAllCertificates: fetchAllCertificates
-    }, dispatch);
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AutoCompletedText);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Accordion, Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
 // import AddNewItem from './addNewItem';
-// import AutoSuggestion from '../common/AutoSuggestion';
+import AutoSuggestion from '../common/AutoSuggestion';
 import AutoComplete from '../common/AutoComplete';
 // import AutoSearch from '../common/AutoSearch';
 
@@ -45,15 +45,8 @@ const renderCertifications = ({ fields, certificates }) => {
                                         </Col>
                                         <Col md={8} sm={8} xs={12}>
                                             {/* <Field name={`${member}.CertificationName`} component="input" type="text" placeholder="Name" className="form-control" /> */}
-                                            {/* <Autosuggest suggestions={suggestions} />
-                                        suggestions={suggestions}
-                                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                                        getSuggestionValue={getSuggestionValue}
-                                        renderSuggestion={renderSuggestion}
-                                        inputProps={inputProps} /> */}
-                                            {/* <AutoSuggestion data={certificates} /> */}
-                                            <AutoComplete FieldId={'certifications'} FieldName={`${member}.CertificationName`} data={certificates} />
+                                            {/* <AutoSuggestion data={certificates} FieldName={`${member}.CertificationName`} /> */}
+                                            <AutoComplete FieldId={'certifications'} Field1Name={`${member}.CertificationName`} Field2Name={`${member}.CertificationAuthority`} data={certificates} />
                                             {/* <AutoSearch data={certificates} /> */}
                                         </Col>
                                     </Row>
