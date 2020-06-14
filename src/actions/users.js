@@ -1,4 +1,4 @@
-import { FETCH_IND_USER, FETCH_ALL_USERS, ADD_NEW_USER } from './types';
+import { FETCH_IND_USER, FETCH_ALL_USERS, ADD_NEW_USER, INSERTION_ERROR } from './types';
 import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
@@ -21,6 +21,13 @@ export const addUser = (user) => {
     return {
         type: ADD_NEW_USER,
         user
+    }
+};
+
+export const insertionError = (insertionErrorMessage) => {
+    return {
+        type: INSERTION_ERROR,
+        insertionErrorMessage
     }
 };
 
@@ -62,7 +69,12 @@ export const addNewUser = (formData) => {
             { headers: headers })
             .then(response => {
                 if (response.status === 200) {
-                    dispatch(setStatus(false));
+                    // dispatch(setStatus(false));
+                    if (response.data.insertStatus === "ALREADY_EXIST") {
+                        dispatch(insertionError('User already exists..!!!'));
+                    } else {
+                        dispatch(setStatus(false));
+                    }
                 }
             })
             .catch(error => {

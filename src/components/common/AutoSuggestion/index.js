@@ -1,5 +1,6 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import { Field } from 'redux-form';
 
 const languages = [
     {
@@ -64,7 +65,7 @@ function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function getSuggestions(value) {
+function getSuggestions(value) { console.log('value: ', value);
     const escapedValue = escapeRegexCharacters(value.trim());
 
     if (escapedValue === '') {
@@ -73,7 +74,7 @@ function getSuggestions(value) {
 
     const regex = new RegExp('^' + escapedValue, 'i');
 
-    return this.props.data.filter(language => regex.test(language.name));
+    return languages.filter(language => regex.test(language.name));
 }
 
 function getSuggestionValue(suggestion) {
@@ -102,9 +103,23 @@ export default class App extends React.Component {
         });
     };
 
+    getSuggestions = (value) => { console.log('value: ', value);
+        const escapedValue = escapeRegexCharacters(value.trim());
+        const data = this.props.data; console.log('data: ', data);
+
+        if (escapedValue === '') {
+            return [];
+        }
+
+        const regex = new RegExp('^' + escapedValue, 'i');
+
+        return languages.filter(language => regex.test(language.name));
+    }
+
     onSuggestionsFetchRequested = ({ value }) => {
+        let suggestions = this.getSuggestions(value);console.log('suggestions: ', suggestions);
         this.setState({
-            suggestions: getSuggestions(value)
+            suggestions: suggestions
         });
     };
 
@@ -115,15 +130,28 @@ export default class App extends React.Component {
     };
 
     render() {
-        const { value, suggestions } = this.state;
-        const { data } = this.props;
+        const { value, suggestions } = this.state;console.log('state suggestions: ', suggestions);
+        const { data, FieldName } = this.props;
         const inputProps = {
+            name: FieldName,
             placeholder: "Type 'c'",
             value,
             onChange: this.onChange
         };
 
+        const AutosuggestWrapper = ({input, ...custom}) => {
+            return (<Autosuggest
+                suggestions={suggestions}
+                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                getSuggestionValue={getSuggestionValue}
+                renderSuggestion={renderSuggestion}
+                inputProps={inputProps} />
+            );
+        };
+
         return (
+            <><Field name={FieldName} component={AutosuggestWrapper} type="text" placeholder="Name" className="form-control" />
             <Autosuggest
                 suggestions={suggestions}
                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -131,6 +159,7 @@ export default class App extends React.Component {
                 getSuggestionValue={getSuggestionValue}
                 renderSuggestion={renderSuggestion}
                 inputProps={inputProps} />
+                </>
         );
     }
 }

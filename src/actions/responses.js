@@ -52,11 +52,11 @@ export const fetchFilterResponses = (formData) => {
     };
 };
 
-export const fetchAllResponses = (user) => {
+export const fetchAllResponses = (ssoId) => {
     return (dispatch) => {
-        // let userCondition = (user !== undefined) ? '&userType=' + user.type+ '&userId=' + user.id : '';
+        let userCondition = (ssoId !== undefined) ? '&ssoId=' + ssoId : '';
+        let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=responses' + userCondition;
         // let url = appConstants.GET_ALL_ITEMS_URL + '?type=responses' + userCondition;
-        let url = appConstants.FETCH_ALL_ITEMS_URL + '?type=responses';
         return axios.get(url)
             .then(response => {
                 dispatch(fetchResponses(response.data));
@@ -92,13 +92,10 @@ export const addNewResponse = (formData) => {
             { headers: headers })
             .then(response => {
                 if (response.status === 200) {
-                    dispatch(setStatus(false));
+                    //dispatch(setStatus(false));
+                    browserHistory.push('/responses');
                 }
             })
-            // .then(() => {
-            //     browserHistory.push('/');
-            //     browserHistory.push('/responses');
-            // })
             .catch(error => {
                 throw (error);
             });

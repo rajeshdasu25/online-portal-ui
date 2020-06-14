@@ -1,7 +1,7 @@
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import './CustomDataTableStyles.scss';
-import { Accordion, Badge, Card, Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
+import { /*Accordion,*/ Badge, Card, Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 
 const isExpandableRow = (row) => {
   if (row.hasOwnProperty('expand')) return true;
@@ -19,9 +19,12 @@ const selectRow = {
 };
 
 export default class ExpandRow extends React.Component {
-  /*constructor(props) {
+  constructor(props) {
     super(props);
-  }*/
+    this.state = {
+      isDataFetched: false
+    };
+  }
 
   statusFormatter = (row) => { console.log('row: ', row);
     return (row === 1) ? <Badge variant="success">Active</Badge> : <Badge variant="danger">Inactive</Badge>;
@@ -45,13 +48,17 @@ export default class ExpandRow extends React.Component {
                 </Row>
               </Card.Header>
               <Card.Body>
-                {row.certifications.map((certification, index) => {
+                {(row.certifications.length > 0) && row.certifications.map((certification, index) => {
                   return (
                     <Row key={index}>
                       <Col md={6} sm={6} xs={6}>{certification.CertificationName}</Col>
                     </Row>
                   );
                 })}
+                {(row.certifications.length === 0) && <Row>
+                  <Col className="text-center text-danger font-weight-bold">No data found..!!!</Col>
+                </Row>
+                }
               </Card.Body>
             </Card>
           </Col>
@@ -65,13 +72,17 @@ export default class ExpandRow extends React.Component {
                 </Row>
               </Card.Header>
               <Card.Body>
-                {row.trainings.map((training, index) => {
+                {(row.trainings.length > 0) && row.trainings.map((training, index) => {
                   return (
                     <Row key={index}>
                       <Col md={6} sm={6} xs={6}>{training.TrainingName}</Col>
                     </Row>
                   );
                 })}
+                {(row.trainings.length === 0) && <Row>
+                  <Col className="text-center text-danger font-weight-bold">No data found..!!!</Col>
+                </Row>
+                }
               </Card.Body>
             </Card>
           </Col>
@@ -85,7 +96,7 @@ export default class ExpandRow extends React.Component {
                 </Row>
               </Card.Header>
               <Card.Body>
-                {row.skills.map((skill, index) => {
+                {(row.skills.length > 0) && row.skills.map((skill, index) => {
                   return (
                     <Row key={index}>
                       <Col md={6} sm={6} xs={6} className="text-right font-weight-bold">{Object.keys(skill)[0]}&nbsp;:&nbsp;</Col>
@@ -93,6 +104,10 @@ export default class ExpandRow extends React.Component {
                     </Row>
                   );
                 })}
+                {(row.skills.length === 0) && <Row>
+                  <Col className="text-center text-danger font-weight-bold">No data found..!!!</Col>
+                </Row>
+                }
               </Card.Body>
             </Card>
           </Col>
@@ -153,7 +168,6 @@ export default class ExpandRow extends React.Component {
           { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false },
         ];
         break;
-      case 'reports':
       case 'forms':
         headers = [
           { 'title': 'Id', 'dataField': 'id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
@@ -174,6 +188,7 @@ export default class ExpandRow extends React.Component {
       //     { 'title': 'Date', 'dataField': 'FormattedDate', 'ref': 'dateCol', 'hidden': false, 'isKey': false },
       //   ];
       //   break;
+      case 'reports':
       case 'responses':
         headers = [
           { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
@@ -222,9 +237,16 @@ export default class ExpandRow extends React.Component {
     }
     return headers;
   }
+  
+  setNoDataText(){ 
+    if(this.state.isDataFetched){
+      return "There is no data to display..!!!";
+    }
+  }
 
   render() {
     const { forms, itemType } = this.props;
+
     const options = {
       page: 1,  // which page you want to show as default
       sizePerPageList: [
@@ -243,6 +265,7 @@ export default class ExpandRow extends React.Component {
       nextPage: 'Next', // Next page button text
       firstPage: 'First', // First page button text
       lastPage: 'Last', // Last page button text
+      noDataText: this.setNoDataText(), //'There is no data to display',
       // paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
       // paginationPosition: 'bottom'  // default is bottom, top and both is all available
       // hideSizePerPage: true > You can hide the dropdown for sizePerPage
@@ -303,7 +326,7 @@ export default class ExpandRow extends React.Component {
                     hidden={header.hidden}
                     filter={{ type: 'TextFilter', delay: 1000 }}
                     csvHeader={header.title}
-                    // dataFormat={header.statusFormatter}
+                    dataFormat={header.statusFormatter}
                     dataSort>{header.title}</TableHeaderColumn>
                 )
               })

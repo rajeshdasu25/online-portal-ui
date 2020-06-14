@@ -39,3 +39,5 @@ export const FETCH_IND_USER = 'FETCH_IND_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const CHECK_USER_LOGIN = 'CHECK_USER_LOGIN';
 export const FETCH_LOGIN_USER = 'FETCH_LOGIN_USER';
+
+export const INSERTION_ERROR = 'INSERTION_ERROR';

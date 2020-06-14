@@ -1,4 +1,4 @@
-import { FETCH_IND_CERTIFICATE, FETCH_ALL_CERTIFICATES, ADD_NEW_CERTIFICATE } from './types';
+import { FETCH_IND_CERTIFICATE, FETCH_ALL_CERTIFICATES, ADD_NEW_CERTIFICATE, INSERTION_ERROR } from './types';
 import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
@@ -21,6 +21,13 @@ export const addCertificate = (certificate) => {
     return {
         type: ADD_NEW_CERTIFICATE,
         certificate
+    }
+};
+
+export const insertionError = (insertionErrorMessage) => {
+    return {
+        type: INSERTION_ERROR,
+        insertionErrorMessage
     }
 };
 
@@ -62,7 +69,11 @@ export const addNewCertificate = (formData) => {
             { headers: headers })
             .then(response => {
                 if (response.status === 200) {
-                    dispatch(setStatus(false));
+                    if (response.data.insertStatus === "ALREADY_EXIST") {
+                        dispatch(insertionError('Certification already exists..!!!'));
+                    } else {
+                        dispatch(setStatus(false));
+                    }
                 }
             })
             .catch(error => {

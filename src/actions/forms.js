@@ -1,4 +1,4 @@
-import { FETCH_IND_FORM, FETCH_ALL_FORMS, ADD_NEW_FORM } from './types';
+import { FETCH_IND_FORM, FETCH_ALL_FORMS, ADD_NEW_FORM, INSERTION_ERROR } from './types';
 import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
@@ -21,6 +21,13 @@ export const addForm = (form) => {
     return {
         type: ADD_NEW_FORM,
         form
+    }
+};
+
+export const insertionError = (insertionErrorMessage) => {
+    return {
+        type: INSERTION_ERROR,
+        insertionErrorMessage
     }
 };
 
@@ -64,7 +71,12 @@ export const addNewForm = (formData) => {
             { headers: headers })
             .then(response => {
                 if (response.status === 200) {
-                    dispatch(setStatus(false));
+                    // dispatch(setStatus(false));
+                    if (response.data.insertStatus === "ALREADY_EXIST") {
+                        dispatch(insertionError('Form Name already exists..!!!'));
+                    } else {
+                        dispatch(setStatus(false));
+                    }
                 }
             })
             .catch(error => {

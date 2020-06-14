@@ -13,10 +13,16 @@ class RoleFormPage extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        insertionError: state.insertionError
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         addNewRole: (params) => dispatch(addNewRole(params)),
     };
 };
 
-export default connect(null, mapDispatchToProps)(RoleFormPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RoleFormPage);

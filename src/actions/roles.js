@@ -1,5 +1,5 @@
 import { createBrowserHistory } from 'history';
-import { FETCH_IND_ROLE, FETCH_ALL_ROLES, ADD_NEW_ROLE } from './types';
+import { FETCH_IND_ROLE, FETCH_ALL_ROLES, ADD_NEW_ROLE, INSERTION_ERROR } from './types';
 import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
@@ -24,6 +24,13 @@ export const addRole = (role) => {
     return {
         type: ADD_NEW_ROLE,
         role
+    }
+};
+
+export const insertionError = (insertionErrorMessage) => {
+    return {
+        type: INSERTION_ERROR,
+        insertionErrorMessage
     }
 };
 
@@ -65,7 +72,11 @@ export const addNewRole = (formData) => {
             { headers: headers })
             .then(response => {
                 if (response.status === 200) {
-                    dispatch(setStatus(false));
+                    if (response.data.insertStatus === "ALREADY_EXIST") {
+                        dispatch(insertionError('Role already exists..!!!'));
+                    } else {
+                        dispatch(setStatus(false));
+                    }
                 }
             })
             .then(() => {

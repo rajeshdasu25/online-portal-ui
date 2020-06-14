@@ -30,7 +30,7 @@ class ViewReports extends React.Component {
     }
 
     render() {
-        const { forms, filterResponse, /*certificates, responses, trainings, users*/ } = this.props;
+        const { forms, filterResponse, responses, /*certificates, trainings, users*/ } = this.props;
 
         filterResponse.forEach(function (response) {
             response.expand = [];
@@ -43,17 +43,27 @@ class ViewReports extends React.Component {
             response.expand.push(expandObj);
         });
 
+        responses.forEach(function (response) {
+            response.expand = [];
+            let expandObj = {
+                "certifications": response.certifications,
+                "skills": response.skills,
+                "trainings": response.trainings
+            };
+            response.expand.push(expandObj);
+        });
+
         return (
             <React.Fragment>
                 <Helmet>
                     <title>Reports</title>
                 </Helmet>
-                <FilterForm onSubmit={this.submit} {...this.props} />
+                {/* <FilterForm onSubmit={this.submit} {...this.props} /> */}
                 {/* {filterResponse && (filterResponse.length > 0) && <div className="list-container"> */}
                 <div className="list-container">
                     <Row>
                         <Col md={12} xs={12} sm={12}>
-                            <CustomDataTable data={forms} forms={forms} itemType="reports" />
+                            <CustomDataTable data={responses} forms={forms} itemType="reports" />
                         </Col>
                     </Row>
                 </div>

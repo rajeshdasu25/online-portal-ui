@@ -4,7 +4,7 @@ import { addNewForm } from '../../actions/forms';
 import NewForm from './newForm';
 
 class FormSubmitPage extends React.Component {
-    submit = formValues => { 
+    submit = formValues => {
         this.props.addNewForm(formValues);
     }
 
@@ -13,10 +13,16 @@ class FormSubmitPage extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        insertionError: state.insertionError
+    };
+}; 
+
 const mapDispatchToProps = dispatch => {
     return {
         addNewForm: (params) => dispatch(addNewForm(params)),
     };
 };
 
-export default connect(null, mapDispatchToProps)(FormSubmitPage);
+export default connect(mapStateToProps, mapDispatchToProps)(FormSubmitPage);

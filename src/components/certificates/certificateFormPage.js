@@ -4,7 +4,7 @@ import { addNewCertificate } from '../../actions/certificates';
 import CertificateForm from './certificateForm';
 
 class CertificateFormPage extends React.Component {
-    submit = formValues => { 
+    submit = formValues => {
         this.props.addNewCertificate(formValues);
     }
 
@@ -13,10 +13,16 @@ class CertificateFormPage extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        insertionError: state.insertionError
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         addNewCertificate: (params) => dispatch(addNewCertificate(params))
     };
 };
 
-export default connect(null, mapDispatchToProps)(CertificateFormPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CertificateFormPage);

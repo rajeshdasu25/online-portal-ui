@@ -1,4 +1,4 @@
-import { FETCH_IND_SKILL, FETCH_ALL_SKILLS, ADD_NEW_SKILL } from './types';
+import { FETCH_IND_SKILL, FETCH_ALL_SKILLS, ADD_NEW_SKILL, INSERTION_ERROR } from './types';
 import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
@@ -21,6 +21,13 @@ export const addSkill = (skill) => {
     return {
         type: ADD_NEW_SKILL,
         skill
+    }
+};
+
+export const insertionError = (insertionErrorMessage) => {
+    return {
+        type: INSERTION_ERROR,
+        insertionErrorMessage
     }
 };
 
@@ -63,7 +70,11 @@ export const addNewSkill = (formData) => {
             { headers: headers })
             .then(response => {
                 if (response.status === 200) {
-                    dispatch(setStatus(false));
+                    if (response.data.insertStatus === "ALREADY_EXIST") {
+                        dispatch(insertionError('Skill already exists..!!!'));
+                    } else {
+                        dispatch(setStatus(false));
+                    }
                 }
             })
             .catch(error => {

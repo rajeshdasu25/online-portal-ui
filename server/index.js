@@ -57,6 +57,7 @@ app.get('/ping', function (req, res) {
 app.get('/fetchAllItems', (req, res) => {
     let itemType = req.query.type;
     let roleId = req.query.roleId ? req.query.roleId : '';
+    let ssoId = req.query.ssoId ? req.query.ssoId : '';
     let jsonUrl = './data/' + itemType + '.json';
     let result;
 
@@ -64,17 +65,25 @@ app.get('/fetchAllItems', (req, res) => {
         if (err) throw err;
         let items = JSON.parse(data);
         // res.json(items);
-        if (itemType === 'skills') {
-            fs.readFile('./data/roles.json', (err, data) => {
-                let roles = JSON.parse(data);
-                for (var i = 0; i < items.length; i++) {
-                    for (var j = 0; j < roles.length; j++) { //console.log(roles[j]);
-                        items[i].RoleName = roles[j].DisplayName;//'Rajesh';
+        switch (itemType) {
+            case 'responses':
+                result = (!_.isEmpty(ssoId)) ? items.filter(item => item.ssoId == ssoId) : items;
+                break;
+            case 'skills':
+                fs.readFile('./data/roles.json', (err, data) => {
+                    let roles = JSON.parse(data);
+                    for (var i = 0; i < items.length; i++) {
+                        for (var j = 0; j < roles.length; j++) { //console.log(roles[j]);
+                            items[i].RoleName = roles[j].DisplayName;
+                        }
                     }
-                }
-            });
-            result = (!_.isEmpty(roleId)) ? items.filter(item => item.RoleId == roleId) : items;
-        } else { result = items; }
+                });
+                result = (!_.isEmpty(roleId)) ? items.filter(item => item.RoleId == roleId) : items;
+                break;
+            default:
+                result = items;
+                break;
+        }
         res.json(result);
     });
 });
@@ -102,8 +111,12 @@ app.post('/addAnItem', (req, res) => {
     let itemType = req.query.type;
     let jsonUrl = './data/' + itemType + '.json';
     let formData = {};
+    let checkJsonField = '';
+    let reqBodyData = '';
+    let reqBodyName = req.body.Name ? (req.body.Name).toLowerCase().split(' ').join('-') : '';
 
     fs.readFile(jsonUrl, (err, data) => {
+        let resultObj = {};
         if (err) throw err;
         let items = JSON.parse(data);
         switch (itemType) {
@@ -114,6 +127,8 @@ app.post('/addAnItem', (req, res) => {
                     'Authority': req.body.Authority,
                     'ActiveStatus': "1"
                 };
+                checkJsonField = 'Name';
+                reqBodyData = req.body.Name;
                 break;
             case 'forms':
                 formData = {
@@ -122,14 +137,18 @@ app.post('/addAnItem', (req, res) => {
                     'Description': req.body.Description,
                     'ActiveStatus': "1"
                 };
+                checkJsonField = 'Name';
+                reqBodyData = req.body.Name;
                 break;
             case 'roles':
                 formData = {
                     'Id': items.length + 1,
-                    'Name': req.body.Name,
-                    'DisplayName': req.body.DisplayName,
+                    'Name': (req.body.Name).toLowerCase().split(' ').join('-'),
+                    'DisplayName': req.body.Name,
                     'ActiveStatus': "1"
                 };
+                checkJsonField = 'Name';
+                reqBodyData = reqBodyName;//req.body.Name;
                 break;
             case 'responses':
                 formData = {
@@ -146,10 +165,12 @@ app.post('/addAnItem', (req, res) => {
                 formData = {
                     'Id': items.length + 1,
                     'RoleId': req.body.RoleId,
-                    'Name': req.body.Name,
-                    'DisplayName': req.body.DisplayName,
+                    'Name': (req.body.Name).toLowerCase().split(' ').join('-'),
+                    'DisplayName': req.body.Name,
                     'ActiveStatus': "1"
                 };
+                checkJsonField = 'Name';
+                reqBodyData = reqBodyName;//req.body.Name;
                 break;
             case 'trainings':
                 formData = {
@@ -158,6 +179,8 @@ app.post('/addAnItem', (req, res) => {
                     'Description': req.body.Description,
                     'ActiveStatus': "1"
                 };
+                checkJsonField = 'Name';
+                reqBodyData = req.body.Name;
                 break;
             case 'users':
                 formData = {
@@ -179,13 +202,27 @@ app.post('/addAnItem', (req, res) => {
                     'SyfApplication': req.body.SyfApplication,
                     'ActiveStatus': "1"
                 };
+                checkJsonField = 'SsoId';
+                reqBodyData = req.body.SsoId;
                 break;
         }
-        items.push(formData);
+        let item = items.find(item => item[checkJsonField] == reqBodyData);//console.log('item: ', item);
+        if (_.isEmpty(item)) {
+            items.push(formData);
+            fs.writeFile(jsonUrl, JSON.stringify(items, null, 4), function (err) {
+                if (err) throw err;
+                //res.send(formData);
+            });
+            resultObj.insertStatus = "SUCCESS";
+        } else {
+            resultObj.insertStatus = "ALREADY_EXIST";
+        } console.log('resultObj: ', resultObj);
+        /*items.push(formData);
         fs.writeFile(jsonUrl, JSON.stringify(items, null, 4), function (err) {
             if (err) throw err;
             res.send(formData);
-        });
+        });*/
+        res.json(resultObj);
     });
 });
 

@@ -4,7 +4,7 @@ import { addNewTraining } from '../../actions/trainings';
 import TrainingForm from './trainingForm';
 
 class TrainingFormPage extends React.Component {
-    submit = formValues => { 
+    submit = formValues => {
         this.props.addNewTraining(formValues);
     }
 
@@ -13,10 +13,16 @@ class TrainingFormPage extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        insertionError: state.insertionError
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         addNewTraining: (params) => dispatch(addNewTraining(params))
     };
 };
 
-export default connect(null, mapDispatchToProps)(TrainingFormPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TrainingFormPage);

@@ -2,40 +2,61 @@
     {
         "Id": 1,
         "ssoId": "503006500",
+        "certifications": [],
+        "skills": [],
+        "trainings": [],
+        "dateTime": "09-06-2020 21:37:26",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 2,
+        "ssoId": "503006500",
+        "certifications": [],
+        "skills": [
+            {
+                "React": "1"
+            },
+            {
+                "jQuery": "2"
+            },
+            {
+                "Javascript": "3"
+            },
+            {
+                "HTML 5": "4"
+            },
+            {
+                "CSS 3": "5"
+            },
+            {
+                "Angular": "4"
+            }
+        ],
+        "trainings": [],
+        "dateTime": "09-06-2020 22:18:22",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 3,
+        "ssoId": "502455770",
         "certifications": [
             {
                 "CertificationName": "a"
-            },
-            {
-                "CertificationName": "s"
             }
         ],
         "skills": [
             {
-                "Angular": "1"
+                "Hybernet": "3"
             },
             {
-                "CSS 3": "2"
+                "JAVA": "4"
             },
             {
-                "HTML 5": "3"
-            },
-            {
-                "Javascript": "4"
-            },
-            {
-                "jQuery": "5"
-            },
-            {
-                "React": "4"
+                "Spring": "5"
             }
         ],
-        "trainings": [
-            {
-                "TrainingName": "o"
-            }
-        ],
-        "dateTime": "05-06-2020 18:26:47",
+        "trainings": [],
+        "dateTime": "11-06-2020 06:01:03",
         "ActiveStatus": "1"
     }
 ]

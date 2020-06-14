@@ -1,5 +1,5 @@
 import { createBrowserHistory } from 'history';
-import { FETCH_IND_TRAINING, FETCH_ALL_TRAININGS, ADD_NEW_TRAINING } from './types';
+import { FETCH_IND_TRAINING, FETCH_ALL_TRAININGS, ADD_NEW_TRAINING, INSERTION_ERROR } from './types';
 import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
@@ -24,6 +24,13 @@ export const addTraining = (training) => {
     return {
         type: ADD_NEW_TRAINING,
         training
+    }
+};
+
+export const insertionError = (insertionErrorMessage) => {
+    return {
+        type: INSERTION_ERROR,
+        insertionErrorMessage
     }
 };
 
@@ -65,7 +72,11 @@ export const addNewTraining = (formData) => {
             { headers: headers })
             .then(response => {
                 if (response.status === 200) {
-                    dispatch(setStatus(false));
+                    if (response.data.insertStatus === "ALREADY_EXIST") {
+                        dispatch(insertionError('Training already exists..!!!'));
+                    } else {
+                        dispatch(setStatus(false));
+                    }
                 }
             })
             .then(() => {

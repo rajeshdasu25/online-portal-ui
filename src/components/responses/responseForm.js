@@ -6,6 +6,7 @@ import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
 import AutoSuggestion from '../common/AutoSuggestion';
 import AutoComplete from '../common/AutoComplete';
 // import AutoSearch from '../common/AutoSearch';
+import SelectSearch from '../common/SelectSearch';
 
 const ProficiencyOptions = [
     { text: 'Novice', value: '1', checked: true },
@@ -46,12 +47,13 @@ const renderCertifications = ({ fields, certificates }) => {
                                         <Col md={8} sm={8} xs={12}>
                                             {/* <Field name={`${member}.CertificationName`} component="input" type="text" placeholder="Name" className="form-control" /> */}
                                             {/* <AutoSuggestion data={certificates} FieldName={`${member}.CertificationName`} /> */}
-                                            <AutoComplete FieldId={'certifications'} Field1Name={`${member}.CertificationName`} Field2Name={`${member}.CertificationAuthority`} data={certificates} />
                                             {/* <AutoSearch data={certificates} /> */}
+                                            <AutoComplete FieldId={'certifications'} Field1Name={`${member}.CertificationName`} Field2Name={`${member}.CertificationAuthority`} data={certificates} />
+                                            {/* <Field name={`${member}.CertificationName`} isClearable={true} placeholder="Certification" table="client" tableData={certificates} label="Client" component={SelectSearch} /> */}
                                         </Col>
                                     </Row>
                                 </div>
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <Row>
                                         <Col md={4} sm={4} xs={12}>
                                             <label htmlFor="CertificationAuthority" className="col-form-label">Authority</label>
@@ -60,7 +62,7 @@ const renderCertifications = ({ fields, certificates }) => {
                                             <Field name={`${member}.CertificationAuthority`} component="input" type="text" placeholder="" className="form-control" />
                                         </Col>
                                     </Row>
-                                </div>
+                                </div> */}
                                 {/* <Button size="sm" onClick={() => { }} >...</Button>
                                 <div className="form-group">
                                     <Row>

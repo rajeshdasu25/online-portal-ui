@@ -15,7 +15,7 @@ class ViewAllResponses extends React.Component {
             'sso': localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'))
         };
         this.props.fetchAllForms();
-        (loginUser.type === '1') ? this.props.fetchAllResponses() : this.props.fetchAllResponses(loginUser);
+        (loginUser.type === '1') ? this.props.fetchAllResponses() : this.props.fetchAllResponses(loginUser.sso);
     }
     handleShowModal = (type, status) => {
         this.props.showModal(type, status);

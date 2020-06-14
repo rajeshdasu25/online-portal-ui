@@ -27,7 +27,7 @@ class ResponseFormPage extends React.Component {
                 userSkills: skillsObj,
                 userTrainings: formValues.trainings ? formValues.trainings : []
             }
-        }; console.log('userObj: ', userObj);
+        };
         this.props.addNewResponse(userObj);
     }
 

@@ -20,7 +20,8 @@ class SkillFormPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        roles: state.roles
+        roles: state.roles,        
+        insertionError: state.insertionError
     };
 };
 
