@@ -81,12 +81,15 @@
         transparent 11px);
     padding: 5px 5px 5px 15px;
     border: 1px solid #CCC;
-    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5);
-    /* margin-bottom: 5px; */
+    /* box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5); */
+    margin-bottom: 5px;
     width: 100%;
     box-sizing: border-box;
     cursor: pointer;
     border-radius: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #certifications span,

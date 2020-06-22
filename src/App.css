@@ -350,3 +350,5 @@ footer {
   color: #fff !important;
   font-weight: bold;
 }
+
+.header > a { color: #fff; }

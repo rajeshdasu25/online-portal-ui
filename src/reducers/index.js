@@ -7,6 +7,8 @@ import indForm from './indFormReducer';
 import forms from './allFormsReducer';
 import response from './indResponseReducer';
 import filterResponse from './filterResponsesReducer';
+import proficiency from './indProficiencyReducer';
+import proficiencies from './allProficienciesReducer';
 import responses from './allResponsesReducer';
 import role from './indRoleReducer';
 import roles from './allRolesReducer';
@@ -27,6 +29,8 @@ const rootReducer = combineReducers({
     indForm: indForm,
     forms: forms,
     filterResponse: filterResponse,
+    proficiency: proficiency,
+    proficiencies: proficiencies,
     response: response,
     responses: responses,
     role: role,

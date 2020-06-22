@@ -14,9 +14,6 @@ class ViewReports extends React.Component {
         };
     }
 
-    submit = formValues => { console.log(formValues);
-    }
-
     render() {
         // const { certificates, forms, filterResponse, responses, trainings, users } = this.props;
 

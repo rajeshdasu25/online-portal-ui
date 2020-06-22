@@ -12,7 +12,7 @@ const ProficiencyOptions = [
 ];
 
 const renderMultipleRadios = ({ onChange }) => (
-    ProficiencyOptions.map((radio, index) => { console.log()
+    ProficiencyOptions.map((radio, index) => {
         return (
             <Col md={2} sm={2} xs={2} key={index}>
                 <Field

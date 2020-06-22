@@ -5,8 +5,11 @@ import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
 // import AddNewItem from './addNewItem';
 import AutoSuggestion from '../common/AutoSuggestion';
 import AutoComplete from '../common/AutoComplete';
+import AutoCompletee from '../common/AutoCompletee';
+import AutoCompleteTag from '../common/AutoCompleteTag';
 // import AutoSearch from '../common/AutoSearch';
 import SelectSearch from '../common/SelectSearch';
+import CreatableSearch from '../common/CreatableSearch';
 
 const ProficiencyOptions = [
     { text: 'Novice', value: '1', checked: true },
@@ -48,9 +51,15 @@ const renderCertifications = ({ fields, certificates }) => {
                                             {/* <Field name={`${member}.CertificationName`} component="input" type="text" placeholder="Name" className="form-control" /> */}
                                             {/* <AutoSuggestion data={certificates} FieldName={`${member}.CertificationName`} /> */}
                                             {/* <AutoSearch data={certificates} /> */}
-                                            <AutoComplete FieldId={'certifications'} Field1Name={`${member}.CertificationName`} Field2Name={`${member}.CertificationAuthority`} data={certificates} />
-                                            {/* <Field name={`${member}.CertificationName`} isClearable={true} placeholder="Certification" table="client" tableData={certificates} label="Client" component={SelectSearch} /> */}
+                                            <AutoComplete FieldId={'certifications'} FieldName={`${member}.CertificationName`} data={certificates} />
+                                            {/* <Field name={`${member}.CertificationName`} component={SelectSearch} isClearable={true} placeholder="Certification" table="client" tableData={certificates} label="Client" /> */}
+                                            {/* <Field FieldId={'certifications'} FieldName={`${member}.CertificationName`} component={AutoCompletee} data={certificates} /> */}
+                                            {/* <AutoCompletee FieldId={'certifications'} FieldName={`${member}.CertificationName`} data={certificates} /> */}
+                                            {/* <Field name="certifications" component={AutoCompleteTag} /> */}
                                         </Col>
+                                    </Row>
+                                    <Row>
+                                        {/* <AutoCompletee FieldId={'certifications'} FieldName={`${member}.CertificationName`} data={certificates} /> */}
                                     </Row>
                                 </div>
                                 {/* <div className="form-group">
@@ -93,7 +102,7 @@ const renderCertifications = ({ fields, certificates }) => {
     )
 };
 
-const renderTrainings = ({ fields }) => (
+const renderTrainings = ({ fields, certificates }) => (
     <div className="form-group">
         <Row>
             <Col md={12} sm={12} xs={12}>
@@ -121,8 +130,22 @@ const renderTrainings = ({ fields }) => (
                                         <label htmlFor="TrainingName" className="col-form-label">Name</label>
                                     </Col>
                                     <Col md={8} sm={8} xs={12}>
-                                        {/* <Field name={`${member}.TrainingName`} component="input" type="text" placeholder="Name" className="form-control" /> */}
-                                        <AutoComplete FieldId={'trainings'} FieldName={`${member}.TrainingName`} />
+                                        {/* <Field name={`${member}.CertificationName`} component="input" type="text" placeholder="Name" className="form-control" /> */}
+                                        {/* <AutoSuggestion data={certificates} FieldName={`${member}.CertificationName`} /> */}
+                                        {/* <AutoSearch data={certificates} /> */}
+                                        {/* <AutoComplete FieldId={'trainings'} Field1Name={`${member}.TrainingName`} Field2Name={`${member}.TrainingStream`} data={certificates} /> */}
+                                        <Field name={`${member}.TrainingName`} component={SelectSearch} isClearable={true} placeholder="Training" table="client" data={certificates} label="Client" />
+                                        {/* <Field name={`${member}.CertificationName`} component={CreatableSearch} isClearable={true} placeholder="Training" table="client" tableData={certificates} label="Client" /> */}
+                                    </Col>
+                                </Row>
+                            </div>
+                            {/* <div className="form-group">
+                                <Row>
+                                    <Col md={4} sm={4} xs={12}>
+                                        <label htmlFor="TrainingName" className="col-form-label">Name</label>
+                                    </Col>
+                                    <Col md={8} sm={8} xs={12}>
+                                        <AutoComplete FieldId={'trainings'} FieldName={`${member}.TrainingName`} data={certificates} />
                                     </Col>
                                 </Row>
                             </div>
@@ -135,7 +158,7 @@ const renderTrainings = ({ fields }) => (
                                         <Field name={`${member}.TrainingStream`} component="input" type="text" placeholder="" className="form-control" />
                                     </Col>
                                 </Row>
-                            </div>
+                            </div> */}
                         </Card.Body>
                     </Card>
                 </Col>
@@ -165,11 +188,7 @@ const renderMultipleRadios = ({ onChange }) => (
 
 let ResponseForm = props => {
     const { handleSubmit, reset, pristine, submitting,
-        certificates, skills, loginUser } = props;
-
-    const submit = formValues => {
-        // console.log(formValues);
-    }
+        certificates, proficiencies, skills, loginUser } = props;
 
     return (
         <Row>
@@ -280,7 +299,8 @@ let ResponseForm = props => {
                                         <Accordion.Toggle as={Card.Header} eventKey="0">Certifications</Accordion.Toggle>
                                         <Accordion.Collapse eventKey="0">
                                             <Card.Body>
-                                                <FieldArray name="certifications" props={{ certificates: certificates }} component={renderCertifications} />
+                                                {/* <FieldArray name="certifications" props={{ certificates: certificates }} component={renderCertifications} /> */}
+                                                <Field name="certifications" component={AutoCompleteTag} data={certificates} />
                                             </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
@@ -288,7 +308,8 @@ let ResponseForm = props => {
                                         <Accordion.Toggle as={Card.Header} eventKey="1">Trainings</Accordion.Toggle>
                                         <Accordion.Collapse eventKey="1">
                                             <Card.Body>
-                                                <FieldArray name="trainings" component={renderTrainings} />
+                                                {/* <FieldArray name="trainings" component={renderTrainings} /> */}
+                                                <Field name="trainings" component={AutoCompleteTag} data={certificates} />
                                             </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
@@ -304,9 +325,9 @@ let ResponseForm = props => {
                                                             </Col>
                                                             <Col md={9} sm={9} xs={9}>
                                                                 <Row className="text-center">
-                                                                    {ProficiencyOptions.map((item, index) => (
+                                                                    {proficiencies.map((item, index) => (
                                                                         <Col md={2} sm={2} xs={2} key={index}>
-                                                                            <strong>{item.text} ({item.value})</strong>
+                                                                            <strong>{item.Name} ({item.Value})</strong>
                                                                         </Col>
                                                                     ))}
                                                                 </Row>
@@ -328,12 +349,6 @@ let ResponseForm = props => {
                                                                                         name={`skill_${RoleOptionItem.DisplayName}`}
                                                                                         component={"input"}
                                                                                         type={"radio"}
-                                                                                        // onChange={(e) => {
-                                                                                        //     // console.log(ProficiencyOptionItem.value);
-                                                                                        //     if (e.target.checked) {
-                                                                                        //         console.log(e.target.value);
-                                                                                        //     }
-                                                                                        // }}
                                                                                         // checked={ProficiencyOptionIndex === radio.value}
                                                                                         value={ProficiencyOptionItem.value}
                                                                                     />
@@ -374,7 +389,7 @@ ResponseForm = reduxForm({
 
 // const selector = formValueSelector('responseForm');
 // ResponseForm = connect(
-//     (state) => { console.log('state: ', state);
+//     (state) => {
 //         const SSO = selector(state, 'SSO');
 //         return {
 //             SSO

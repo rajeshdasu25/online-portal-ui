@@ -3,8 +3,10 @@ import { FETCH_IND_RESPONSE, FETCH_FILTER_RESPONSE, FETCH_ALL_RESPONSES, ADD_NEW
 import { setStatus } from './modal';
 import axios from 'axios';
 import * as appConstants from '../config/constants';
+import history from '../helpers/history';
+// import { browserHistory } from 'react-router'
 
-export const browserHistory = createBrowserHistory();
+// export const browserHistory = createBrowserHistory();
 
 export const fetchResponses = (responses) => {
     return {
@@ -80,7 +82,7 @@ export const fetchAResponse = (respId) => {
     };
 };
 
-export const addNewResponse = (formData) => {
+export const addNewResponse = (formData, ownProps) => {
     return (dispatch) => {
         let url = appConstants.ADD_AN_ITEM_URL + '?type=responses';
         let headers = {
@@ -92,8 +94,15 @@ export const addNewResponse = (formData) => {
             { headers: headers })
             .then(response => {
                 if (response.status === 200) {
-                    //dispatch(setStatus(false));
-                    browserHistory.push('/responses');
+                    ownProps.history.push({
+                        pathname: '/responses',
+                        state: { insertStatus: 'success' },
+                    });
+                } else {
+                    ownProps.history.push({
+                        pathname: '/responses',
+                        state: { insertStatus: 'failure' },
+                    });
                 }
             })
             .catch(error => {

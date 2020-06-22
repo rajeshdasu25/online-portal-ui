@@ -20,9 +20,9 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 ReactDOM.render((
     <Provider store={store}>
         <BrowserRouter>
-            <ScrollToTop>
+            {/*<ScrollToTop>*/}
                 <App />
-            </ScrollToTop>
+            {/*</ScrollToTop>*/}
         </BrowserRouter>
     </Provider>
 ), document.getElementById('root'));

@@ -14,19 +14,19 @@ export default class AddNewItem extends React.Component {
         };
     }
 
-    addNewItem = () => { console.log('state fields before', this.state.fields);
-        this.state.fields.push({});console.log('state fields after', this.state.fields);
+    addNewItem = () => { //console.log('state fields before', this.state.fields);
+        this.state.fields.push({});//console.log('state fields after', this.state.fields);
         //this.renderNewItem();
     }
 
     renderNewItem = () => {
-        this.state.fields.map((member, index) =>{ console.log('member: ', member);
+        this.state.fields.map((member, index) =>{ //console.log('member: ', member);
             return <p>Rajesh</p>;
         });
     }
 
     render() {
-        let fields = []; console.log('fields: ', fields);
+        let fields = []; //console.log('fields: ', fields);
         return (
             // <AutoSuggestion />
             <div className="form-group">
@@ -37,7 +37,7 @@ export default class AddNewItem extends React.Component {
                 </Row>
                 <Row>
                     {this.renderNewItem.bind(this)}
-                {this.state.fields.map((member, index) =>{ console.log('member: ', member);
+                {this.state.fields.map((member, index) =>{ //console.log('member: ', member);
                     return(
                     <Col md={4} sm={4} xs={12} key={index}>
                         <Card bg="light" className="certification-ctr">

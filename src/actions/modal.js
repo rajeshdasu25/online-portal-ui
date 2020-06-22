@@ -6,9 +6,10 @@ export const getStatus = (status) => {
         modal: {
             addCertificate: status,
             addForm: status,
-            addTraining: status,
+            addProficiency: status,
             addRole: status,
             addSkill: status,
+            addTraining: status,
             addUser: status,
         }
     }
@@ -20,9 +21,10 @@ export const setStatus = (type, status) => {
         modal: {
             addCertificate: status,
             addForm: status,
-            addTraining: status,
+            addProficiency: status,
             addRole: status,
             addSkill: status,
+            addTraining: status,
             addUser: status,
             type: status
         }

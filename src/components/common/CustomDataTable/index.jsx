@@ -8,10 +8,6 @@ const isExpandableRow = (row) => {
   else return false;
 };
 
-const statusFormatter = (row) => { console.log('row: ', row);
-    return (row === 1) ? <Badge variant="success">Active</Badge> : <Badge variant="danger">Inactive</Badge>;
-  }
-
 const selectRow = {
   //mode: 'checkbox',
   //clickToSelect: true,
@@ -26,7 +22,12 @@ export default class ExpandRow extends React.Component {
     };
   }
 
-  statusFormatter = (row) => { console.log('row: ', row);
+  isExpandableRow = (row) => {
+    if (row.hasOwnProperty('expand')) return true;
+    else return false;
+  };
+
+  statusFormatter = (row) => {
     return (row === 1) ? <Badge variant="success">Active</Badge> : <Badge variant="danger">Inactive</Badge>;
   }
 
@@ -34,7 +35,17 @@ export default class ExpandRow extends React.Component {
     return (row === 1) ? 'Active' : 'Inactive';
   }
 
-  expandComponent(row) { //console.log('row: ', row);
+  renderProficiencyLevel = (level) => {
+    switch(level) {
+      case 1: return 'Novice'; break;
+      case 2: return 'Beginner'; break;
+      case 3: return 'Competant'; break;
+      case 4: return 'Proficient'; break;
+      case 5: return 'Expert'; break;
+    }
+  }
+
+  expandComponent(row) {
     return (
       <>
         <Row>
@@ -48,13 +59,13 @@ export default class ExpandRow extends React.Component {
                 </Row>
               </Card.Header>
               <Card.Body>
-                {(row.certifications.length > 0) && row.certifications.map((certification, index) => {
-                  return (
-                    <Row key={index}>
-                      <Col md={6} sm={6} xs={6}>{certification.CertificationName}</Col>
-                    </Row>
-                  );
-                })}
+                <div id="certifications"><ul id="certifications">
+                  {(row.certifications.length > 0) && row.certifications.map((certification, index) => {
+                    return (
+                      <li key={index}>{certification.name}</li>
+                    );
+                  })}
+                </ul></div>
                 {(row.certifications.length === 0) && <Row>
                   <Col className="text-center text-danger font-weight-bold">No data found..!!!</Col>
                 </Row>
@@ -72,13 +83,13 @@ export default class ExpandRow extends React.Component {
                 </Row>
               </Card.Header>
               <Card.Body>
-                {(row.trainings.length > 0) && row.trainings.map((training, index) => {
-                  return (
-                    <Row key={index}>
-                      <Col md={6} sm={6} xs={6}>{training.TrainingName}</Col>
-                    </Row>
-                  );
-                })}
+                <div id="trainings"><ul>
+                  {(row.trainings.length > 0) && row.trainings.map((training, index) => {
+                    return (
+                      <li key={index}>{training.name}</li>
+                    );
+                  })}
+                </ul></div>
                 {(row.trainings.length === 0) && <Row>
                   <Col className="text-center text-danger font-weight-bold">No data found..!!!</Col>
                 </Row>
@@ -101,6 +112,19 @@ export default class ExpandRow extends React.Component {
                     <Row key={index}>
                       <Col md={6} sm={6} xs={6} className="text-right font-weight-bold">{Object.keys(skill)[0]}&nbsp;:&nbsp;</Col>
                       <Col md={6} sm={6} xs={6}>{Object.values(skill)[0]}</Col>
+                      {/* <Col md={6} sm={6} xs={6}>
+                        {() => {
+                            let level;console.log('Object.values(skill)[0]: ', Object.values(skill)[0]);
+                            switch(Object.values(skill)[0]) {
+                              case '1': level = 'Novice';
+                              case '2': level = 'Beginner';
+                              case '3': level = 'Competant';
+                              case '4': level = 'Proficient';
+                              case '5': level = 'Expert';
+                            }
+                            return level;
+                        }}
+                      </Col> */}
                     </Row>
                   );
                 })}
@@ -131,6 +155,10 @@ export default class ExpandRow extends React.Component {
       case 'responses': this.refs.nameCol.applyFilter(event.target.value); break;
       default: this.refs.authCol.applyFilter(event.target.value); break;
     }
+  }
+
+  enableExportCsv = (itemType) => {
+    return (itemType === 'responses') ? false : true;
   }
 
   getCsvFileName = (itemType) => {
@@ -179,6 +207,14 @@ export default class ExpandRow extends React.Component {
           { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat': this.statusFormatter },
         ];
         break;
+      case 'proficiencies':
+        headers = [
+          { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true, 'csvHeader': 'Id' },
+          { 'title': 'Name', 'dataField': 'Name', 'ref': 'nameCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Value', 'dataField': 'Value', 'ref': 'valueCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false },
+        ];
+        break;
       // case 'responses':
       //   headers = [
       //     { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
@@ -193,7 +229,7 @@ export default class ExpandRow extends React.Component {
         headers = [
           { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
           { 'title': 'SSO ID', 'dataField': 'ssoId', 'ref': 'ssoIdCol', 'hidden': false, 'isKey': false },
-          // { 'title': 'Certifications', 'dataField': 'certifications', 'ref': 'certificationsCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Full Name', 'dataField': 'fullName', 'ref': 'fullNameCol', 'hidden': false, 'isKey': false },
           // { 'title': 'Skills', 'dataField': 'skills', 'ref': 'skillsCol', 'hidden': false, 'isKey': false },
           // { 'title': 'Trainings', 'dataField': 'trainings', 'ref': 'trainingsCol', 'hidden': false, 'isKey': false },
           { 'title': 'Date Time', 'dataField': 'dateTime', 'ref': 'dateTimeCol', 'hidden': false, 'isKey': false },
@@ -210,7 +246,8 @@ export default class ExpandRow extends React.Component {
         headers = [
           { 'title': 'Id', 'dataField': 'Id', 'ref': 'idCol', 'hidden': true, 'isKey': true },
           { 'title': 'Name', 'dataField': 'DisplayName', 'ref': 'displayNameCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Role', 'dataField': 'RoleName', 'ref': 'roleNameCol', 'hidden': false, 'isKey': false },
+          // { 'title': 'Role', 'dataField': 'RoleName', 'ref': 'roleNameCol', 'hidden': false, 'isKey': false },
+          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat': this.statusFormatter },
         ];
         break;
       case 'trainings':
@@ -231,15 +268,15 @@ export default class ExpandRow extends React.Component {
           { 'title': 'First Name', 'dataField': 'FirstName', 'ref': 'firstNameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Last Name', 'dataField': 'LastName', 'ref': 'lastNameCol', 'hidden': false, 'isKey': false },
           { 'title': 'Email', 'dataField': 'SyfEmail', 'ref': 'emailCol', 'hidden': false, 'isKey': false },
-          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat': {statusFormatter} },
+          { 'title': 'Status', 'dataField': 'ActiveStatus', 'ref': 'statusCol', 'hidden': false, 'isKey': false, 'dataFormat': this.statusFormatter },
         ];
         break;
     }
     return headers;
   }
-  
-  setNoDataText(){ 
-    if(this.state.isDataFetched){
+
+  setNoDataText() {
+    if (this.state.isDataFetched) {
       return "There is no data to display..!!!";
     }
   }
@@ -275,7 +312,7 @@ export default class ExpandRow extends React.Component {
 
     return (
       <div className="expandableTableContainer">
-        {itemType && itemType === 'responses' && <DropdownButton id="dropdown-item-button" className="btn-filter" title="Filter" alignRight>
+        {/* {itemType && itemType === 'responses' && <DropdownButton id="dropdown-item-button" className="btn-filter" title="Filter" alignRight>
           {forms.map((type, index) => {
             return (
               <Dropdown.Item as="button" key={index} value={type.Name}
@@ -284,7 +321,7 @@ export default class ExpandRow extends React.Component {
               </Dropdown.Item>
             );
           })}
-        </DropdownButton>}
+        </DropdownButton>} */}
         {/* {itemType && itemType !== 'reports' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addCertificate', true)}>Add New</Button>}
         {itemType && itemType === 'certificates' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addCertificate', true)}>Add New</Button>}
         {itemType && itemType === 'roles' && <Button className="btn-addnew" size="sm" variant="primary" onClick={() => this.handleShowModal('addRole', true)}>Add New</Button>}
@@ -293,11 +330,11 @@ export default class ExpandRow extends React.Component {
         {this.props.data && (this.props.data.length > 0) && <BootstrapTable data={this.props.data}
           search={true}
           pagination={true}
-          exportCSV={true}
+          exportCSV={this.enableExportCsv(itemType)}
           csvFileName={this.getCsvFileName(itemType)}
           // insertRow= { (itemType === 'trainings' || itemType === 'certificates') ? true : false }
           options={options}
-          expandableRow={isExpandableRow}
+          expandableRow={this.isExpandableRow}
           expandComponent={this.expandComponent}
           expandColumnOptions={{ expandColumnVisible: true }}
           selectRow={selectRow} >

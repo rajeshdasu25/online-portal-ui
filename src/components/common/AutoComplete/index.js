@@ -8,35 +8,33 @@ export default class AutoCompletedText extends React.Component {
         super(props)
         this.state = {
             suggestions: [],
-            Field1Text: '',
-            Field2Text: ''
+            FieldText: ''
         }
     }
 
-    onTextChange = (e) => {
+    onTextChange = (e) => {//debugger;
         const { data } = this.props;
-        const Field1Value = e.target.value;
+        const FieldValue = e.target.value;
         let suggestions = [];
 
-        if (Field1Value.length > 0) {
-            const regex = new RegExp(`^${Field1Value}`, 'i');
-            suggestions = data.sort().filter(certificate => regex.test(certificate.Name));
+        if (FieldValue.length > 0) {
+            const regex = new RegExp(`^${FieldValue}`, 'i');
+            let validSuggestions = data.sort().filter(suggestion => regex.test(suggestion.Name));
+            let nullSuggestions = [{Id: '0', Name: 'No data found.!!'}];
+            suggestions = (validSuggestions.length > 0) ? validSuggestions : nullSuggestions;
         }
-        console.log('suggestions: ', suggestions);
 
         this.setState(() => ({
             suggestions,
-            //Field1Text: Field1Value,
-            //Field2Text: Field1Value
-        })); console.log('onTextChange state: ', this.state);
+            //FieldText: FieldValue
+        })); //console.log('onTextChange state: ', this.state);
     }
 
-    selectedText(value) {
-        this.setState({
-            Field1Text: value,
-            suggestions: []
-        });
-        console.log('selectedText state: ', this.state);
+    selectedText(value) {//console.log('selectedText before state: ', this.state);debugger;
+        this.setState(() => {
+            return { FieldText: value, suggestions: [] }
+        })
+        //console.log('selectedText after state: ', this.state);
     }
 
     renderSuggestions = () => {
@@ -64,14 +62,13 @@ export default class AutoCompletedText extends React.Component {
     );
 
     render() {
-        const { Field1Text, Field2Text } = this.state; console.log('render state: ', this.state);
-        const { FieldId, Field1Name/*, Field2Name*/ } = this.props;
+        const { FieldText } = this.state;
+        const { FieldId, FieldName } = this.props;
         return (
             <div id={FieldId}>
                 {/* <input id={FieldName} name={FieldName} type="text" onChange={this.onTextChange} value={text} className="form-control" /> */}
                 {/* <Field id={FieldName} name={FieldName} component="input" type="text" onChange={this.onTextChange} value={text} className="form-control" /> */}
-                <Field id={Field1Name} name={Field1Name} component={this.TextInput} type="text" onChange={this.onTextChange} value={Field1Text} className="form-control" />
-                {/* <Field id={Field2Name} name={Field2Name} component={this.TextInput} type="text" value={Field2Text} className="form-control" /> */}
+                <Field id={FieldName} name={FieldName} component={this.TextInput} type="text" onChange={this.onTextChange} /*value={FieldText}*/ className="form-control" />
                 {this.renderSuggestions()}
             </div>
         );

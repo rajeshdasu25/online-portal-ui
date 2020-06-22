@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import { Link } from "react-router-dom";
 import { Col, Row } from 'react-bootstrap';
 
@@ -8,6 +9,7 @@ import WidgetInfo from './common/WidgetInfo.js';
 
 import { fetchAllCertificates } from '../actions/certificates';
 import { fetchAllForms } from '../actions/forms';
+import { fetchAllProficiencies } from '../actions/proficiencies';
 import { fetchAllResponses } from '../actions/responses';
 import { fetchAllRoles } from '../actions/roles';
 import { fetchAllSkills } from '../actions/skills';
@@ -20,6 +22,7 @@ class Dashboard extends React.Component {
         return Promise.all([
             this.props.fetchAllCertificates(),
             this.props.fetchAllForms(loginUser),
+            this.props.fetchAllProficiencies(),
             this.props.fetchAllResponses(loginUser),
             this.props.fetchAllRoles(),
             this.props.fetchAllSkills(),
@@ -36,6 +39,7 @@ class Dashboard extends React.Component {
             'sso': localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'))
         };
         this.props.fetchAllCertificates();
+        this.props.fetchAllProficiencies();
         this.props.fetchAllRoles();
         this.props.fetchAllSkills();
         this.props.fetchAllTrainings();
@@ -50,8 +54,11 @@ class Dashboard extends React.Component {
     }
 
     render() {
+        // const loginUserType = localStorage.hasOwnProperty('loginUserType') && JSON.parse(localStorage.getItem('loginUserType'));
+        // let redirectPage = loginUserType === '1' ? '/dashboard' : '/new-response';
+
         const {
-            certificates, forms, responses, roles, skills, trainings, users
+            certificates, forms, responses, roles, skills, trainings, users, proficiencies
         } = this.props;
 
         const masterItems = [
@@ -62,6 +69,7 @@ class Dashboard extends React.Component {
             { url: 'users', text: 'Users', theme: 'yellow', count: users },
             { url: 'roles', text: 'Roles', theme: 'brown', count: roles },
             { url: 'skills', text: 'Skills', theme: 'brown', count: skills },
+            { url: 'proficiencies', text: 'Proficiencies', theme: 'brown', count: proficiencies },
         ];
 
         return (
@@ -80,6 +88,7 @@ class Dashboard extends React.Component {
                         );
                     })}
                 </Row>
+                {/* <Redirect to={redirectPage} push={true} />; */}
             </React.Fragment>
         );
     }
@@ -89,6 +98,7 @@ const mapStateToProps = state => {
     return {
         certificates: state.certificates,
         forms: state.forms,
+        proficiencies: state.proficiencies,
         responses: state.responses,
         roles: state.roles,
         skills: state.skills,
@@ -101,6 +111,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchAllCertificates: () => dispatch(fetchAllCertificates()),
         fetchAllForms: (params) => dispatch(fetchAllForms(params)),
+        fetchAllProficiencies: () => dispatch(fetchAllProficiencies()),
         fetchAllResponses: (params) => dispatch(fetchAllResponses(params)),
         fetchAllRoles: () => dispatch(fetchAllRoles()),
         fetchAllSkills: () => dispatch(fetchAllSkills()),

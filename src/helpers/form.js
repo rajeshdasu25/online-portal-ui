@@ -71,3 +71,7 @@ export const renderSelectField = ({
         </div>
     </div>
 )
+
+export const getKeyByValue = (object, value) => {//console.log(object, value);
+    return Object.keys(object).find(key => {/*console.log('key: ', key, '; object[key]: ',object[key],'; value: ', value);*/ return object[key].Value === value});
+}

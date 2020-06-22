@@ -2,46 +2,58 @@
     {
         "Id": 1,
         "ssoId": "503006500",
-        "certifications": [],
-        "skills": [],
-        "trainings": [],
-        "dateTime": "09-06-2020 21:37:26",
+        "fullName": "Murugadasu, Rajesh Kumar",
+        "certifications": [
+            {
+                "id": 11,
+                "name": "AWS Certified Solutions Architect - Associate"
+            },
+            {
+                "id": 3,
+                "name": "Spring Professional Certification"
+            }
+        ],
+        "skills": [
+            {
+                "Angular": "5"
+            },
+            {
+                "CSS 3": "4"
+            },
+            {
+                "HTML 5": "3"
+            },
+            {
+                "Javascript": "2"
+            },
+            {
+                "jQuery": "1"
+            },
+            {
+                "React": "2"
+            }
+        ],
+        "trainings": [
+            {
+                "id": 1,
+                "name": "Oracle Certified Associate Java Programmer (OCAJP)"
+            }
+        ],
+        "dateTime": "22-06-2020 18:02:58",
         "ActiveStatus": "1"
     },
     {
         "Id": 2,
-        "ssoId": "503006500",
-        "certifications": [],
-        "skills": [
-            {
-                "React": "1"
-            },
-            {
-                "jQuery": "2"
-            },
-            {
-                "Javascript": "3"
-            },
-            {
-                "HTML 5": "4"
-            },
-            {
-                "CSS 3": "5"
-            },
-            {
-                "Angular": "4"
-            }
-        ],
-        "trainings": [],
-        "dateTime": "09-06-2020 22:18:22",
-        "ActiveStatus": "1"
-    },
-    {
-        "Id": 3,
         "ssoId": "502455770",
+        "fullName": "Choudhary, Niraj",
         "certifications": [
             {
-                "CertificationName": "a"
+                "id": 6,
+                "name": "Professional Scrum Master Certification(PSM I)"
+            },
+            {
+                "id": 9,
+                "name": "Agile Certified Professsional(ACP)"
             }
         ],
         "skills": [
@@ -55,8 +67,52 @@
                 "Spring": "5"
             }
         ],
-        "trainings": [],
-        "dateTime": "11-06-2020 06:01:03",
+        "trainings": [
+            {
+                "id": 5,
+                "name": "Apache Spark Developer Certification (HDPCD)"
+            }
+        ],
+        "dateTime": "22-06-2020 18:05:13",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 3,
+        "ssoId": "503006500",
+        "fullName": "Murugadasu, Rajesh Kumar",
+        "certifications": [
+            {
+                "id": 11,
+                "name": "AWS Certified Solutions Architect - Associate"
+            }
+        ],
+        "skills": [
+            {
+                "Angular": "1"
+            },
+            {
+                "CSS 3": "1"
+            },
+            {
+                "React": "1"
+            },
+            {
+                "HTML 5": "1"
+            },
+            {
+                "Javascript": "1"
+            },
+            {
+                "jQuery": "1"
+            }
+        ],
+        "trainings": [
+            {
+                "id": 1,
+                "name": "Oracle Certified Associate Java Programmer (OCAJP)"
+            }
+        ],
+        "dateTime": "22-06-2020 19:51:05",
         "ActiveStatus": "1"
     }
 ]

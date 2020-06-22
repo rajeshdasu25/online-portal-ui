@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 
 import AppHeader from './components/common/AppHeader';
 import Footer from './components/common/Footer';
@@ -13,6 +13,8 @@ import ViewAllCertificates from './components/certificates/viewAllCertificates';
 import ViewIndCertificate from './components/certificates/viewIndCertificate';
 import ViewAllForms from './components/forms/viewAllForms';
 import ViewIndForm from './components/forms/viewIndForm';
+import ViewAllProficiencies from './components/proficiencies/viewAllProficiencies';
+import ViewIndProficiency from './components/proficiencies/viewIndProficiency';
 import ViewAllResponses from './components/responses/viewAllResponses';
 import ViewIndResponse from './components/responses/viewIndResponse';
 import ViewAllRoles from './components/roles/viewAllRoles';
@@ -39,6 +41,7 @@ function Main() {
       <div id='left' className={leftOpen}>
         <div className='icon' onClick={toggleSidebar}>&equiv;</div>
         <div className={`sidebar ${leftOpen}`} >
+          {/* <div className='header'><Link to="/">Online Portal</Link></div> */}
           <div className='header'>Online Portal</div>
           <div className='content'>
             <LeftNav />
@@ -57,6 +60,8 @@ function Main() {
             <Route path='/new-response' component={ResponseFormPage} />
             <Route path='/forms' component={ViewAllForms} />
             <Route path='/form/:id' component={ViewIndForm} />
+            <Route path='/proficiencies' component={ViewAllProficiencies} />
+            <Route path='/proficiency/:id' component={ViewIndProficiency} />
             <Route path='/reports' component={ReportsPage} />
             <Route path='/responses' component={ViewAllResponses} />
             <Route path='/response/:id' component={ViewIndResponse} />

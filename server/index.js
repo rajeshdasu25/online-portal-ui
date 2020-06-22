@@ -40,6 +40,18 @@ function jsonReader(filePath, cb) {
     })
 }
 
+function fetchAnItem(type, id, key) {
+    let jsonUrl = './data/' + type + '.json';
+    let resultItem;
+
+    fs.readFile(jsonUrl, (err, data) => {
+        if (err) throw err;
+        let items = JSON.parse(data);        
+        resultItem = items.find(item => item.Id == id);//console.log('resultItem: ', resultItem[key]);
+        return resultItem[key];
+    });
+}
+
 app.get('/ping', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     var responseData = {
@@ -67,17 +79,25 @@ app.get('/fetchAllItems', (req, res) => {
         // res.json(items);
         switch (itemType) {
             case 'responses':
+                /*items.forEach(item => {
+                    item.skills.map((skill, index) => {
+                        let profVal = fetchAnItem('proficiencies', Object.values(skill)[0], 'Name');
+                    });
+                });*/
                 result = (!_.isEmpty(ssoId)) ? items.filter(item => item.ssoId == ssoId) : items;
                 break;
             case 'skills':
-                fs.readFile('./data/roles.json', (err, data) => {
-                    let roles = JSON.parse(data);
-                    for (var i = 0; i < items.length; i++) {
-                        for (var j = 0; j < roles.length; j++) { //console.log(roles[j]);
-                            items[i].RoleName = roles[j].DisplayName;
-                        }
-                    }
-                });
+                // fs.readFile('./data/roles.json', (err, data) => {
+                //     let roles = JSON.parse(data);
+                //     for (var i = 0; i < items.length; i++) {
+                //         for (var j = 0; j < roles.length; j++) { //console.log(roles[j]);
+                //             items[i].RoleName = roles[j].DisplayName;
+                //         }
+                //     }
+                // });
+                // items.forEach(function (item) {
+                //     item.RoleName = fetchAnItem('roles', item.RoleId, 'DisplayName');
+                // });
                 result = (!_.isEmpty(roleId)) ? items.filter(item => item.RoleId == roleId) : items;
                 break;
             default:
@@ -140,6 +160,16 @@ app.post('/addAnItem', (req, res) => {
                 checkJsonField = 'Name';
                 reqBodyData = req.body.Name;
                 break;
+            case 'proficiencies':
+                formData = {
+                    'Id': items.length + 1,
+                    'Name': req.body.Name,
+                    'Value': req.body.Value,
+                    'ActiveStatus': "1"
+                };
+                checkJsonField = 'Name';
+                reqBodyData = req.body.Name;
+                break;
             case 'roles':
                 formData = {
                     'Id': items.length + 1,
@@ -154,6 +184,7 @@ app.post('/addAnItem', (req, res) => {
                 formData = {
                     'Id': items.length + 1,
                     'ssoId': req.body.userSsoId,
+                    'fullName': req.body.userFullName,
                     'certifications': req.body.userCertifications,
                     'skills': req.body.userSkills,
                     'trainings': req.body.userTrainings,
@@ -216,7 +247,7 @@ app.post('/addAnItem', (req, res) => {
             resultObj.insertStatus = "SUCCESS";
         } else {
             resultObj.insertStatus = "ALREADY_EXIST";
-        } console.log('resultObj: ', resultObj);
+        }
         /*items.push(formData);
         fs.writeFile(jsonUrl, JSON.stringify(items, null, 4), function (err) {
             if (err) throw err;
