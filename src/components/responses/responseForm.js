@@ -248,10 +248,10 @@ let ResponseForm = props => {
                             <div className="form-group">
                                 <Row>
                                     <Col md={3} sm={3} xs={12} className="text-right">
-                                        <label htmlFor="DateOfBirth" className="col-form-label">Date Of Birth</label>
+                                        <label htmlFor="DateOfJoiningCapgemini" className="col-form-label">Date Of Joining Capgemini</label>
                                     </Col>
                                     <Col md={3} sm={3} xs={12}>
-                                        <Field name="DateOfBirth" component="input" type="text" placeholder="MM/DD/YYYY" className="form-control" disabled={true} />
+                                        <Field name="DateOfJoiningCapgemini" component="input" type="text" placeholder="MM/DD/YYYY" className="form-control" disabled={true} />
                                     </Col>
                                     <Col md={2} sm={2} xs={12} className="text-right">
                                         <label htmlFor="Designation" className="col-form-label">Designation</label>

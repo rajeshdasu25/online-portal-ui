@@ -50,6 +50,7 @@ export const checkUserLogin = (formData) => {
                             'role': response.data.userRoleId
                         };
                         localStorage.setItem('loginUser', loginUser);
+                        sessionStorage.setItem('loginUser', loginUser);
                         dispatch(userLogin(response.data.ssoId));
                     } else if (response.data.userValidity === "WRONG_PWD") {
                         dispatch(authError('Incorrect Password.!'));

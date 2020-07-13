@@ -114,5 +114,20 @@
         ],
         "dateTime": "22-06-2020 19:51:05",
         "ActiveStatus": "1"
+    },
+    {
+        "Id": 4,
+        "ssoId": "503006500",
+        "fullName": "Murugadasu, Rajesh Kumar",
+        "certifications": [
+            {
+                "id": 11,
+                "name": "AWS Certified Solutions Architect - Associate"
+            }
+        ],
+        "skills": [],
+        "trainings": [],
+        "dateTime": "04-07-2020 04:45:30",
+        "ActiveStatus": "1"
     }
 ]

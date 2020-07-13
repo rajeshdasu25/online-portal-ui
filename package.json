@@ -6,6 +6,7 @@
   "keywords": [],
   "author": "Rajesh Kumar",
   "license": "MIT",
+  "homepage": "./",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-brands-svg-icons": "^5.11.2",
@@ -46,8 +47,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"cd server && npm run start\" \"npm run start\""
+    "server": "node-env-run server --exec nodemon",
+    "dev": "run-p server start"
   },
+  "proxy": "http://localhost:5001/",
   "eslintConfig": {
     "extends": "react-app"
   },

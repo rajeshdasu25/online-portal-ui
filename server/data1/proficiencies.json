@@ -1,0 +1,32 @@
+[
+    {
+        "Id": 1,
+        "Name": "Novice",
+        "Value": "1",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 2,
+        "Name": "Beginner",
+        "Value": "2",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 3,
+        "Name": "Competant",
+        "Value": "3",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 4,
+        "Name": "Proficient",
+        "Value": "4",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 5,
+        "Name": "Expert",
+        "Value": "5",
+        "ActiveStatus": "1"
+    }
+]

@@ -6,6 +6,7 @@
     "author": "Rajesh Kumar",
     "license": "MIT",
     "main": "index.js",
+    "homepage": "./",
     "scripts": {
         "start": "node index.js"
     },

@@ -1,0 +1,38 @@
+[
+    {
+        "Id": 1,
+        "Name": "ui-developer",
+        "DisplayName": "Frontend Developer",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 2,
+        "Name": "java-developer",
+        "DisplayName": "JAVA Developer",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 3,
+        "Name": "devops-engineer",
+        "DisplayName": "DevOPS Engineer",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 4,
+        "Name": "batch-developer",
+        "DisplayName": "Batch Developer",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 5,
+        "Name": "microservice-developer",
+        "DisplayName": "Microservice Developer",
+        "ActiveStatus": "1"
+    },
+    {
+        "Id": 6,
+        "Name": "database-administrator",
+        "DisplayName": "Database Administrator",
+        "ActiveStatus": "1"
+    }
+]
