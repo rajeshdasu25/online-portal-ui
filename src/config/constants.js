@@ -1,4 +1,6 @@
-export const NODE_HOST = "http://localhost:5001/";
+const { REACT_APP_NODE_HOST_URL } = process.env;
+
+export const NODE_HOST = REACT_APP_NODE_HOST_URL;
 export const PHP_HOST = "http://localhost/online-portal/api/";
 
 export const FETCH_AN_ITEM_URL = NODE_HOST + "fetchAnItem";
