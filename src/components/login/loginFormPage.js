@@ -20,7 +20,10 @@ class LoginFormPage extends React.Component {
     }
 
     componentDidUpdate() {
-        if (localStorage.length > 0) {
+        // if (localStorage.length > 0) {
+        //     this.setState({ redirectToDashboard: true });
+        // }
+        if (sessionStorage.length > 0) {
             this.setState({ redirectToDashboard: true });
         }
     }
@@ -28,7 +31,8 @@ class LoginFormPage extends React.Component {
     render() {
         if (this.state.redirectToDashboard === true) {
             // return localStorage.loginUserType === '1' ? <Redirect to="/" /> : <Redirect to="/new-response" />;
-            if (localStorage.loginUserType === '1') {
+            // if (localStorage.loginUserType === '1') {
+            if (sessionStorage.loginUserType === '1') {
                 return <Redirect to="/" />;
             } else {
                 return <Redirect to="/new-response" />;

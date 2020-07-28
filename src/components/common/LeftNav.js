@@ -3,7 +3,8 @@ import { Accordion, Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 function LeftNav() {
-  const loginUserType = localStorage.hasOwnProperty('loginUserType') && JSON.parse(localStorage.getItem('loginUserType'));
+  // const loginUserType = localStorage.hasOwnProperty('loginUserType') && JSON.parse(localStorage.getItem('loginUserType'));
+  const loginUserType = sessionStorage.hasOwnProperty('loginUserType') && JSON.parse(sessionStorage.getItem('loginUserType'));
   const currentLocation = window.location.pathname;
   return (
     <div className="leftmenu">

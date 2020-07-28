@@ -33,10 +33,15 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         //this.fetchAllItems(loginUser);
+        // const loginUser = {
+        //     'type': localStorage.hasOwnProperty('loginUserType') && JSON.parse(localStorage.getItem('loginUserType')),
+        //     'id': localStorage.hasOwnProperty('loginUserId') && JSON.parse(localStorage.getItem('loginUserId')),
+        //     'sso': localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'))
+        // };
         const loginUser = {
-            'type': localStorage.hasOwnProperty('loginUserType') && JSON.parse(localStorage.getItem('loginUserType')),
-            'id': localStorage.hasOwnProperty('loginUserId') && JSON.parse(localStorage.getItem('loginUserId')),
-            'sso': localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'))
+            'type': sessionStorage.hasOwnProperty('loginUserType') && JSON.parse(sessionStorage.getItem('loginUserType')),
+            'id': sessionStorage.hasOwnProperty('loginUserId') && JSON.parse(sessionStorage.getItem('loginUserId')),
+            'sso': sessionStorage.hasOwnProperty('loginSsoId') && JSON.parse(sessionStorage.getItem('loginSsoId'))
         };
         this.props.fetchAllCertificates();
         this.props.fetchAllProficiencies();

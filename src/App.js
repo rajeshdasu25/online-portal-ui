@@ -6,7 +6,8 @@ import LoginPage from './components/login/loginFormPage';
 import AuthenticateRoute from './components/login/authenticateRoute';
 
 function App() {
-  const loginUserType = localStorage.hasOwnProperty('loginUserType') && JSON.parse(localStorage.getItem('loginUserType'));
+  // const loginUserType = localStorage.hasOwnProperty('loginUserType') && JSON.parse(localStorage.getItem('loginUserType'));
+  const loginUserType = sessionStorage.hasOwnProperty('loginUserType') && JSON.parse(sessionStorage.getItem('loginUserType'));
   return (
     <Switch>
       <Route path='/login' component={LoginPage} />

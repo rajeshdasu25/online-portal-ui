@@ -14,12 +14,14 @@ class AppHeader extends React.Component {
     }
 
     componentDidMount() {
-        const loginSsoId = localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'));
+        // const loginSsoId = localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'));
+        const loginSsoId = sessionStorage.hasOwnProperty('loginSsoId') && JSON.parse(sessionStorage.getItem('loginSsoId'));
         this.props.fetchAUser(loginSsoId);
     }
 
     handleLogout() {
-        localStorage.clear();
+        // localStorage.clear();
+        sessionStorage.clear();
         this.setState({ redirect: true });
     }
 

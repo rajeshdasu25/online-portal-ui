@@ -34,8 +34,10 @@ class ResponseFormPage extends React.Component {
     }
 
     componentDidMount() {
-        const loginSsoId = localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'));
-        const loginUserRoleId = localStorage.hasOwnProperty('loginUserRoleId') && JSON.parse(localStorage.getItem('loginUserRoleId'));
+        // const loginSsoId = localStorage.hasOwnProperty('loginSsoId') && JSON.parse(localStorage.getItem('loginSsoId'));
+        // const loginUserRoleId = localStorage.hasOwnProperty('loginUserRoleId') && JSON.parse(localStorage.getItem('loginUserRoleId'));
+        const loginSsoId = sessionStorage.hasOwnProperty('loginSsoId') && JSON.parse(sessionStorage.getItem('loginSsoId'));
+        const loginUserRoleId = sessionStorage.hasOwnProperty('loginUserRoleId') && JSON.parse(sessionStorage.getItem('loginUserRoleId'));
         this.props.fetchLoginUser(loginSsoId);
         this.props.fetchAllCertificates();
         this.props.fetchAllProficiencies();

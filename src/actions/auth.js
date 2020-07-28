@@ -39,18 +39,22 @@ export const checkUserLogin = (formData) => {
             .then(response => {
                 if (response.status === 200) {
                     if (response.data.userValidity === "VALID_USER") {
-                        localStorage.setItem('loginUserId', JSON.stringify(response.data.userId));
-                        localStorage.setItem('loginSsoId', JSON.stringify(response.data.ssoId));
-                        localStorage.setItem('loginUserType', JSON.stringify(response.data.userTypeId));
-                        localStorage.setItem('loginUserRoleId', JSON.stringify(response.data.userRoleId));
+                        // localStorage.setItem('loginUserId', JSON.stringify(response.data.userId));
+                        // localStorage.setItem('loginSsoId', JSON.stringify(response.data.ssoId));
+                        // localStorage.setItem('loginUserType', JSON.stringify(response.data.userTypeId));
+                        // localStorage.setItem('loginUserRoleId', JSON.stringify(response.data.userRoleId));
                         let loginUser = {
                             'type': response.data.userTypeId,
                             'id': response.data.userId,
                             'sso': response.data.ssoId,
                             'role': response.data.userRoleId
                         };
-                        localStorage.setItem('loginUser', loginUser);
+                        // localStorage.setItem('loginUser', loginUser);
                         sessionStorage.setItem('loginUser', loginUser);
+                        sessionStorage.setItem('loginUserId', JSON.stringify(response.data.userId));
+                        sessionStorage.setItem('loginSsoId', JSON.stringify(response.data.ssoId));
+                        sessionStorage.setItem('loginUserType', JSON.stringify(response.data.userTypeId));
+                        sessionStorage.setItem('loginUserRoleId', JSON.stringify(response.data.userRoleId));
                         dispatch(userLogin(response.data.ssoId));
                     } else if (response.data.userValidity === "WRONG_PWD") {
                         dispatch(authError('Incorrect Password.!'));
