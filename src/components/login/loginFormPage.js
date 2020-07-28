@@ -14,6 +14,12 @@ class LoginFormPage extends React.Component {
 
     submit = formValues => { 
         this.props.checkUserLogin(formValues);
+        // if (localStorage.length > 0) {
+        //     this.setState({ redirectToDashboard: true });
+        // }
+    }
+
+    componentDidUpdate() {
         if (localStorage.length > 0) {
             this.setState({ redirectToDashboard: true });
         }
